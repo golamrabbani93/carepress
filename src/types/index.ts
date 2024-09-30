@@ -7,11 +7,11 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 export interface IUser {
 	_id: string;
 	name: string;
-	role: string;
 	email: string;
-	status: string;
-	mobileNumber: string;
-	profilePhoto?: string;
+	profilePicture: string;
+	followers: any[];
+	following: any[];
+	role: string;
 	createdAt?: string;
 	updatedAt?: string;
 	__v?: number;

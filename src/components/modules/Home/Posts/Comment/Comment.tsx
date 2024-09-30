@@ -1,3 +1,4 @@
+import {PostProps} from '../Post/Post';
 import Comment from './Comment';
 import SingleComment from './SingleComment';
 
@@ -15,7 +16,7 @@ const comments: Comment[] = [
 	},
 ];
 
-const CommentSection: React.FC = () => {
+const CommentSection = ({post}: PostProps) => {
 	return (
 		<div className="p-4">
 			{comments.map((comment, index) => (
