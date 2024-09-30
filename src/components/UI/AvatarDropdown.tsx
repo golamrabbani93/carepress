@@ -29,7 +29,7 @@ const AvatarDropdown = () => {
 			{user?._id ? (
 				<Dropdown>
 					<DropdownTrigger>
-						<Avatar className="cursor-pointer" src={user?.profilePhoto} />
+						<Avatar className="cursor-pointer" src={user?.profilePicture} />
 					</DropdownTrigger>
 					<DropdownMenu aria-label="Link Actions">
 						<DropdownItem key="profile" href="/profile">

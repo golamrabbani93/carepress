@@ -10,10 +10,12 @@ interface IProps {
 	type?: string;
 	label: string;
 	name: string;
+	className?: string;
 }
 
 export default function CPInput({
-	variant = 'bordered',
+	className,
+	variant = 'flat',
 	size = 'md',
 	required = false,
 	type = 'text',
@@ -28,6 +30,7 @@ export default function CPInput({
 	return (
 		<Input
 			{...register(name)}
+			className={className}
 			errorMessage={errors[name] ? (errors[name].message as string) : ''}
 			isInvalid={!!errors[name]}
 			label={label}
