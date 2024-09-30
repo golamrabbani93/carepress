@@ -1,7 +1,9 @@
+import PostModal from '@/components/modal/PostModal';
+
 export default function Home() {
 	return (
 		<>
-			<h2>Newsfeed</h2>
+			<PostModal />
 		</>
 	);
 }

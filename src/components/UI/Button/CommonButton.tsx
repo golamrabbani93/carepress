@@ -1,10 +1,11 @@
 'use client';
 import {Button} from '@nextui-org/button';
-import {LogInIcon} from 'lucide-react';
 
-const CommonButton = (text: string) => {
+import {ReactNode} from 'react';
+
+const CommonButton = ({text, icon}: {text: string; icon: ReactNode}) => {
 	return (
-		<Button color="primary" startContent={<LogInIcon />} variant="bordered">
+		<Button type="submit" color="primary" endContent={icon} variant="bordered">
 			{text}
 		</Button>
 	);
