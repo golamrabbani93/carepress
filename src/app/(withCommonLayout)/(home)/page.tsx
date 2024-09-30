@@ -1,7 +1,7 @@
 export default function Home() {
 	return (
 		<>
-			<h2>banner</h2>
+			<h2>Newsfeed</h2>
 		</>
 	);
 }
