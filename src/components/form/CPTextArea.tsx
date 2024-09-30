@@ -6,7 +6,7 @@ interface IProps extends IInput {
 	type?: string;
 }
 
-export default function FXTextarea({name, label, variant = 'bordered'}: IProps) {
+export default function CPTextarea({name, label, variant = 'bordered'}: IProps) {
 	const {
 		register,
 		formState: {errors},

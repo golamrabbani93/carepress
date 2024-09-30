@@ -5,7 +5,7 @@ import {useFormContext} from 'react-hook-form';
 interface Iprops extends IInput {
 	options: ISelect[];
 }
-const FXSelect = ({name, label, disabled, options, variant = 'bordered'}: Iprops) => {
+export const CPSelect = ({name, label, disabled, options, variant = 'bordered'}: Iprops) => {
 	const {register} = useFormContext();
 
 	return (
@@ -23,5 +23,3 @@ const FXSelect = ({name, label, disabled, options, variant = 'bordered'}: Iprops
 		</Select>
 	);
 };
-
-export default FXSelect;

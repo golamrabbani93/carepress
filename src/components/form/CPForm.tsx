@@ -13,7 +13,7 @@ interface IProps extends formConfig {
 	onSubmit: SubmitHandler<any>;
 }
 
-export default function FXForm({children, onSubmit, defaultValues, resolver}: IProps) {
+export default function CPForm({children, onSubmit, defaultValues, resolver}: IProps) {
 	const formConfig: formConfig = {};
 
 	if (!!defaultValues) {

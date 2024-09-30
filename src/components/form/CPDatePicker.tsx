@@ -5,7 +5,7 @@ import {DatePicker} from '@nextui-org/date-picker';
 import {Controller} from 'react-hook-form';
 
 interface IProps extends IInput {}
-const FXDatePicker = ({name, label, variant = 'bordered'}: IProps) => {
+const CPDatePicker = ({name, label, variant = 'bordered'}: IProps) => {
 	return (
 		<Controller
 			name={name}
@@ -22,4 +22,4 @@ const FXDatePicker = ({name, label, variant = 'bordered'}: IProps) => {
 	);
 };
 
-export default FXDatePicker;
+export default CPDatePicker;
