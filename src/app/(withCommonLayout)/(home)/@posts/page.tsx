@@ -1,3 +1,4 @@
+import AddComment from '@/components/modules/Home/Posts/Comment/AddComment';
 import CommentSection from '@/components/modules/Home/Posts/Comment/Comment';
 import Post from '@/components/modules/Home/Posts/Post/Post';
 import ReactionBar from '@/components/modules/Home/Posts/ReactionBar/ReactionBar';
@@ -21,6 +22,7 @@ const Posts = async () => {
 							<TotalReactionBar />
 							<ReactionBar post={post} />
 							<CommentSection post={post} />
+							<AddComment />
 						</div>
 					);
 				})}

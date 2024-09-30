@@ -16,7 +16,10 @@ const Post = ({post}: PostProps) => {
 					width={40}
 				/>
 				<div>
-					<h2 className="font-semibold">{post?.author?.name}</h2>
+					<div className="flex justify-center items-center">
+						<h2 className="font-semibold">{post?.author?.name}</h2>
+						<button className="text-primary font-semibold text-xs ml-2">Follow</button>
+					</div>
 					<p className="text-gray-400 text-sm">5 hours ago</p>
 				</div>
 			</div>
