@@ -4,6 +4,7 @@ import {Button} from '@nextui-org/button';
 import {Modal, ModalContent, ModalHeader, useDisclosure} from '@nextui-org/modal';
 import Editor from '../editor/Editor';
 import {useUser} from '@/context/user.provider';
+import {useState} from 'react';
 
 export default function PostModal() {
 	const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -77,8 +78,8 @@ export default function PostModal() {
 				<ModalContent>
 					{(onClose) => (
 						<>
-							<ModalHeader className="flex flex-col gap-1 h-full">Modal Title</ModalHeader>
-							<Editor />
+							<ModalHeader className="flex flex-col gap-1 h-full">Create A Post</ModalHeader>
+							<Editor onClose={onClose} />
 						</>
 					)}
 				</ModalContent>

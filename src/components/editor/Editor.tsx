@@ -9,6 +9,11 @@ import EditorMenuBar from './EditorMenuBar';
 import './Editor.css';
 import CommonButton from '../UI/Button/CommonButton';
 import {Check} from 'lucide-react';
+import {useUser} from '@/context/user.provider';
+import {useCreatePost} from '@/hooks/post.hook';
+import {IPost} from '@/types';
+import {Button} from '@nextui-org/button';
+import {Spinner} from '@nextui-org/spinner';
 interface PostData {
 	title: string;
 	content: string;
@@ -16,7 +21,9 @@ interface PostData {
 	image: File | null;
 }
 
-const Editor = () => {
+const Editor = ({onClose}: {onClose: () => void}) => {
+	const {user} = useUser();
+	const {mutate: createPost, isPending} = useCreatePost();
 	const [postData, setPostData] = useState<PostData>({
 		title: '',
 		content: '',
@@ -59,9 +66,26 @@ const Editor = () => {
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		const UpdatedPostData = {
+			author: user?._id,
+			title: postData.title,
+			content: postData.content,
+			category: postData.category,
+		};
 		const formData = new FormData();
 
-		console.log('🚀🚀: handleSubmit -> postData', postData);
+		formData.append('data', JSON.stringify(UpdatedPostData));
+		if (postData.image) {
+			formData.append('images', postData.image);
+		}
+		createPost(formData, {
+			onSuccess: (data) => {
+				if (data?.success) {
+					onClose();
+					setPostData((_prev) => ({title: '', content: '', category: '', image: null}));
+				}
+			},
+		});
 	};
 
 	return (
@@ -96,9 +120,8 @@ const Editor = () => {
 						onChange={(e) => setPostData((prev) => ({...prev, category: e.target.value}))}
 					>
 						<option value="">Select a category</option>
-						<option value="pet-care">Pet Care</option>
-						<option value="pet-stories">Pet Stories</option>
-						<option value="adoption-tales">Adoption Tales</option>
+						<option value="Tips">Tips</option>
+						<option value="Story">Story</option>
 					</select>
 				</div>
 
@@ -141,7 +164,9 @@ const Editor = () => {
 					>
 						Post
 					</button> */}
-					<CommonButton text="Post" icon={<Check />} />
+					<Button type="submit" color="primary" endContent={<Check />} variant="bordered">
+						{isPending ? <Spinner color="primary" /> : 'Post'}
+					</Button>
 				</div>
 			</form>
 		</div>
