@@ -10,7 +10,7 @@ export default function layout({children, posts}: {children: ReactNode; posts: R
 				<div className="col-span-3">
 					<LeftSidebar />
 				</div>
-				<div className="col-span-6 bg-secondary">
+				<div className="col-span-6">
 					{children}
 					{posts}
 				</div>

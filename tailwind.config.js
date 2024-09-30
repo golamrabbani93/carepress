@@ -9,6 +9,9 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			boxShadow: {
+				'custom-all-around': '0 0 15px 5px rgba(0, 0, 0, 0.1)',
+			},
 			fontFamily: {
 				sans: ['var(--font-sans)'],
 				mono: ['var(--font-mono)'],

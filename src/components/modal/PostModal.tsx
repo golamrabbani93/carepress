@@ -4,7 +4,6 @@ import {Button} from '@nextui-org/button';
 import {Modal, ModalContent, ModalHeader, useDisclosure} from '@nextui-org/modal';
 import Editor from '../editor/Editor';
 import {useUser} from '@/context/user.provider';
-import {User} from 'lucide-react';
 
 export default function PostModal() {
 	const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -12,7 +11,7 @@ export default function PostModal() {
 
 	return (
 		<>
-			<div className="p-4 my-5 max-w-xl mx-auto bg-white rounded-lg shadow-md">
+			<div className="p-4 my-5 max-w-xl mx-auto bg-white rounded-lg shadow-custom-all-around">
 				{/* Avatar and Input */}
 				<div className="flex items-center space-x-3 mb-3">
 					<img

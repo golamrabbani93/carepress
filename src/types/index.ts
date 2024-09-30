@@ -39,3 +39,19 @@ export interface ISelect {
 	key: string;
 	label: string;
 }
+
+export interface IPost {
+	_id: string;
+	title: string;
+	content: string;
+	images: string[];
+	author: IUser;
+	upvotes: number;
+	downvotes: number;
+	category: string;
+	comments: any[];
+	isPremium: boolean;
+	premiumPrice: number;
+	createdAt: string;
+	updatedAt: string;
+}
