@@ -17,7 +17,6 @@ export const createPost = async (formData: FormData): Promise<any> => {
 
 		return data;
 	} catch (error) {
-		console.log(error);
 		throw new Error('Failed to create post');
 	}
 };
@@ -33,4 +32,18 @@ export const getAllPosts = async () => {
 	const res = await fetch(`${envConfig.baseApi}/posts`, fetchOption);
 
 	return res.json();
+};
+
+// *create upvote
+export const createUpvote = async (postId: string): Promise<any> => {
+	try {
+		const {data} = await axiosInstance.put(`/posts/upvote/${postId}`);
+
+		revalidateTag('posts');
+
+		return data;
+	} catch (error) {
+		console.log('🚀🚀: error', error);
+		throw new Error('Failed to create post');
+	}
 };
