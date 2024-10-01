@@ -58,7 +58,7 @@ const AddComment = ({post}: PostProps) => {
 						type="submit"
 					>
 						{isPending ? (
-							<Spinner size="sm" color="white" />
+							<Spinner color="white" size="sm" />
 						) : (
 							<SendHorizontal className="w-[20px]" />
 						)}

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 import {useEffect, useRef, useState} from 'react';
 import {EditorContent, useEditor} from '@tiptap/react';
@@ -116,7 +117,6 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 		};
 		const formData = new FormData();
 
-		console.log(UpdatedPostData);
 		formData.append('data', JSON.stringify(UpdatedPostData));
 		if (postData.image) {
 			formData.append('images', postData.image);

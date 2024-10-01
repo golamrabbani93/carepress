@@ -64,7 +64,7 @@ export default function DeleteCommentModal({setShowOptions, comment}: DeleteComm
 								>
 									Close
 								</Button>
-								<Button isDisabled={isPending} color="primary" onPress={handleDeleteComment}>
+								<Button color="primary" isDisabled={isPending} onPress={handleDeleteComment}>
 									{isPending ? <Spinner color="white" size="sm" /> : 'Delete'}
 								</Button>
 							</ModalFooter>

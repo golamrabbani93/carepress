@@ -3,7 +3,6 @@
 
 import {useUserLogin} from '@/hooks/auth.hook';
 import {loginValidationSchema} from '@/schemas/login.schema';
-import Loader from '@/components/UI/Loader';
 import {useUser} from '@/context/user.provider';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {Button} from '@nextui-org/button';
@@ -60,20 +59,20 @@ export default function LoginPage() {
 							>
 								<div className="py-4">
 									<CPInput
+										className="text-black hover:border-red-500"
 										label="Email"
 										name="email"
 										size="sm"
-										className="text-black hover:border-red-500"
 									/>
 								</div>
 
 								<div className="py-4">
 									<CPInput
+										className="text-black"
 										label="Password"
 										name="password"
 										size="sm"
 										type="password"
-										className="text-black"
 									/>
 								</div>
 
@@ -89,7 +88,7 @@ export default function LoginPage() {
 							<div className="text-center mt-6">
 								<p className="text-sm text-gray-600">
 									Don't have an account?{' '}
-									<Link href={'/register'} className="text-indigo-600 hover:underline">
+									<Link className="text-indigo-600 hover:underline" href={'/register'}>
 										Register
 									</Link>
 								</p>

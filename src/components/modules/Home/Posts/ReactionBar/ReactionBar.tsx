@@ -4,7 +4,6 @@ import {PostProps} from '../Post/Post';
 import {useUser} from '@/context/user.provider';
 import {toast} from 'sonner';
 import {useState} from 'react';
-import {Button} from '@nextui-org/button';
 import {useCreateDownVote, useCreateUpVote} from '@/hooks/post.hook';
 
 const ReactionBar: React.FC<PostProps> = ({post}) => {
@@ -50,8 +49,8 @@ const ReactionBar: React.FC<PostProps> = ({post}) => {
 		<div className="flex justify-between px-4 py-2 border-t border-b border-gray-200">
 			{/* Like Button */}
 			<button
-				onClick={() => handleLike()}
 				className={`flex items-center space-x-2 text-gray-500 hover:text-primary ${isLike && 'text-primary'} ${LikeShake && 'animate-shake'}`}
+				onClick={() => handleLike()}
 			>
 				<ThumbsUp className="w-5 h-5" />
 				<span>Like</span>
@@ -59,8 +58,8 @@ const ReactionBar: React.FC<PostProps> = ({post}) => {
 
 			{/* Dislike Button */}
 			<button
-				onClick={handleDisLike}
 				className={`flex items-center space-x-2 text-gray-500 hover:text-primary ${isDisLike && 'text-primary'} ${disLikeShake && 'animate-shake'}`}
+				onClick={handleDisLike}
 			>
 				<ThumbsDown className="w-5 h-5" />
 				<span>Dislike</span>

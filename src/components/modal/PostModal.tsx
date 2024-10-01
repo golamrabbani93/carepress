@@ -4,7 +4,6 @@ import {Button} from '@nextui-org/button';
 import {Modal, ModalContent, ModalHeader, useDisclosure} from '@nextui-org/modal';
 import Editor from '../editor/Editor';
 import {useUser} from '@/context/user.provider';
-import {useState} from 'react';
 
 export default function PostModal() {
 	const {isOpen, onOpen, onOpenChange} = useDisclosure();

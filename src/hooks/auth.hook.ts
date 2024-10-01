@@ -1,6 +1,5 @@
 import {loginUser, registerUser} from '@/services/AuthService';
 import {useMutation} from '@tanstack/react-query';
-import {useRouter} from 'next/navigation';
 
 import {FieldValues} from 'react-hook-form';
 import {toast} from 'sonner';

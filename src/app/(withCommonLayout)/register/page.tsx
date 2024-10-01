@@ -55,18 +55,18 @@ export default function RegisterPage() {
 									onSubmit={onSubmit}
 								>
 									<div className="py-3">
-										<CPInput label="Name" name="name" size="sm" className="text-black" />
+										<CPInput className="text-black" label="Name" name="name" size="sm" />
 									</div>
 									<div className="py-3">
-										<CPInput label="Email" name="email" size="sm" className="text-black" />
+										<CPInput className="text-black" label="Email" name="email" size="sm" />
 									</div>
 									<div className="py-3">
 										<CPInput
+											className="text-black"
 											label="Password"
 											name="password"
 											size="sm"
 											type="password"
-											className="text-black"
 										/>
 									</div>
 
@@ -81,7 +81,7 @@ export default function RegisterPage() {
 							</div>
 							<div className="text-center">
 								Already have an account ?{' '}
-								<Link href={'/login'} className="text-indigo-600 hover:underline">
+								<Link className="text-indigo-600 hover:underline" href={'/login'}>
 									Login
 								</Link>
 							</div>

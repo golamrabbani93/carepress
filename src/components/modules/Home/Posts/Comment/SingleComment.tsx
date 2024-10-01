@@ -8,6 +8,7 @@ import {useEffect, useState} from 'react';
 import {toast} from 'sonner';
 import {Spinner} from '@nextui-org/spinner';
 import DeleteCommentModal from './DeleteCommentModal';
+import {formatDistanceToNowStrict} from 'date-fns';
 interface CommentProps {
 	comment: IComment;
 }
@@ -17,6 +18,26 @@ const SingleComment = ({comment}: CommentProps) => {
 	const [showOptions, setShowOptions] = useState(false);
 	const [edit, setEdit] = useState(false);
 
+	// !Comment Date
+	const commentDate = new Date(comment.updatedAt);
+	const formatTimeAgo = (date: Date) => {
+		const timeAgo = formatDistanceToNowStrict(date, {addSuffix: false});
+
+		//* Custom plural handling for "min", "hour", and "day"
+		if (timeAgo.includes('minute')) {
+			return timeAgo === '1 minute' ? '1 min ago' : `${timeAgo.replace('minutes', 'mins')} ago`;
+		}
+
+		if (timeAgo.includes('hour')) {
+			return timeAgo === '1 hour' ? '1 hour ago' : `${timeAgo.replace('hours', 'hours')} ago`;
+		}
+
+		if (timeAgo.includes('day')) {
+			return timeAgo === '1 day' ? '1 day ago' : `${timeAgo.replace('days', 'days')} ago`;
+		}
+
+		return `${timeAgo} ago`;
+	};
 	const {mutate: handleUpdateComment, isPending, data} = useUpadateComment();
 
 	const handleToggleOptions = () => {
@@ -59,7 +80,7 @@ const SingleComment = ({comment}: CommentProps) => {
 				<div className="bg-gray-100 p-2 rounded-lg w-[220px] ]">
 					<div className="flex justify-between">
 						<h3 className="font-semibold">{comment.author.name}</h3>
-						<span className="text-xs text-gray-400 ml-2">time</span>
+						<span className="text-[12px] text-gray-400 ml-2">{formatTimeAgo(commentDate)}</span>
 					</div>
 					<div>
 						{edit ? (
@@ -83,8 +104,8 @@ const SingleComment = ({comment}: CommentProps) => {
 									</button>
 								</form>
 								<button
-									onClick={() => setEdit(false)}
 									className="text-xs text-primary uppercase font-semibold"
+									onClick={() => setEdit(false)}
 								>
 									{' '}
 									cencel
