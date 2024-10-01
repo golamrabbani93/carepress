@@ -1,4 +1,4 @@
-import {createPost, createUpvote} from '@/services/Post/post.service';
+import {createDownVote, createPost, createUpvote} from '@/services/Post/post.service';
 import {useMutation} from '@tanstack/react-query';
 import {toast} from 'sonner';
 
@@ -16,14 +16,27 @@ export const useCreatePost = () => {
 	});
 };
 
-export const useCreateUpvote = () => {
+export const useCreateUpVote = () => {
 	return useMutation<any, Error, string>({
 		mutationKey: ['CREATE_Upvote'],
 		mutationFn: async (postId) => await createUpvote(postId),
 		onSuccess: (data: {success: any; message: any}) => {
 			if (data.success) {
-				console.log('🚀🚀: useCreateUpvote -> data', data);
 				toast.success('Like Updated');
+			} else {
+				toast.error(data.message);
+			}
+		},
+	});
+};
+
+export const useCreateDownVote = () => {
+	return useMutation<any, Error, string>({
+		mutationKey: ['CREATE_DOWNVOTE'],
+		mutationFn: async (postId) => await createDownVote(postId),
+		onSuccess: (data: {success: any; message: any}) => {
+			if (data.success) {
+				toast.success('Dislike Updated');
 			} else {
 				toast.error(data.message);
 			}

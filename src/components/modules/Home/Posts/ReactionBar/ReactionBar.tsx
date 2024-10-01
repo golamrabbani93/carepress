@@ -1,14 +1,15 @@
 'use client';
 import {ThumbsUp, MessageCircle, ThumbsDown} from 'lucide-react';
 import {PostProps} from '../Post/Post';
-import {useCreateUpvote} from '@/hooks/post.hook';
 import {useUser} from '@/context/user.provider';
 import {toast} from 'sonner';
 import {useState} from 'react';
 import {Button} from '@nextui-org/button';
+import {useCreateDownVote, useCreateUpVote} from '@/hooks/post.hook';
 
 const ReactionBar: React.FC<PostProps> = ({post}) => {
-	const {mutate: handleUpdate} = useCreateUpvote();
+	const {mutate: handleUpVoteUpdate} = useCreateUpVote();
+	const {mutate: handleDownVoteUpdate} = useCreateDownVote();
 	const {user} = useUser();
 	const [LikeShake, setLikeShake] = useState(false);
 	const [disLikeShake, setDisLikeShake] = useState(false);
@@ -19,7 +20,7 @@ const ReactionBar: React.FC<PostProps> = ({post}) => {
 		if (!user?._id) {
 			toast.error('Please login to like the post');
 		} else {
-			handleUpdate(post._id);
+			handleUpVoteUpdate(post._id);
 		}
 		setTimeout(() => {
 			setLikeShake(false);
@@ -31,16 +32,19 @@ const ReactionBar: React.FC<PostProps> = ({post}) => {
 		if (!user?._id) {
 			toast.error('Please login to like the post');
 		} else {
-			// handleUpdate(post._id);
+			handleDownVoteUpdate(post._id);
 		}
 		setTimeout(() => {
 			setDisLikeShake(false);
 		}, 1500);
 	};
 	//* check that i am like or not
-
 	const isLikedPost = post?.upvotes?.find((upvote) => upvote._id === user?._id);
 	const isLike = isLikedPost ? true : false;
+
+	// * check that i am dislike or not
+	const isDisLikedPost = post?.downvotes?.find((downvote) => downvote._id === user?._id);
+	const isDisLike = isDisLikedPost ? true : false;
 
 	return (
 		<div className="flex justify-between px-4 py-2 border-t border-b border-gray-200">
@@ -56,7 +60,7 @@ const ReactionBar: React.FC<PostProps> = ({post}) => {
 			{/* Dislike Button */}
 			<button
 				onClick={handleDisLike}
-				className={`flex items-center space-x-2 text-gray-500 hover:text-primary ${isLike && 'text-primary'} ${disLikeShake && 'animate-shake'}`}
+				className={`flex items-center space-x-2 text-gray-500 hover:text-primary ${isDisLike && 'text-primary'} ${disLikeShake && 'animate-shake'}`}
 			>
 				<ThumbsDown className="w-5 h-5" />
 				<span>Dislike</span>

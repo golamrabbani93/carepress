@@ -43,7 +43,19 @@ export const createUpvote = async (postId: string): Promise<any> => {
 
 		return data;
 	} catch (error) {
-		console.log('🚀🚀: error', error);
-		throw new Error('Failed to create post');
+		throw new Error('Failed to update vote');
+	}
+};
+
+// *create downvote
+export const createDownVote = async (postId: string): Promise<any> => {
+	try {
+		const {data} = await axiosInstance.put(`/posts/downvote/${postId}`);
+
+		revalidateTag('posts');
+
+		return data;
+	} catch (error) {
+		throw new Error('Failed to update vote');
 	}
 };

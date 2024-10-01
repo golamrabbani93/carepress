@@ -47,7 +47,7 @@ export interface IPost {
 	images: string[];
 	author: IUser;
 	upvotes: IUser[];
-	downvotes: number;
+	downvotes: IUser[];
 	category: string;
 	comments: any[];
 	isPremium: boolean;
