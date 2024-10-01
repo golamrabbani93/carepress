@@ -9,7 +9,6 @@ import {Spinner} from '@nextui-org/spinner';
 const AddComment = ({post}: PostProps) => {
 	const {user} = useUser();
 	const {mutate: handleCreateComment, isPending} = useCreateComment();
-	console.log('🚀🚀: AddComment -> isPending', isPending);
 
 	const handleSendComment = (e: FieldValues) => {
 		e.preventDefault();
@@ -27,7 +26,7 @@ const AddComment = ({post}: PostProps) => {
 			toast.error('Please login to Comment the post');
 		} else {
 			handleCreateComment(commentData);
-			// commentInput.value = '';
+			commentInput.value = '';
 		}
 	};
 
