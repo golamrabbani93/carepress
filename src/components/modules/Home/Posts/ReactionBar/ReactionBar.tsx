@@ -10,18 +10,31 @@ import {Button} from '@nextui-org/button';
 const ReactionBar: React.FC<PostProps> = ({post}) => {
 	const {mutate: handleUpdate} = useCreateUpvote();
 	const {user} = useUser();
-	const [shake, setShake] = useState(false);
+	const [LikeShake, setLikeShake] = useState(false);
+	const [disLikeShake, setDisLikeShake] = useState(false);
 
 	// Handle Like Button
 	const handleLike = () => {
-		setShake(true);
+		setLikeShake(true);
 		if (!user?._id) {
 			toast.error('Please login to like the post');
 		} else {
 			handleUpdate(post._id);
 		}
 		setTimeout(() => {
-			setShake(false);
+			setLikeShake(false);
+		}, 1500);
+	};
+
+	const handleDisLike = () => {
+		setDisLikeShake(true);
+		if (!user?._id) {
+			toast.error('Please login to like the post');
+		} else {
+			// handleUpdate(post._id);
+		}
+		setTimeout(() => {
+			setDisLikeShake(false);
 		}, 1500);
 	};
 	//* check that i am like or not
@@ -34,16 +47,19 @@ const ReactionBar: React.FC<PostProps> = ({post}) => {
 			{/* Like Button */}
 			<button
 				onClick={() => handleLike()}
-				className={`flex items-center space-x-2 text-gray-500 hover:text-primary ${isLike && 'text-primary'} ${shake && 'animate-shake'}`}
+				className={`flex items-center space-x-2 text-gray-500 hover:text-primary ${isLike && 'text-primary'} ${LikeShake && 'animate-shake'}`}
 			>
 				<ThumbsUp className="w-5 h-5" />
 				<span>Like</span>
 			</button>
 
-			{/* Share Button */}
-			<button className="flex items-center space-x-2 text-gray-500 hover:text-primary">
+			{/* Dislike Button */}
+			<button
+				onClick={handleDisLike}
+				className={`flex items-center space-x-2 text-gray-500 hover:text-primary ${isLike && 'text-primary'} ${disLikeShake && 'animate-shake'}`}
+			>
 				<ThumbsDown className="w-5 h-5" />
-				<span>Share</span>
+				<span>Dislike</span>
 			</button>
 
 			{/* Comment Button */}
