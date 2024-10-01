@@ -96,9 +96,11 @@ const SingleComment = ({comment}: CommentProps) => {
 					</div>
 				</div>
 				<div className="relative inline-block text-left">
-					<button className="ml-2 cursor-pointer" onClick={handleToggleOptions}>
-						<EllipsisVertical />
-					</button>
+					{user?._id && (
+						<button className="ml-2 cursor-pointer" onClick={handleToggleOptions}>
+							<EllipsisVertical />
+						</button>
+					)}
 
 					{showOptions && (
 						<div className="absolute -top-[6px] right-[35px] mt-2 w-32 bg-white rounded-md shadow-custom-all-around ring-1 ring-black ring-opacity-5 z-10">

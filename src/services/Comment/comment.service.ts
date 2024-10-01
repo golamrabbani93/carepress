@@ -46,3 +46,17 @@ export const updateComment = async (commentData: FieldValues) => {
 		throw new Error('Failed to create comment');
 	}
 };
+
+// *Delete Comment
+export const deleteComment = async (commentId: string): Promise<any> => {
+	try {
+		const {data} = await axiosInstance.delete(`/comments/${commentId}`);
+
+		revalidateTag('posts');
+		revalidateTag('comments');
+
+		return data;
+	} catch (error) {
+		throw new Error('Failed to update vote');
+	}
+};

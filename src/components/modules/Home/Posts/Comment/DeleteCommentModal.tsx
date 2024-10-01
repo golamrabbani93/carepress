@@ -1,3 +1,4 @@
+import {UseDeleteComment} from '@/hooks/comment.hook';
 import {IComment} from '@/types';
 import {Button} from '@nextui-org/button';
 import {
@@ -8,23 +9,26 @@ import {
 	ModalFooter,
 	useDisclosure,
 } from '@nextui-org/modal';
-
+import {useEffect} from 'react';
+import {Spinner} from '@nextui-org/spinner';
 interface DeleteCommentModalProps {
 	setShowOptions: (value: boolean) => void;
 	comment: IComment;
 }
 export default function DeleteCommentModal({setShowOptions, comment}: DeleteCommentModalProps) {
 	const {isOpen, onOpen, onOpenChange} = useDisclosure();
+	const {mutate: deleteComment, isPending, data} = UseDeleteComment();
 
 	const handleDeleteComment = async () => {
-		console.log('Delete Comment');
-		// !check user is logged in
-		// if (!user?._id) {
-		// 	toast.error('Please login to Comment the post');
-		// } else {
-		// 	// handleDeleteComment(comment._id);
-		// }
+		deleteComment(comment._id);
 	};
+
+	useEffect(() => {
+		if (data && data.success) {
+			setShowOptions(false);
+			onOpenChange();
+		}
+	}, [data]);
 
 	return (
 		<>
@@ -50,11 +54,18 @@ export default function DeleteCommentModal({setShowOptions, comment}: DeleteComm
 								<p>Are you sure you want to delete this comment?</p>
 							</ModalBody>
 							<ModalFooter>
-								<Button color="danger" variant="light" onPress={onClose}>
+								<Button
+									color="danger"
+									variant="light"
+									onPress={() => {
+										onClose();
+										setShowOptions(false);
+									}}
+								>
 									Close
 								</Button>
-								<Button color="primary" onPress={handleDeleteComment}>
-									Delete
+								<Button isDisabled={isPending} color="primary" onPress={handleDeleteComment}>
+									{isPending ? <Spinner color="white" size="sm" /> : 'Delete'}
 								</Button>
 							</ModalFooter>
 						</>
