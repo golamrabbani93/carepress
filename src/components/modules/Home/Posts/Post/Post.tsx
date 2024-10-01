@@ -25,7 +25,8 @@ const Post = ({post}: PostProps) => {
 			</div>
 			<div className="mb-2">
 				<h1 className="text-xl font-bold">{post?.title}</h1>
-				<p>{post?.content}</p>
+
+				<div dangerouslySetInnerHTML={{__html: post?.content}} />
 			</div>
 			{/* Background Image Section */}
 			<div className="relative w-full h-64 rounded-lg overflow-hidden">

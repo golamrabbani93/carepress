@@ -1,5 +1,5 @@
 'use client';
-import {useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {EditorContent, useEditor} from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Highlight from '@tiptap/extension-highlight';
@@ -7,11 +7,9 @@ import TextAlign from '@tiptap/extension-text-align';
 import Image from '@tiptap/extension-image';
 import EditorMenuBar from './EditorMenuBar';
 import './Editor.css';
-import CommonButton from '../UI/Button/CommonButton';
 import {Check} from 'lucide-react';
 import {useUser} from '@/context/user.provider';
 import {useCreatePost} from '@/hooks/post.hook';
-import {IPost} from '@/types';
 import {Button} from '@nextui-org/button';
 import {Spinner} from '@nextui-org/spinner';
 interface PostData {
@@ -23,6 +21,49 @@ interface PostData {
 
 const Editor = ({onClose}: {onClose: () => void}) => {
 	const {user} = useUser();
+	const editorRef = useRef<HTMLDivElement>(null);
+	const proseMirror = editorRef.current?.children[0]?.childNodes[0] as unknown as HTMLDivElement;
+
+	useEffect(() => {
+		const adjustHeight = () => {
+			// Access the ProseMirror element
+			const proseMirror = editorRef.current?.children[0]?.childNodes[0] as HTMLDivElement;
+
+			// Check if the ProseMirror element exists
+			if (proseMirror) {
+				// Get the scrollHeight of the ProseMirror element
+				const scrollHeight = proseMirror.scrollHeight;
+
+				// Adjust the height based on the scrollHeight
+				if (scrollHeight > 100) {
+					proseMirror.style.height = 'auto'; // Set height to auto
+				} else {
+					proseMirror.style.height = '100px';
+				}
+			}
+		};
+
+		// Initial height adjustment on mount
+		adjustHeight();
+
+		// Optional: Add a mutation observer to watch for changes in the ProseMirror content
+		const observer = new MutationObserver(adjustHeight);
+
+		// Observe changes on the ProseMirror element
+		const proseMirror = editorRef.current?.children[0]?.childNodes[0] as HTMLDivElement;
+
+		if (proseMirror) {
+			observer.observe(proseMirror, {
+				childList: true,
+				subtree: true,
+			});
+		}
+
+		// Cleanup observer on unmount
+		return () => {
+			observer.disconnect();
+		};
+	}, [proseMirror]);
 	const {mutate: createPost, isPending} = useCreatePost();
 	const [postData, setPostData] = useState<PostData>({
 		title: '',
@@ -30,6 +71,7 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 		category: '',
 		image: null,
 	});
+
 	const [imagePreview, setImagePreview] = useState<string | null>(null);
 
 	const editor = useEditor({
@@ -74,18 +116,19 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 		};
 		const formData = new FormData();
 
+		console.log(UpdatedPostData);
 		formData.append('data', JSON.stringify(UpdatedPostData));
 		if (postData.image) {
 			formData.append('images', postData.image);
 		}
-		createPost(formData, {
-			onSuccess: (data) => {
-				if (data?.success) {
-					onClose();
-					setPostData((_prev) => ({title: '', content: '', category: '', image: null}));
-				}
-			},
-		});
+		// createPost(formData, {
+		// 	onSuccess: (data) => {
+		// 		if (data?.success) {
+		// 			onClose();
+		// 			setPostData((_prev) => ({title: '', content: '', category: '', image: null}));
+		// 		}
+		// 	},
+		// });
 	};
 
 	return (
@@ -153,7 +196,9 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 					<div className="mb-3">
 						<EditorMenuBar editor={editor} />
 					</div>
-					<EditorContent editor={editor} />
+					<div ref={editorRef}>
+						<EditorContent editor={editor} />
+					</div>
 				</div>
 
 				{/* Submit Button */}
@@ -164,7 +209,7 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 					>
 						Post
 					</button> */}
-					<Button type="submit" color="primary" endContent={<Check />} variant="bordered">
+					<Button color="primary" endContent={<Check />} type="submit" variant="bordered">
 						{isPending ? <Spinner color="primary" /> : 'Post'}
 					</Button>
 				</div>
