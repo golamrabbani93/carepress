@@ -7,6 +7,7 @@ import {EllipsisVertical, SendHorizontal} from 'lucide-react';
 import {useEffect, useState} from 'react';
 import {toast} from 'sonner';
 import {Spinner} from '@nextui-org/spinner';
+import DeleteCommentModal from './DeleteCommentModal';
 interface CommentProps {
 	comment: IComment;
 }
@@ -111,15 +112,7 @@ const SingleComment = ({comment}: CommentProps) => {
 								>
 									Edit
 								</button>
-								<button
-									className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-									onClick={() => {
-										setEdit(true);
-										setShowOptions(false);
-									}}
-								>
-									Delete
-								</button>
+								<DeleteCommentModal comment={comment} setShowOptions={setShowOptions} />
 							</div>
 						</div>
 					)}
