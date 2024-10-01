@@ -12,13 +12,10 @@ import {useRouter, useSearchParams} from 'next/navigation';
 import {FieldValues, SubmitHandler} from 'react-hook-form';
 import CPForm from '@/components/form/CPForm';
 import CPInput from '@/components/form/CPInput';
-import Container from '@/components/UI/Container';
-import Image from 'next/image';
 import {Spinner} from '@nextui-org/spinner';
 export default function LoginPage() {
 	const {setIsLoading: userLoader} = useUser();
 	const {mutate: handleUserLogin, isPending, isSuccess, data} = useUserLogin();
-	console.log('🚀🚀: LoginPage -> data', data);
 	const searchParams = useSearchParams();
 	const router = useRouter();
 	const onSubmit: SubmitHandler<FieldValues> = async (data) => {

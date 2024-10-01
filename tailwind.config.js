@@ -21,7 +21,6 @@ module.exports = {
 			animation: {
 				shake: 'shake 0.5s ease-in-out infinite',
 			},
-
 			boxShadow: {
 				'custom-all-around': '0 0 15px 5px rgba(0, 0, 0, 0.1)',
 			},

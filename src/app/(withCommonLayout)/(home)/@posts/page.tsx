@@ -23,7 +23,7 @@ const Posts = async () => {
 							<TotalReactionBar />
 							<ReactionBar post={post} />
 							<CommentSection post={post} />
-							<AddComment />
+							<AddComment post={post} />
 						</div>
 					);
 				})}
