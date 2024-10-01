@@ -47,9 +47,10 @@ const AddComment = ({post}: PostProps) => {
 			<div className="flex-grow">
 				<form className="relative w-full customText" onSubmit={(e) => handleSendComment(e)}>
 					<input
+						required
 						className="w-full bg-white p-2 pr-10 rounded-md border border-gray-300 focus:outline-none"
 						name="comment"
-						placeholder="Comment as Golam Rabbani"
+						placeholder={`Comment as ${user?.name}`}
 						type="text"
 					/>
 					<button
@@ -57,7 +58,7 @@ const AddComment = ({post}: PostProps) => {
 						type="submit"
 					>
 						{isPending ? (
-							<Spinner size="sm" color="primary" />
+							<Spinner size="sm" color="white" />
 						) : (
 							<SendHorizontal className="w-[20px]" />
 						)}
