@@ -31,3 +31,18 @@ export const getAllComment = async () => {
 
 	return res.json();
 };
+
+// *update Comment
+export const updateComment = async (commentData: FieldValues) => {
+	try {
+		const {data} = await axiosInstance.put(`/comments/${commentData._id}`, commentData);
+
+		revalidateTag('comments');
+
+		revalidateTag('posts');
+
+		return data;
+	} catch (error) {
+		throw new Error('Failed to create comment');
+	}
+};

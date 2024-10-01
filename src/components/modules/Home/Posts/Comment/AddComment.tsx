@@ -6,6 +6,7 @@ import {toast} from 'sonner';
 import {PostProps} from '../Post/Post';
 import {useCreateComment} from '@/hooks/comment.hook';
 import {Spinner} from '@nextui-org/spinner';
+
 const AddComment = ({post}: PostProps) => {
 	const {user} = useUser();
 	const {mutate: handleCreateComment, isPending} = useCreateComment();
@@ -44,7 +45,7 @@ const AddComment = ({post}: PostProps) => {
 
 			{/* Input Area */}
 			<div className="flex-grow">
-				<form className="relative w-full" onSubmit={(e) => handleSendComment(e)}>
+				<form className="relative w-full customText" onSubmit={(e) => handleSendComment(e)}>
 					<input
 						className="w-full bg-white p-2 pr-10 rounded-md border border-gray-300 focus:outline-none"
 						name="comment"
@@ -52,10 +53,14 @@ const AddComment = ({post}: PostProps) => {
 						type="text"
 					/>
 					<button
-						className="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary"
+						className="absolute right-2 top-1/2 transform -translate-y-1/2  bg-primary w-8 h-8 rounded-full text-white flex items-center justify-center"
 						type="submit"
 					>
-						{isPending ? <Spinner size="sm" color="primary" /> : <SendHorizontal />}
+						{isPending ? (
+							<Spinner size="sm" color="primary" />
+						) : (
+							<SendHorizontal className="w-[20px]" />
+						)}
 					</button>
 				</form>
 			</div>
