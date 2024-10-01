@@ -3,6 +3,7 @@ import CommentSection from '@/components/modules/Home/Posts/Comment/Comment';
 import Post from '@/components/modules/Home/Posts/Post/Post';
 import ReactionBar from '@/components/modules/Home/Posts/ReactionBar/ReactionBar';
 import TotalReactionBar from '@/components/modules/Home/Posts/TotalReaction/TotalReaction';
+
 import {getAllPosts} from '@/services/Post/post.service';
 import {IPost} from '@/types';
 
