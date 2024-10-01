@@ -1,4 +1,5 @@
 'use server';
+import envConfig from '@/config/envConfig';
 import axiosInstance from '@/lib/AxiosInstance';
 import {revalidateTag} from 'next/cache';
 import {FieldValues} from 'react-hook-form';
@@ -16,4 +17,17 @@ export const createComment = async (commentData: FieldValues) => {
 	} catch (error) {
 		throw new Error('Failed to create comment');
 	}
+};
+
+//*get Comment Data
+export const getAllComment = async () => {
+	const fetchOption = {
+		next: {
+			tags: ['comments'],
+		},
+	};
+
+	const res = await fetch(`${envConfig.baseApi}/comments`, fetchOption);
+
+	return res.json();
 };

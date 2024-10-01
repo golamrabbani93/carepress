@@ -1,26 +1,15 @@
+import {IComment} from '@/types';
 import {PostProps} from '../Post/Post';
-import Comment from './Comment';
+
 import SingleComment from './SingleComment';
 
-interface Comment {
-	name: string;
-	text: string;
-	time: string;
-}
-
-const comments: Comment[] = [
-	{
-		name: 'Hasiba Akter Srity',
-		text: 'আবার পাঠাও কীন্যা না জাতীয় বিশ্ববিদ্যালয় ড্রাইভে',
-		time: '3h',
-	},
-];
-
 const CommentSection = ({post}: PostProps) => {
+	const comments = post.comments;
+
 	return (
 		<div className="p-4">
-			{comments.map((comment, index) => (
-				<SingleComment key={index} name={comment.name} text={comment.text} time={comment.time} />
+			{comments.map((comment: IComment) => (
+				<SingleComment key={comment._id} comment={comment} />
 			))}
 		</div>
 	);

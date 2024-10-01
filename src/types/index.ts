@@ -55,3 +55,14 @@ export interface IPost {
 	createdAt: string;
 	updatedAt: string;
 }
+
+export interface IComment {
+	_id: string;
+	post: string;
+	author: IUser;
+	content: string;
+	replies: any[];
+	createdAt: string;
+	updatedAt: string;
+	__v: number;
+}

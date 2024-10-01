@@ -1,23 +1,23 @@
+import {IComment} from '@/types';
+
 interface CommentProps {
-	name: string;
-	text: string;
-	time: string;
+	comment: IComment;
 }
 
-const SingleComment = ({name, text, time}: CommentProps) => {
+const SingleComment = ({comment}: CommentProps) => {
 	return (
 		<div className="flex items-start mb-4">
 			<img
-				src="https://via.placeholder.com/40"
+				src={comment.author.profilePicture}
 				alt="Profile"
 				className="w-10 h-10 rounded-full mr-3"
 			/>
 			<div className="bg-gray-100 p-2 rounded-lg">
 				<div className="flex justify-between">
-					<h3 className="font-semibold">{name}</h3>
-					<span className="text-xs text-gray-400">{time}</span>
+					<h3 className="font-semibold">{comment.author.name}</h3>
+					<span className="text-xs text-gray-400">time</span>
 				</div>
-				<p>{text}</p>
+				<p>{comment.content}</p>
 			</div>
 		</div>
 	);
