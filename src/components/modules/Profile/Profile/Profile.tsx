@@ -59,6 +59,12 @@ export default function ProfilePage({data}: any) {
 						Posts
 					</Link>
 					<Link
+						href={'/profile/following'}
+						className="hover:text-primary hover:border-b-2 hover:border-primary py-2"
+					>
+						Following
+					</Link>
+					<Link
 						href={'/profile/follower'}
 						className="hover:text-primary hover:border-b-2 hover:border-primary py-2"
 					>

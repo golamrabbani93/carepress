@@ -4,12 +4,12 @@ import {TableLoader} from '@/components/Loader/TableLoader';
 import {IUser} from '@/types';
 
 import React, {useEffect, useState} from 'react';
+import SingleFollowingList from './SingleFollowing';
 
-import SingleFollowerList from './SingleFollowerList';
-const FollowerList = ({users}: any) => {
+const FollowingList = ({users}: any) => {
 	const [loading, setloading] = useState(true);
 
-	const followersUsers = users?.data?.followers;
+	const followingUsers = users?.data?.following;
 
 	useEffect(() => {
 		if (users.success) {
@@ -23,7 +23,7 @@ const FollowerList = ({users}: any) => {
 
 	return (
 		<div className="overflow-x-auto">
-			{followersUsers?.length > 0 ? (
+			{followingUsers?.length > 0 ? (
 				<table className="min-w-full bg-white border border-gray-200">
 					<thead>
 						<tr>
@@ -42,16 +42,16 @@ const FollowerList = ({users}: any) => {
 						</tr>
 					</thead>
 					<tbody>
-						{followersUsers.map((user: IUser) => (
-							<SingleFollowerList key={user._id} user={user} />
+						{followingUsers.map((user: IUser) => (
+							<SingleFollowingList key={user._id} user={user} />
 						))}
 					</tbody>
 				</table>
 			) : (
-				<div className="text-center text-primary font-bold">No Follower Available</div>
+				<div className="text-center text-gray-400">No Following Users</div>
 			)}
 		</div>
 	);
 };
 
-export default FollowerList;
+export default FollowingList;
