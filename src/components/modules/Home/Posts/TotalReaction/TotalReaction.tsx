@@ -1,26 +1,39 @@
-import {ThumbsUp, Heart} from 'lucide-react';
+import {ThumbsUp, Heart, ThumbsDown} from 'lucide-react';
+import {PostProps} from '../Post/Post';
 
-const TotalReactionBar = () => {
+const TotalReactionBar = ({post}: PostProps) => {
 	return (
 		<div className="flex items-center justify-between text-sm text-gray-700 mx-3 mb-2">
 			{/* Reactions Section */}
 			<div className="flex items-center space-x-2">
-				{/* Icons */}
-				<div className="flex items-center space-x-1">
-					<ThumbsUp className="w-4 h-4 text-blue-500" />
-					<Heart className="w-4 h-4 text-red-500" />
-				</div>
-				{/* Likes Text */}
-				<span>
-					{/* {userNames.slice(0, 2).join(', ')} and {likes} others */}
-					likers
-				</span>
+				{post?.upvotes?.length > 0 && (
+					<div className="flex items-center space-x-2">
+						{/* Icons */}
+						<div className="flex items-center space-x-1">
+							<ThumbsUp className="w-4 h-4 text-blue-600" />
+						</div>
+						{/* Likes Text */}
+						<span>{post?.upvotes?.length} Likes</span>
+					</div>
+				)}
+				{post?.downvotes?.length > 0 && (
+					<div className="flex items-center space-x-2">
+						{/* Icons */}
+						<div className="flex items-center space-x-1">
+							<ThumbsDown className="w-4 h-4 text-primary" />
+						</div>
+						{/* Likes Text */}
+						<span>{post?.downvotes?.length} Dislikes</span>
+					</div>
+				)}
 			</div>
 
 			{/* Comments Section */}
-			<div>
-				<span> comments</span>
-			</div>
+			{post.comments.length > 0 && (
+				<div>
+					<span>{post?.comments?.length} comments</span>
+				</div>
+			)}
 		</div>
 	);
 };

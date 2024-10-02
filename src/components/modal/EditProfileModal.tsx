@@ -128,7 +128,7 @@ export default function ProfileEditModal({user}: {user: IUser}) {
 
 									<div className="flex justify-end">
 										<Button type="submit" className="bg-primary text-white font-extrabold">
-											{isPending ? <Spinner size="md" color="white" /> : 'Save profile'}
+											{isPending ? <Spinner size="sm" color="white" /> : 'Save profile'}
 										</Button>
 									</div>
 								</CPForm>

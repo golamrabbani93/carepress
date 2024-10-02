@@ -26,7 +26,7 @@ const ProfileLoader = () => {
 			</div>
 
 			{/* Navigation Tabs Skeleton */}
-			<div className="mt-6 border-b border-gray-300">
+			<div className="mt-6">
 				<div className="max-w-4xl mx-auto px-4 flex space-x-8">
 					<Skeleton className="h-4 w-12" />
 					<Skeleton className="h-4 w-16" />

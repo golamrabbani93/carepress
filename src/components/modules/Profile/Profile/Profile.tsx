@@ -23,7 +23,7 @@ export default function ProfilePage({data}: any) {
 	}
 
 	return (
-		<div className=" bg-gray-100">
+		<div className=" bg-gray-100 shadow-custom-all-around">
 			{/* "Cover photo" */}
 			<div className="relative h-60 bg-gray-300">
 				<Image
@@ -53,14 +53,14 @@ export default function ProfilePage({data}: any) {
 			</div>
 
 			{/* Navigation Tabs */}
-			<div className="mt-6 border-b border-gray-300">
+			<div className="mt-6 ">
 				<div className="max-w-4xl mx-auto px-4 flex space-x-8">
 					<Link href={'/profile'} className="text-primary border-b-2 border-primary py-2">
 						Posts
 					</Link>
 					<Link
 						href={'/profile/follower'}
-						className="hover:text-primary border-b-2 hover:border-primary py-2"
+						className="hover:text-primary hover:border-b-2 hover:border-primary py-2"
 					>
 						Follower
 					</Link>

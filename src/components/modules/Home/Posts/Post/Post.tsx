@@ -22,6 +22,8 @@ const Post = ({post}: PostProps) => {
 	const handleFollow = async () => {
 		await followUser(post.author._id);
 	};
+	// check is my post or not
+	const isMyPost = post?.author?._id === user?._id;
 
 	// *check if user is following
 	const isUserFollowing = post?.author.followers?.find((item) => item === user?._id);
@@ -46,14 +48,14 @@ const Post = ({post}: PostProps) => {
 							</button>
 						) : isPending ? (
 							<Spinner color="primary" size="sm" />
-						) : (
+						) : !isMyPost ? (
 							<button
 								className="text-primary font-semibold text-xs  hover:scale-110 transition-transform"
 								onClick={handleFollow}
 							>
 								Follow
 							</button>
-						)}
+						) : null}
 					</div>
 					<p className="text-gray-400 text-sm">{timeConvert(postDate)}</p>
 				</div>

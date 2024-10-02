@@ -80,7 +80,7 @@ const SingleComment = ({comment}: CommentProps) => {
 										type="submit"
 									>
 										{isPending ? (
-											<Spinner color="primary" size="sm" />
+											<Spinner color="white" size="sm" />
 										) : (
 											<SendHorizontal className="w-[20px]" />
 										)}
