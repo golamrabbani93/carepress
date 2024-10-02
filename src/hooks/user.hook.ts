@@ -1,5 +1,5 @@
-import {makeFollow} from '@/services/User/user.service';
-import {useMutation} from '@tanstack/react-query';
+import {getUser, makeFollow} from '@/services/User/user.service';
+import {useMutation, useQuery} from '@tanstack/react-query';
 import {toast} from 'sonner';
 
 export const useMakefollow = () => {
@@ -17,5 +17,14 @@ export const useMakefollow = () => {
 		onError: (_error) => {
 			toast.error('Failed to follow');
 		},
+	});
+};
+
+// *get User
+
+export const useGetMyProfile = () => {
+	return useQuery({
+		queryKey: ['GET_MY_PROFILE'],
+		queryFn: async () => await getUser(),
 	});
 };
