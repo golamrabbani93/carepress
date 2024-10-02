@@ -22,49 +22,51 @@ interface PostData {
 
 const Editor = ({onClose}: {onClose: () => void}) => {
 	const {user} = useUser();
-	const editorRef = useRef<HTMLDivElement>(null);
-	const proseMirror = editorRef.current?.children[0]?.childNodes[0] as unknown as HTMLDivElement;
+	// const editorRef = useRef<HTMLDivElement>(null);
+	// const proseMirror = editorRef.current?.children[0]?.childNodes[0] as unknown as HTMLDivElement;
+	// console.log('🚀🚀: Editor -> proseMirror', proseMirror);
 
-	useEffect(() => {
-		const adjustHeight = () => {
-			// Access the ProseMirror element
-			const proseMirror = editorRef.current?.children[0]?.childNodes[0] as HTMLDivElement;
+	// useEffect(() => {
+	// 	const adjustHeight = () => {
+	// 		// Access the ProseMirror element
+	// 		const proseMirror = editorRef.current?.children[0]?.childNodes[0] as HTMLDivElement;
 
-			// Check if the ProseMirror element exists
-			if (proseMirror) {
-				// Get the scrollHeight of the ProseMirror element
-				const scrollHeight = proseMirror.scrollHeight;
+	// 		// Check if the ProseMirror element exists
+	// 		if (proseMirror) {
+	// 			// Get the scrollHeight of the ProseMirror element
+	// 			const scrollHeight = proseMirror.scrollHeight;
+	// 			console.log('🚀🚀: adjustHeight -> scrollHeight', scrollHeight);
 
-				// Adjust the height based on the scrollHeight
-				if (scrollHeight > 100) {
-					proseMirror.style.height = 'auto'; // Set height to auto
-				} else {
-					proseMirror.style.height = '100px';
-				}
-			}
-		};
+	// 			// Adjust the height based on the scrollHeight
+	// 			if (scrollHeight > 100) {
+	// 				proseMirror.style.height = 'auto'; // Set height to auto
+	// 			} else {
+	// 				proseMirror.style.height = '100px';
+	// 			}
+	// 		}
+	// 	};
 
-		// Initial height adjustment on mount
-		adjustHeight();
+	// 	// Initial height adjustment on mount
+	// 	adjustHeight();
 
-		// Optional: Add a mutation observer to watch for changes in the ProseMirror content
-		const observer = new MutationObserver(adjustHeight);
+	// 	// Optional: Add a mutation observer to watch for changes in the ProseMirror content
+	// 	const observer = new MutationObserver(adjustHeight);
 
-		// Observe changes on the ProseMirror element
-		const proseMirror = editorRef.current?.children[0]?.childNodes[0] as HTMLDivElement;
+	// 	// Observe changes on the ProseMirror element
+	// 	const proseMirror = editorRef.current?.children[0]?.childNodes[0] as HTMLDivElement;
 
-		if (proseMirror) {
-			observer.observe(proseMirror, {
-				childList: true,
-				subtree: true,
-			});
-		}
+	// 	if (proseMirror) {
+	// 		observer.observe(proseMirror, {
+	// 			childList: true,
+	// 			subtree: true,
+	// 		});
+	// 	}
 
-		// Cleanup observer on unmount
-		return () => {
-			observer.disconnect();
-		};
-	}, [proseMirror]);
+	// 	// Cleanup observer on unmount
+	// 	return () => {
+	// 		observer.disconnect();
+	// 	};
+	// }, [proseMirror]);
 	const {mutate: createPost, isPending} = useCreatePost();
 	const [postData, setPostData] = useState<PostData>({
 		title: '',
@@ -121,18 +123,18 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 		if (postData.image) {
 			formData.append('images', postData.image);
 		}
-		// createPost(formData, {
-		// 	onSuccess: (data) => {
-		// 		if (data?.success) {
-		// 			onClose();
-		// 			setPostData((_prev) => ({title: '', content: '', category: '', image: null}));
-		// 		}
-		// 	},
-		// });
+		createPost(formData, {
+			onSuccess: (data) => {
+				if (data?.success) {
+					onClose();
+					setPostData((_prev) => ({title: '', content: '', category: '', image: null}));
+				}
+			},
+		});
 	};
 
 	return (
-		<div className="max-w-xl mx-auto p-4 bg-white rounded-lg ">
+		<div className="w-full mx-auto p-4 bg-white rounded-lg ">
 			<form onSubmit={handleSubmit}>
 				{/* Title Field */}
 				<div className="mb-4">
@@ -163,8 +165,8 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 						onChange={(e) => setPostData((prev) => ({...prev, category: e.target.value}))}
 					>
 						<option value="">Select a category</option>
-						<option value="Tips">Tips</option>
-						<option value="Story">Story</option>
+						<option value="Tip">Tip</option>
+						<option value="Stor">Story</option>
 					</select>
 				</div>
 
@@ -196,7 +198,7 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 					<div className="mb-3">
 						<EditorMenuBar editor={editor} />
 					</div>
-					<div ref={editorRef}>
+					<div>
 						<EditorContent editor={editor} />
 					</div>
 				</div>

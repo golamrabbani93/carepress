@@ -33,39 +33,6 @@ export default function PostModal() {
 						Share A Post...
 					</Button>
 				</div>
-
-				{/* Divider */}
-				{/* <hr className="my-2" /> */}
-
-				{/* Button Group */}
-				{/* <div className="hidden flex justify-between mt-2">
-					<button className="flex items-center space-x-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200">
-						<img
-							src="https://via.placeholder.com/20x20?text=🎥"
-							alt="Live Video"
-							className="h-5 w-5"
-						/>
-						<span>Live video</span>
-					</button>
-
-					<button className="flex items-center space-x-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200">
-						<img
-							src="https://via.placeholder.com/20x20?text=📷"
-							alt="Photo/Video"
-							className="h-5 w-5"
-						/>
-						<span>Photo/video</span>
-					</button>
-
-					<button className="flex items-center space-x-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200">
-						<img
-							src="https://via.placeholder.com/20x20?text=😊"
-							alt="Feeling/Activity"
-							className="h-5 w-5"
-						/>
-						<span>Feeling/activity</span>
-					</button>
-				</div> */}
 			</div>
 			<Modal
 				isDismissable={false}

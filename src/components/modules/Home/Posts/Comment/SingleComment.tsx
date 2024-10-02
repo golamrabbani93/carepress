@@ -77,7 +77,7 @@ const SingleComment = ({comment}: CommentProps) => {
 				src={comment.author.profilePicture}
 			/>
 			<div className="flex items-center justify-center">
-				<div className="bg-gray-100 p-2 rounded-lg w-[220px] ]">
+				<div className="bg-gray-100 p-2 rounded-lg w-[300px] ]">
 					<div className="flex justify-between">
 						<h3 className="font-semibold">{comment.author.name}</h3>
 						<span className="text-[12px] text-gray-400 ml-2">{formatTimeAgo(commentDate)}</span>
