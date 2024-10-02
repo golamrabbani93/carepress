@@ -1,8 +1,9 @@
 import PostProfile from '@/components/modules/Profile/Post/PostProfile';
-import {getAllPosts} from '@/services/Post/post.service';
+import {getMyPosts} from '@/services/Post/post.service';
 
 const profilePage = async () => {
-	const posts = await getAllPosts();
+	const posts = await getMyPosts();
+	console.log('🚀🚀: profilePage -> posts', posts);
 
 	return (
 		<div>

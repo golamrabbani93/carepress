@@ -18,6 +18,20 @@ export const makeFollow = async (followId: string): Promise<any> => {
 		throw new Error('Failed to Follow');
 	}
 };
+// *unfollow User
+export const makeUnFollow = async (followId: string): Promise<any> => {
+	try {
+		const {data} = await axiosInstance.put(`/users/unfollow/${followId}`);
+
+		revalidateTag('posts');
+		revalidateTag('usersData');
+		revalidateTag('my-posts');
+
+		return data;
+	} catch (error) {
+		throw new Error('Failed to Follow');
+	}
+};
 const fetchOption = async () => {
 	const cookieStore = headers().get('cookie') || ''; // Access the cookie header
 	const accessToken = cookieStore.match(/accessToken=([^;]*)/)?.[1]; // Get the access token from cookies
@@ -56,6 +70,7 @@ export const userUpdate = async (userData: FormData): Promise<any> => {
 
 		revalidateTag('posts');
 		revalidateTag('usersData');
+		revalidateTag('my-posts');
 
 		return data;
 	} catch (error) {

@@ -2,7 +2,7 @@ import {Skeleton} from '@nextui-org/skeleton';
 
 const PostLoader = () => {
 	return (
-		<div className="p-4 bg-white rounded-lg shadow-custom-all-around space-y-4">
+		<div className="p-4 mb-4 bg-white rounded-lg shadow-custom-all-around space-y-4">
 			{/* Profile Section */}
 			<div className="flex items-center space-x-4">
 				<Skeleton className="w-10 h-10 rounded-full" /> {/* Profile picture */}

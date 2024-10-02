@@ -30,7 +30,7 @@ const Post = ({post}: PostProps) => {
 	const isFollowing = isUserFollowing ? true : false;
 
 	return (
-		<div className="bg-white p-4 max-w-xl mx-auto my-5">
+		<div className="bg-white p-4  mx-auto my-5">
 			<div className="flex items-center mb-4">
 				<Image
 					alt="Profile Image"

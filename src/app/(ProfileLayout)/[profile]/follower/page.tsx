@@ -5,7 +5,7 @@ const FollowerPage = async () => {
 	const users = await getUser();
 
 	return (
-		<div>
+		<div className="pb-10">
 			<FollowerList users={users} />
 		</div>
 	);

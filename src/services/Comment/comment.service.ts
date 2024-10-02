@@ -12,6 +12,7 @@ export const createComment = async (commentData: FieldValues) => {
 		revalidateTag('comments');
 
 		revalidateTag('posts');
+		revalidateTag('my-posts');
 
 		return data;
 	} catch (error) {
@@ -40,6 +41,7 @@ export const updateComment = async (commentData: FieldValues) => {
 		revalidateTag('comments');
 
 		revalidateTag('posts');
+		revalidateTag('my-posts');
 
 		return data;
 	} catch (error) {
@@ -54,6 +56,7 @@ export const deleteComment = async (commentId: string): Promise<any> => {
 
 		revalidateTag('posts');
 		revalidateTag('comments');
+		revalidateTag('my-posts');
 
 		return data;
 	} catch (error) {

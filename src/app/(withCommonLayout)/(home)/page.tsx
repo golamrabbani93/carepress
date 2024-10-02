@@ -1,6 +1,6 @@
 import PostModal from '@/components/modal/PostModal';
 
-export default function Home() {
+export default function MainPostPage() {
 	return (
 		<>
 			<PostModal />
