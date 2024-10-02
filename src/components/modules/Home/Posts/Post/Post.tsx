@@ -1,10 +1,14 @@
 import {IPost} from '@/types';
+import {timeConvert} from '@/utils/timeCovert';
 import Image from 'next/image';
 
 export interface PostProps {
 	post: IPost;
 }
 const Post = ({post}: PostProps) => {
+	// !Post Date
+	const postDate = new Date(post.updatedAt);
+
 	return (
 		<div className="bg-white p-4 max-w-xl mx-auto my-5">
 			<div className="flex items-center mb-4">
@@ -20,7 +24,7 @@ const Post = ({post}: PostProps) => {
 						<h2 className="font-semibold">{post?.author?.name}</h2>
 						<button className="text-primary font-semibold text-xs ml-2">Follow</button>
 					</div>
-					<p className="text-gray-400 text-sm">5 hours ago</p>
+					<p className="text-gray-400 text-sm">{timeConvert(postDate)}</p>
 				</div>
 			</div>
 			<div className="mb-2">
