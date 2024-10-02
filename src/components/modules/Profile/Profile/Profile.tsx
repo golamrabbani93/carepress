@@ -2,19 +2,23 @@
 
 import ProfileLoader from '@/components/Loader/ProfileLoader';
 import ProfileEditModal from '@/components/modal/EditProfileModal';
-
-import {useGetMyProfile} from '@/hooks/user.hook';
 import {Avatar} from '@nextui-org/avatar';
-import {Button} from '@nextui-org/button';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import {useEffect, useState} from 'react';
 
-export default function ProfilePage() {
-	const {data, isLoading, isError} = useGetMyProfile();
-
+export default function ProfilePage({data}: any) {
+	const [loading, setloading] = useState(true);
 	const user = data?.data;
 
-	if (isLoading) {
+	useEffect(() => {
+		if (data.success) {
+			setloading(false);
+		}
+	}, [user]);
+
+	if (loading) {
 		return <ProfileLoader />;
 	}
 

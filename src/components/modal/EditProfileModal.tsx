@@ -10,14 +10,17 @@ import {
 } from '@nextui-org/modal';
 import {FieldValues, FormProvider, SubmitHandler, useFieldArray, useForm} from 'react-hook-form';
 import {Divider} from '@nextui-org/divider';
-import {ChangeEvent, useState} from 'react';
+import {ChangeEvent, useEffect, useState} from 'react';
 import CPInput from '../form/CPInput';
 import CPForm from '../form/CPForm';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {UserUpadteSchema} from '@/schemas/user.schema';
+import {useUserUpdate} from '@/hooks/user.hook';
+import {Spinner} from '@nextui-org/spinner';
 
 export default function ProfileEditModal({user}: {user: IUser}) {
 	const {isOpen, onOpen, onOpenChange} = useDisclosure();
+	const {mutate: updateUserHandle, isPending, data, reset} = useUserUpdate();
 	const [imageFiles, setImageFiles] = useState<File[] | []>([]);
 
 	const [imagePreviews, setImagePreviews] = useState<string[] | []>([]);
@@ -30,7 +33,17 @@ export default function ProfileEditModal({user}: {user: IUser}) {
 		for (let image of imageFiles) {
 			formData.append('image', image);
 		}
+		updateUserHandle(formData);
 	};
+
+	// *remove modal
+	useEffect(() => {
+		if (data?.success && !isPending) {
+			onOpenChange();
+			setImageFiles([]);
+			reset();
+		}
+	}, [data, isPending]);
 
 	const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files![0];
@@ -114,8 +127,8 @@ export default function ProfileEditModal({user}: {user: IUser}) {
 									<Divider className="my-5" />
 
 									<div className="flex justify-end">
-										<Button size="lg" type="submit">
-											Post
+										<Button type="submit" className="bg-primary text-white font-extrabold">
+											{isPending ? <Spinner size="md" color="white" /> : 'Save profile'}
 										</Button>
 									</div>
 								</CPForm>
