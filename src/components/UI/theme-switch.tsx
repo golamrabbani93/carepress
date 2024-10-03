@@ -60,7 +60,11 @@ export const ThemeSwitch: FC<ThemeSwitchProps> = ({className, classNames}) => {
 					),
 				})}
 			>
-				{!isSelected || isSSR ? <SunFilledIcon size={22} /> : <MoonFilledIcon size={22} />}
+				{!isSelected || isSSR ? (
+					<SunFilledIcon color="#ff4880" size={22} />
+				) : (
+					<MoonFilledIcon color="#ff4880" size={22} />
+				)}
 			</div>
 		</Component>
 	);

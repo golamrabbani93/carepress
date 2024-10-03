@@ -1,7 +1,9 @@
-export default function Home() {
+import PostModal from '@/components/modal/PostModal';
+
+export default function MainPostPage() {
 	return (
 		<>
-			<h2>banner</h2>
+			<PostModal />
 		</>
 	);
 }

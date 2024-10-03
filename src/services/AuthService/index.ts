@@ -11,13 +11,12 @@ export const registerUser = async (userData: FieldValues) => {
 		const {data} = await axiosInstance.post('/auth/signup', userData);
 
 		if (data.success) {
-			cookies().set('accessToken', data?.data?.accessToken);
-			cookies().set('refreshToken', data?.data?.refreshToken);
+			cookies().set('accessToken', data?.token);
 		}
 
 		return data;
 	} catch (error: any) {
-		throw new Error(error);
+		return error.response.data;
 	}
 };
 
@@ -27,8 +26,7 @@ export const loginUser = async (userData: FieldValues) => {
 		const {data} = await axiosInstance.post('/auth/login', userData);
 
 		if (data.success) {
-			cookies().set('accessToken', data?.data?.accessToken);
-			cookies().set('refreshToken', data?.data?.refreshToken);
+			cookies().set('accessToken', data?.token);
 		}
 
 		return data;
@@ -57,10 +55,12 @@ export const getCurrentUser = async () => {
 			_id: decodedToken._id,
 			name: decodedToken.name,
 			email: decodedToken.email,
-			mobileNumber: decodedToken.mobileNumber,
+			profilePicture: decodedToken.profilePicture,
+			followers: decodedToken.followers || [],
+			following: decodedToken.following || [],
 			role: decodedToken.role,
-			status: decodedToken.status,
-			profilePhoto: decodedToken.profilePhoto,
+			createdAt: decodedToken.createdAt,
+			updatedAt: decodedToken.updatedAt,
 		};
 	}
 

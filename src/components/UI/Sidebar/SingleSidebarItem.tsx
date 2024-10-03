@@ -3,9 +3,8 @@ import {ADMINITEMS} from './SidebarItems/AdminItems';
 import {useUser} from '@/context/user.provider';
 
 const SingleSidebarItem = () => {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const {user} = useUser();
-
-	console.log('🚀🚀: SingleSidebarItem -> user', user);
 
 	return (
 		<ul className="space-y-4 pt-10">

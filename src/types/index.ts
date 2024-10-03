@@ -7,11 +7,11 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 export interface IUser {
 	_id: string;
 	name: string;
-	role: string;
 	email: string;
-	status: string;
-	mobileNumber: string;
-	profilePhoto?: string;
+	profilePicture: string;
+	followers: any[];
+	following: any[];
+	role: string;
 	createdAt?: string;
 	updatedAt?: string;
 	__v?: number;
@@ -38,4 +38,31 @@ export interface IInput {
 export interface ISelect {
 	key: string;
 	label: string;
+}
+
+export interface IPost {
+	_id: string;
+	title: string;
+	content: string;
+	images: string[];
+	author: IUser;
+	upvotes: IUser[];
+	downvotes: IUser[];
+	category: string;
+	comments: any[];
+	isPremium: boolean;
+	premiumPrice: number;
+	createdAt: string;
+	updatedAt: string;
+}
+
+export interface IComment {
+	_id: string;
+	post: string;
+	author: IUser;
+	content: string;
+	replies: any[];
+	createdAt: string;
+	updatedAt: string;
+	__v: number;
 }
