@@ -1,5 +1,6 @@
 import {
 	getUser,
+	makeAdmin,
 	makeBlock,
 	makeFollow,
 	makeUnBlock,
@@ -98,6 +99,24 @@ export const useUserUpdate = () => {
 		},
 		onError: (_error) => {
 			toast.error('Failed to Update');
+		},
+	});
+};
+
+//* make admin
+export const useMakeAdmin = () => {
+	return useMutation<any, Error, string>({
+		mutationKey: ['MAKE_ADMIN'],
+		mutationFn: async (userId) => await makeAdmin(userId),
+		onSuccess: (data: {success: any; message: any}) => {
+			if (data.success) {
+				toast.success('Make Admin Completed');
+			} else {
+				toast.error(data.message);
+			}
+		},
+		onError: (_error) => {
+			toast.error('Make Admin Failed');
 		},
 	});
 };

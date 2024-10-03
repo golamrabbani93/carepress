@@ -62,6 +62,20 @@ export const makeUnBlock = async (userId: string): Promise<any> => {
 		throw new Error('Failed to Follow');
 	}
 };
+// *user unblock
+export const makeAdmin = async (userId: string): Promise<any> => {
+	try {
+		const {data} = await axiosInstance.put(`/users/make-admin/${userId}`);
+
+		revalidateTag('posts');
+		revalidateTag('usersData');
+		revalidateTag('my-posts');
+
+		return data;
+	} catch (error) {
+		throw new Error('Failed to Make Admin');
+	}
+};
 
 const fetchOption = async () => {
 	const cookieStore = headers().get('cookie') || ''; // Access the cookie header
