@@ -28,7 +28,7 @@ export const TableLoader = () => (
 					</tr>
 				</thead>
 				<tbody>
-					{[...Array(4)].map((_, index) => (
+					{[...Array(7)].map((_, index) => (
 						<tr key={index} className="hover:bg-gray-50">
 							<td className="py-2 px-4 border-b border-gray-200 text-sm">
 								<div className="w-10 h-10 bg-gray-300 rounded-full" />

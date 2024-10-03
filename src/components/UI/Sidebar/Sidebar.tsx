@@ -16,7 +16,7 @@ export default function Sidebar() {
 	return (
 		<>
 			{/* "Top Navbar" */}
-			<nav className="bg-gray-800 text-white shadow-lg p-4 flex justify-center items-center fixed inset-0 h-20 ">
+			<nav className="bg-gray-800 text-white shadow-lg p-4 flex justify-center items-center fixed inset-0 h-20 z-40">
 				{/* "Mobile toggle button" */}
 				<div className="lg:hidden">
 					<button
