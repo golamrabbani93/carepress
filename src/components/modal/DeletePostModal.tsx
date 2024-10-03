@@ -11,16 +11,17 @@ import {
 } from '@nextui-org/modal';
 import {useEffect} from 'react';
 import {Spinner} from '@nextui-org/spinner';
+import {UseDeletePost} from '@/hooks/post.hook';
 interface DeleteCommentModalProps {
 	setShowOptions: (value: boolean) => void;
 	post: IPost;
 }
 export default function DeletePostModal({setShowOptions, post}: DeleteCommentModalProps) {
 	const {isOpen, onOpen, onOpenChange} = useDisclosure();
-	const {mutate: deleteComment, isPending, data} = UseDeleteComment();
+	const {mutate: deletePost, isPending, data} = UseDeletePost();
 
-	const handleDeleteComment = async () => {
-		deleteComment(post._id);
+	const handleDeletePost = async () => {
+		deletePost(post._id);
 	};
 
 	useEffect(() => {
@@ -64,7 +65,7 @@ export default function DeletePostModal({setShowOptions, post}: DeleteCommentMod
 								>
 									Close
 								</Button>
-								<Button color="primary" isDisabled={isPending} onPress={handleDeleteComment}>
+								<Button color="primary" isDisabled={isPending} onPress={handleDeletePost}>
 									{isPending ? <Spinner color="white" size="sm" /> : 'Delete'}
 								</Button>
 							</ModalFooter>
