@@ -9,6 +9,7 @@ import {IPost} from '@/types';
 
 const Posts = async () => {
 	const posts = await getAllPosts();
+	console.log('🚀🚀: Posts -> posts', posts);
 
 	return (
 		<div>
