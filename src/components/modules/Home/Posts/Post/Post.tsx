@@ -8,6 +8,10 @@ import Image from 'next/image';
 import {Spinner} from '@nextui-org/spinner';
 import {useUser} from '@/context/user.provider';
 import {useRouter} from 'next/navigation';
+import {EllipsisVertical} from 'lucide-react';
+import DeleteCommentModal from '../Comment/DeleteCommentModal';
+import DeletePostModal from '@/components/modal/DeletePostModal';
+import {useState} from 'react';
 
 export interface PostProps {
 	post: IPost;
@@ -15,6 +19,12 @@ export interface PostProps {
 const Post = ({post}: PostProps) => {
 	const {user} = useUser();
 	const router = useRouter();
+
+	// *handle options for post delete and edit
+	const [showOptions, setShowOptions] = useState(false);
+	const handleToggleOptions = () => {
+		setShowOptions(!showOptions); // Toggle dropdown visibility
+	};
 
 	// !Post Date
 	const postDate = new Date(post.updatedAt);
@@ -37,33 +47,57 @@ const Post = ({post}: PostProps) => {
 
 	return (
 		<div className="bg-white p-4  mx-auto my-5">
-			<div className="flex items-center mb-4">
-				<Image
-					alt="Profile Image"
-					className="rounded-full mr-4"
-					height={40}
-					src={post?.author?.profilePicture as string} // Replace with actual image path
-					width={40}
-				/>
-				<div>
-					<div className="flex justify-center items-center">
-						<h2 className="font-semibold mr-3">{post?.author?.name}</h2>
-						{isFollowing ? (
-							<button disabled className="text-primary font-semibold text-xs">
-								Following
-							</button>
-						) : isPending ? (
-							<Spinner color="primary" size="sm" />
-						) : !isMyPost ? (
-							<button
-								className="text-primary font-semibold text-xs  hover:scale-110 transition-transform"
-								onClick={handleFollow}
-							>
-								Follow
-							</button>
-						) : null}
+			<div className="flex justify-between mb-4">
+				<div className="flex items-center mb-4">
+					<Image
+						alt="Profile Image"
+						className="rounded-full mr-4"
+						height={40}
+						src={post?.author?.profilePicture as string} // Replace with actual image path
+						width={40}
+					/>
+					<div>
+						<div className="flex justify-center items-center">
+							<h2 className="font-semibold mr-3">{post?.author?.name}</h2>
+							{isFollowing ? (
+								<button disabled className="text-primary font-semibold text-xs">
+									Following
+								</button>
+							) : isPending ? (
+								<Spinner color="primary" size="sm" />
+							) : !isMyPost ? (
+								<button
+									className="text-primary font-semibold text-xs  hover:scale-110 transition-transform"
+									onClick={handleFollow}
+								>
+									Follow
+								</button>
+							) : null}
+						</div>
+						<p className="text-gray-400 text-sm">{timeConvert(postDate)}</p>
 					</div>
-					<p className="text-gray-400 text-sm">{timeConvert(postDate)}</p>
+				</div>
+				<div className="relative">
+					{isMyPost && (
+						<div>
+							<EllipsisVertical className="cursor-pointer" onClick={handleToggleOptions} />
+						</div>
+					)}
+					{showOptions && (
+						<div className="absolute -top-[6px] right-[35px] mt-2 w-32 bg-white rounded-md shadow-custom-all-around ring-1 ring-black ring-opacity-5 z-10">
+							<div className="py-1">
+								<button
+									className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+									onClick={() => {
+										setShowOptions(false);
+									}}
+								>
+									Edit
+								</button>
+								<DeletePostModal post={post} setShowOptions={setShowOptions} />
+							</div>
+						</div>
+					)}
 				</div>
 			</div>
 			<div className="mb-2">

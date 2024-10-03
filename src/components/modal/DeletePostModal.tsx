@@ -1,5 +1,5 @@
 import {UseDeleteComment} from '@/hooks/comment.hook';
-import {IComment} from '@/types';
+import {IPost} from '@/types';
 import {Button} from '@nextui-org/button';
 import {
 	Modal,
@@ -13,14 +13,14 @@ import {useEffect} from 'react';
 import {Spinner} from '@nextui-org/spinner';
 interface DeleteCommentModalProps {
 	setShowOptions: (value: boolean) => void;
-	comment: IComment;
+	post: IPost;
 }
-export default function DeleteCommentModal({setShowOptions, comment}: DeleteCommentModalProps) {
+export default function DeletePostModal({setShowOptions, post}: DeleteCommentModalProps) {
 	const {isOpen, onOpen, onOpenChange} = useDisclosure();
 	const {mutate: deleteComment, isPending, data} = UseDeleteComment();
 
 	const handleDeleteComment = async () => {
-		deleteComment(comment._id);
+		deleteComment(post._id);
 	};
 
 	useEffect(() => {
@@ -49,7 +49,7 @@ export default function DeleteCommentModal({setShowOptions, comment}: DeleteComm
 				<ModalContent>
 					{(onClose) => (
 						<>
-							<ModalHeader className="flex flex-col gap-1">Comment Delete Action</ModalHeader>
+							<ModalHeader className="flex flex-col gap-1">Post Delete Action</ModalHeader>
 							<ModalBody>
 								<p>Are you sure you want to delete this comment?</p>
 							</ModalBody>
