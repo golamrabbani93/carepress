@@ -80,6 +80,7 @@ export default function LoginPage() {
 									className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-full shadow-lg hover:from-pink-600 hover:to-red-500 transition-transform transform hover:scale-105 font-semibold"
 									size="lg"
 									type="submit"
+									isDisabled={isPending}
 								>
 									{isPending ? <Spinner color="white" /> : 'Login'}
 								</Button>
@@ -88,7 +89,10 @@ export default function LoginPage() {
 							<div className="text-center mt-6">
 								<p className="text-sm text-gray-600">
 									Don't have an account?{' '}
-									<Link className="text-indigo-600 hover:underline" href={'/register'}>
+									<Link
+										className="text-white underline hover:text-primary transition-all"
+										href={'/register'}
+									>
 										Register
 									</Link>
 								</p>

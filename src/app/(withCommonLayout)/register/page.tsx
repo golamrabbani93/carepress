@@ -74,6 +74,7 @@ export default function RegisterPage() {
 										className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-full shadow-lg hover:from-pink-600 hover:to-red-500 transition-transform transform hover:scale-105 font-semibold"
 										size="lg"
 										type="submit"
+										isDisabled={isPending}
 									>
 										{isPending ? <Spinner color="white" /> : 'Register'}
 									</Button>
@@ -81,7 +82,7 @@ export default function RegisterPage() {
 							</div>
 							<div className="text-center">
 								Already have an account ?{' '}
-								<Link className="text-indigo-600 hover:underline" href={'/login'}>
+								<Link className="text-primary hover:underline" href={'/login'}>
 									Login
 								</Link>
 							</div>

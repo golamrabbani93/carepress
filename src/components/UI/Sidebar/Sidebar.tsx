@@ -4,6 +4,10 @@ import {useState} from 'react';
 import {motion} from 'framer-motion';
 import SingleSidebarItem from './SingleSidebarItem';
 import Link from 'next/link';
+import {useUser} from '@/context/user.provider';
+import {usePathname, useRouter} from 'next/navigation';
+import {logout} from '@/services/AuthService';
+import {protectedRoutes} from '@/constants/private-routes';
 
 export default function Sidebar() {
 	const [isOpen, setIsOpen] = useState(false); //* Control sidebar for mobile
@@ -11,6 +15,19 @@ export default function Sidebar() {
 	// *Toggle the sidebar
 	const toggleSidebar = () => {
 		setIsOpen(!isOpen);
+	};
+	// *User Logout
+	const {setIsLoading: userLoader} = useUser();
+	const pathname = usePathname();
+	const router = useRouter();
+	const handleLogout = () => {
+		logout();
+		userLoader(true);
+
+		// * handle protected route when logout button trigger
+		if (protectedRoutes.some((route) => pathname.match(route))) {
+			router.push('/');
+		}
 	};
 
 	return (
@@ -27,17 +44,17 @@ export default function Sidebar() {
 					</button>
 				</div>
 				<div className="flex space-x-6 justify-center items-center">
-					<Link className="flex items-center text-lg hover:text-red-400 transition-all" href="/">
+					<Link className="flex items-center text-lg hover:text-primary transition-all" href="/">
 						<HousePlus className="mr-2" />
 						Home
 					</Link>
-					<Link
-						className="flex items-center text-lg hover:text-red-400 transition-all"
-						href="/logout"
+					<button
+						onClick={handleLogout}
+						className="flex items-center text-lg hover:text-primary transition-all"
 					>
 						<LogOut className="mr-2" />
 						Logout
-					</Link>
+					</button>
 				</div>
 			</nav>
 			{/* " Small Device Sidebar" */}

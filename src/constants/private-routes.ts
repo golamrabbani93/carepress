@@ -1,1 +1,8 @@
-export const protectedRoutes = ['/profile', '/profile/:page*', '/admin', '/login', '/register'];
+export const protectedRoutes = [
+	'/profile',
+	'/profile/:page*',
+	'/dashboard',
+	'/dashboard/:page*',
+	'/login',
+	'/register',
+];
