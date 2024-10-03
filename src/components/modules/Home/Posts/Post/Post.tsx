@@ -12,6 +12,7 @@ import {EllipsisVertical} from 'lucide-react';
 import DeletePostModal from '@/components/modal/DeletePostModal';
 import {useState} from 'react';
 import UpdatePostModal from '@/components/modal/updatePostModal';
+import ImageGallery from '../ImageGallery/ImageGallery';
 
 export interface PostProps {
 	post: IPost;
@@ -27,7 +28,7 @@ const Post = ({post}: PostProps) => {
 	};
 
 	// !Post Date
-	const postDate = new Date(post.updatedAt);
+	const postDate = new Date(post?.updatedAt);
 
 	// *handle Make follow
 	const {mutate: followUser, isPending} = useMakefollow();
@@ -74,7 +75,7 @@ const Post = ({post}: PostProps) => {
 								</button>
 							) : null}
 						</div>
-						<p className="text-gray-400 text-sm">{timeConvert(postDate)}</p>
+						{post.updatedAt && <p className="text-gray-400 text-sm">{timeConvert(postDate)}</p>}
 					</div>
 				</div>
 				<div className="relative">
@@ -98,16 +99,8 @@ const Post = ({post}: PostProps) => {
 
 				<div dangerouslySetInnerHTML={{__html: post?.content}} />
 			</div>
-			{/* Background Image Section */}
-			<div className="relative w-full h-64 rounded-lg overflow-hidden">
-				<Image
-					alt="Background Image"
-					className="absolute"
-					layout="fill"
-					objectFit="cover"
-					src={post?.images[0]} // Replace with actual image path
-				/>
-			</div>
+
+			<ImageGallery images={post?.images} />
 		</div>
 	);
 };

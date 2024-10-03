@@ -205,15 +205,15 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 
 				{/* Submit Button */}
 				<div className="flex justify-end">
-					{/* <button
-						className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-						type="submit"
-					>
-						Post
-					</button> */}
-					<Button color="primary" endContent={<Check />} type="submit" variant="bordered">
-						{isPending ? <Spinner color="primary" /> : 'Post'}
-					</Button>
+					{isPending ? (
+						<Button color="primary" type="submit" variant="bordered">
+							<Spinner size="sm" color="primary" />
+						</Button>
+					) : (
+						<Button color="primary" endContent={<Check />} type="submit" variant="bordered">
+							Post
+						</Button>
+					)}
 				</div>
 			</form>
 		</div>

@@ -220,9 +220,15 @@ const UpdateEditor = ({onClose, post, setShowOptions}: PostModalProps & {onClose
 
 				{/* Submit Button */}
 				<div className="flex justify-end">
-					<Button color="primary" endContent={<Check />} type="submit" variant="bordered">
-						{isPending ? <Spinner color="primary" /> : 'Post'}
-					</Button>
+					{isPending ? (
+						<Button color="primary" type="submit" variant="bordered">
+							<Spinner size="sm" color="primary" />
+						</Button>
+					) : (
+						<Button color="primary" endContent={<Check />} type="submit" variant="bordered">
+							Post
+						</Button>
+					)}
 				</div>
 			</form>
 		</div>
