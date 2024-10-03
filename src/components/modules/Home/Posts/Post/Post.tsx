@@ -54,6 +54,11 @@ const Post = ({post}: PostProps) => {
 					for further assistance.
 				</h3>
 			)}
+			{!post?.status && user?.role === 'ADMIN' && (
+				<h3 className="text-red-500 font-bold border border-red-500 p-3 mb-4 rounded-md ">
+					Admin set this post as a draft
+				</h3>
+			)}
 			<div className="flex justify-between mb-4">
 				<div className="flex items-center mb-4">
 					<Image
@@ -85,11 +90,12 @@ const Post = ({post}: PostProps) => {
 					</div>
 				</div>
 				<div className="relative">
-					{isMyPost && (
-						<div>
-							<EllipsisVertical className="cursor-pointer" onClick={handleToggleOptions} />
-						</div>
-					)}
+					{isMyPost ||
+						(user?.role === 'ADMIN' && (
+							<div>
+								<EllipsisVertical className="cursor-pointer" onClick={handleToggleOptions} />
+							</div>
+						))}
 					{showOptions && (
 						<div className="absolute -top-[6px] right-[35px] mt-2 w-32 bg-white rounded-md shadow-custom-all-around ring-1 ring-black ring-opacity-5 z-10">
 							<div className="py-1">

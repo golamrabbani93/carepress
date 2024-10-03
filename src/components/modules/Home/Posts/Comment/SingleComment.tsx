@@ -90,7 +90,6 @@ const SingleComment = ({comment}: CommentProps) => {
 									className="text-xs text-primary uppercase font-semibold"
 									onClick={() => setEdit(false)}
 								>
-									{' '}
 									cencel
 								</button>
 							</>

@@ -90,7 +90,6 @@ const UpdateEditor = ({onClose, post, setShowOptions}: PostModalProps & {onClose
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const UpdatedPostData = {
-			author: user?._id,
 			title: postData.title,
 			content: postData.content,
 			category: postData.category,
