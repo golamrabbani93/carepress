@@ -10,7 +10,7 @@ import EditorMenuBar from './EditorMenuBar';
 import './Editor.css';
 import {Check, X} from 'lucide-react';
 import {useUser} from '@/context/user.provider';
-import {useCreatePost} from '@/hooks/post.hook';
+import {useCreatePost, useUpdatePost} from '@/hooks/post.hook';
 import {Button} from '@nextui-org/button';
 import {Spinner} from '@nextui-org/spinner';
 import {PostModalProps} from '../modal/DeletePostModal';
@@ -26,7 +26,8 @@ const UpdateEditor = ({onClose, post, setShowOptions}: PostModalProps & {onClose
 	const {user} = useUser();
 	const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 	const [imageFiles, setImageFiles] = useState<File[] | []>([]);
-	const {mutate: createPost, isPending, data} = useCreatePost();
+	const {mutate: updatePost, isPending, data} = useUpdatePost();
+	console.log('🚀🚀: UpdateEditor -> data', data);
 	const [postData, setPostData] = useState<PostData>({
 		title: '',
 		content: '',
@@ -107,18 +108,12 @@ const UpdateEditor = ({onClose, post, setShowOptions}: PostModalProps & {onClose
 			formData.append('images', image);
 		}
 
-		console.log(formData.get('data'));
+		const updateData = {
+			postId: post._id as string,
+			postData: formData,
+		};
 
-		console.log(formData.get('images'));
-		// createPost(formData, {
-		// 	onSuccess: (data) => {
-		// 		if (data?.success) {
-		// 			onClose();
-		// 			setPostData({title: '', content: '', category: '', images: []}); // Reset images
-		// 			setImagePreviews([]); // Clear image previews
-		// 		}
-		// 	},
-		// });
+		updatePost(updateData);
 	};
 
 	useEffect(() => {

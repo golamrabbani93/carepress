@@ -1,4 +1,10 @@
-import {createDownVote, createPost, createUpvote, deletePost} from '@/services/Post/post.service';
+import {
+	createDownVote,
+	createPost,
+	createUpvote,
+	deletePost,
+	updatePost,
+} from '@/services/Post/post.service';
 import {useMutation} from '@tanstack/react-query';
 import {toast} from 'sonner';
 
@@ -6,6 +12,20 @@ export const useCreatePost = () => {
 	return useMutation<any, Error, FormData>({
 		mutationKey: ['CREATE_POST'],
 		mutationFn: async (postData) => await createPost(postData),
+		onSuccess: (data: {success: any; message: any}) => {
+			if (data.success) {
+				toast.success(data.message);
+			} else {
+				toast.error(data.message);
+			}
+		},
+	});
+};
+
+export const useUpdatePost = () => {
+	return useMutation<any, Error, {postId: string; postData: FormData}>({
+		mutationKey: ['UPDATE_POST'],
+		mutationFn: async ({postId, postData}) => await updatePost(postId, postData),
 		onSuccess: (data: {success: any; message: any}) => {
 			if (data.success) {
 				toast.success(data.message);

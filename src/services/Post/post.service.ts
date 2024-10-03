@@ -38,6 +38,24 @@ export const createPost = async (formData: FormData): Promise<any> => {
 	}
 };
 
+// *update post
+export const updatePost = async (postId: string, formData: FormData): Promise<any> => {
+	try {
+		const {data} = await axiosInstance.put(`/posts/${postId}`, formData, {
+			headers: {
+				'Content-Type': 'multipart/form-data',
+			},
+		});
+
+		revalidateTag('posts');
+		revalidateTag('my-posts');
+
+		return data;
+	} catch (error) {
+		throw new Error('Failed to create post');
+	}
+};
+
 //*get Post Data
 export const getAllPosts = async () => {
 	const fetchOption = {
