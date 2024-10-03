@@ -12,7 +12,7 @@ const SingleSidebarItem = () => {
 			{USERITEMS.map((item) => (
 				<li key={item.name}>
 					<Link
-						className="flex items-center p-3 rounded-lg text-lg hover:bg-gray-700 transition-all"
+						className="flex items-center p-3 rounded-lg text-lg hover:bg-primary transition-all"
 						href={item?.path || '/'}
 					>
 						<span className="mr-4">{item.icon}</span>

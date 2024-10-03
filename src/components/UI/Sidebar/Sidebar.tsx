@@ -1,5 +1,5 @@
 'use client';
-import {Home, HousePlus, LogOut, Menu, X} from 'lucide-react';
+import {HousePlus, LogOut, Menu, X} from 'lucide-react';
 import {useState} from 'react';
 import {motion} from 'framer-motion';
 import SingleSidebarItem from './SingleSidebarItem';
@@ -77,10 +77,10 @@ export default function Sidebar() {
 			</motion.div>
 			{/*  "large device Sidebar" */}
 			<div
-				className="hidden bg-gray-800 text-white p-6 fixed top-0 left-0 h-full lg:block"
+				className="hidden bg-gray-800 text-white p-6 fixed top-0 left-0 h-full lg:block z-40"
 				style={{width: '16rem'}} //! Width is fixed at 16rem 64 Tailwind units
 			>
-				<h2 className="text-2xl font-bold">Menu</h2>
+				<h2 className="text-3xl font-bold text-primary text-center">CAREPRESS</h2>
 				{/* "Sidebar Menu Items" */}
 				<SingleSidebarItem />
 			</div>
