@@ -8,7 +8,7 @@ type Role = keyof typeof roleBasedRoutes;
 
 const roleBasedRoutes = {
 	USER: [/^\/dashboard\/user/, /^\/profile/],
-	ADMIN: [/^\/dashboard\/admin/],
+	ADMIN: [/^\/dashboard\/admin/, /^\/profile/],
 };
 
 export async function middleware(request: NextRequest) {

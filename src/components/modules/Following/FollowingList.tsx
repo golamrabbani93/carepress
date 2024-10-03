@@ -48,7 +48,7 @@ const FollowingList = ({users}: any) => {
 					</tbody>
 				</table>
 			) : (
-				<div className="text-center text-gray-400">No Following Users</div>
+				<div className="text-center text-primary font-bold">No Following Available</div>
 			)}
 		</div>
 	);

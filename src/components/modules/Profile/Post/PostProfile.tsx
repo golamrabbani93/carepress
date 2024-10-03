@@ -9,6 +9,7 @@ import AddComment from '../../Home/Posts/Comment/AddComment';
 import {useEffect, useState} from 'react';
 import PostLoader from '@/components/Loader/PostLoader';
 import PostModal from '@/components/modal/PostModal';
+import {set} from 'date-fns';
 
 const PostProfile = ({posts}: {posts: any}) => {
 	const [loading, setloading] = useState(true);
@@ -19,25 +20,35 @@ const PostProfile = ({posts}: {posts: any}) => {
 		}
 	}, [posts]);
 
+	if (!posts.data) {
+		setTimeout(() => {
+			setloading(false);
+		}, 1500);
+	}
+
 	return (
 		<div className="min-h-screen">
 			<PostModal />
-			{loading
-				? [...Array(5)].map((_, index) => <PostLoader key={index} />)
-				: posts?.data?.map((post: IPost) => {
-						return (
-							<div
-								key={post._id}
-								className="shadow-custom-all-around rounded-lg bg-white border border-gray-200 my-3 "
-							>
-								<Post post={post} />
-								<TotalReactionBar post={post} />
-								<ReactionBar post={post} />
-								<CommentSection post={post} />
-								<AddComment post={post} />
-							</div>
-						);
-					})}
+			{loading ? (
+				[...Array(5)].map((_, index) => <PostLoader key={index} />)
+			) : posts?.data?.length > 0 ? (
+				posts?.data?.map((post: IPost) => {
+					return (
+						<div
+							key={post._id}
+							className="shadow-custom-all-around rounded-lg bg-white border border-gray-200 my-3 "
+						>
+							<Post post={post} />
+							<TotalReactionBar post={post} />
+							<ReactionBar post={post} />
+							<CommentSection post={post} />
+							<AddComment post={post} />
+						</div>
+					);
+				})
+			) : (
+				<div className="text-center text-primary font-bold">No Post Available</div>
+			)}
 		</div>
 	);
 };
