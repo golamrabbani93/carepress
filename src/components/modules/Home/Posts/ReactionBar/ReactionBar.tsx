@@ -2,7 +2,6 @@
 import {ThumbsUp, MessageCircle, ThumbsDown} from 'lucide-react';
 import {PostProps} from '../Post/Post';
 import {useUser} from '@/context/user.provider';
-import {toast} from 'sonner';
 import {useState} from 'react';
 import {useCreateDownVote, useCreateUpVote} from '@/hooks/post.hook';
 import {useRouter} from 'next/navigation';
