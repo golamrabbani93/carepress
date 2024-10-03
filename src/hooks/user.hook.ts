@@ -1,4 +1,11 @@
-import {getUser, makeFollow, makeUnFollow, userUpdate} from '@/services/User/user.service';
+import {
+	getUser,
+	makeBlock,
+	makeFollow,
+	makeUnBlock,
+	makeUnFollow,
+	userUpdate,
+} from '@/services/User/user.service';
 import {useMutation, useQuery} from '@tanstack/react-query';
 import {toast} from 'sonner';
 
@@ -32,6 +39,38 @@ export const useMakeUnfollow = () => {
 		},
 		onError: (_error) => {
 			toast.error('Failed to Unfollow');
+		},
+	});
+};
+export const useMakeUnBlock = () => {
+	return useMutation<any, Error, string>({
+		mutationKey: ['MAKE_UNBLOCK'],
+		mutationFn: async (userId) => await makeUnBlock(userId),
+		onSuccess: (data: {success: any; message: any}) => {
+			if (data.success) {
+				toast.success('Unblocked Completed');
+			} else {
+				toast.error(data.message);
+			}
+		},
+		onError: (_error) => {
+			toast.error('Failed to Unblocked');
+		},
+	});
+};
+export const useMakeBlock = () => {
+	return useMutation<any, Error, string>({
+		mutationKey: ['MAKE_Block'],
+		mutationFn: async (userId) => await makeBlock(userId),
+		onSuccess: (data: {success: any; message: any}) => {
+			if (data.success) {
+				toast.success('Blocked Completed');
+			} else {
+				toast.error(data.message);
+			}
+		},
+		onError: (_error) => {
+			toast.error('Failed to Blocked');
 		},
 	});
 };

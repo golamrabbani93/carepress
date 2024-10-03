@@ -12,6 +12,7 @@ export const makeFollow = async (followId: string): Promise<any> => {
 
 		revalidateTag('posts');
 		revalidateTag('usersData');
+		revalidateTag('my-posts');
 
 		return data;
 	} catch (error) {
@@ -22,6 +23,35 @@ export const makeFollow = async (followId: string): Promise<any> => {
 export const makeUnFollow = async (followId: string): Promise<any> => {
 	try {
 		const {data} = await axiosInstance.put(`/users/unfollow/${followId}`);
+
+		revalidateTag('posts');
+		revalidateTag('usersData');
+		revalidateTag('my-posts');
+
+		return data;
+	} catch (error) {
+		throw new Error('Failed to Follow');
+	}
+};
+
+// *user block
+export const makeBlock = async (userId: string): Promise<any> => {
+	try {
+		const {data} = await axiosInstance.put(`/users/block/${userId}`);
+
+		revalidateTag('posts');
+		revalidateTag('usersData');
+		revalidateTag('my-posts');
+
+		return data;
+	} catch (error) {
+		throw new Error('Failed to Follow');
+	}
+};
+// *user unblock
+export const makeUnBlock = async (userId: string): Promise<any> => {
+	try {
+		const {data} = await axiosInstance.put(`/users/unblock/${userId}`);
 
 		revalidateTag('posts');
 		revalidateTag('usersData');

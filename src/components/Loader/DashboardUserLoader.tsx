@@ -20,6 +20,9 @@ export const DashboardUserLoader = () => (
 							Role
 						</th>
 						<th className="py-2 px-4 border-b border-gray-200 bg-gray-100  text-sm font-semibold text-gray-700">
+							Role
+						</th>
+						<th className="py-2 px-4 border-b border-gray-200 bg-gray-100  text-sm font-semibold text-gray-700">
 							User Action
 						</th>
 					</tr>

@@ -1,16 +1,22 @@
 'user client';
 
-import {useMakefollow} from '@/hooks/user.hook';
+import {useMakeBlock, useMakefollow, useMakeUnBlock} from '@/hooks/user.hook';
 import {IUser} from '@/types';
 import {Avatar} from '@nextui-org/avatar';
 import {Button} from '@nextui-org/button';
 import {Spinner} from '@nextui-org/spinner';
-import {UserCog, UserMinus, UserX} from 'lucide-react';
+import {UserCog, UserMinus, UserPlus, UserX} from 'lucide-react';
 const SingleUserList = ({user}: {user: IUser}) => {
 	const {isPending} = useMakefollow();
 
+	const {mutate: makeBlock, isPending: isBlockPending} = useMakeBlock();
+	const {mutate: makeUnBlock, isPending: isUnBlockPending} = useMakeUnBlock();
+
 	const handleBlock = async (id: string) => {
-		console.log(id);
+		makeBlock(id);
+	};
+	const handleUnBlock = async (id: string) => {
+		makeUnBlock(id);
 	};
 
 	const handleMakeAdmin = async (id: string) => {
@@ -31,17 +37,37 @@ const SingleUserList = ({user}: {user: IUser}) => {
 			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900">{user.name}</td>
 			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900">{user.email}</td>
 			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900">{user.role}</td>
-			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900">status</td>
-			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900 capitalize">
-				<Button
-					startContent={<UserMinus className="w-5 h-5" />}
-					size="sm"
-					color="danger"
-					variant="bordered"
-					onClick={() => handleBlock(user._id)}
+			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900">
+				<span
+					className={`border px-3 py-1 rounded-md uppercase text-xs ${user.status === 'blocked' ? 'border-red-500' : 'border-green-500'}`}
 				>
-					{isPending ? <Spinner color="primary" size="sm" /> : 'Block'}
-				</Button>
+					{user.status}
+				</span>
+			</td>
+			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900 capitalize">
+				{user.role === 'ADMIN' ? (
+					''
+				) : user.status === 'blocked' ? (
+					<Button
+						startContent={<UserPlus className="w-5 h-5" />}
+						size="sm"
+						color="danger"
+						variant="bordered"
+						onClick={() => handleUnBlock(user._id)}
+					>
+						{isUnBlockPending ? <Spinner color="primary" size="sm" /> : 'Unblock'}
+					</Button>
+				) : (
+					<Button
+						startContent={<UserMinus className="w-5 h-5" />}
+						size="sm"
+						color="danger"
+						variant="bordered"
+						onClick={() => handleBlock(user._id)}
+					>
+						{isBlockPending ? <Spinner color="primary" size="sm" /> : 'Block'}
+					</Button>
+				)}
 
 				<Button
 					onClick={() => handleMakeAdmin(user._id)}

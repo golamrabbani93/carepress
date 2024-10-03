@@ -12,6 +12,7 @@ export interface IUser {
 	followers: any[];
 	following: any[];
 	role: string;
+	status: string;
 	createdAt?: string;
 	updatedAt?: string;
 	__v?: number;
