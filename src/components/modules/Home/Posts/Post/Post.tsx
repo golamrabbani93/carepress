@@ -9,9 +9,9 @@ import {Spinner} from '@nextui-org/spinner';
 import {useUser} from '@/context/user.provider';
 import {useRouter} from 'next/navigation';
 import {EllipsisVertical} from 'lucide-react';
-import DeleteCommentModal from '../Comment/DeleteCommentModal';
 import DeletePostModal from '@/components/modal/DeletePostModal';
 import {useState} from 'react';
+import UpdatePostModal from '@/components/modal/updatePostModal';
 
 export interface PostProps {
 	post: IPost;
@@ -86,14 +86,7 @@ const Post = ({post}: PostProps) => {
 					{showOptions && (
 						<div className="absolute -top-[6px] right-[35px] mt-2 w-32 bg-white rounded-md shadow-custom-all-around ring-1 ring-black ring-opacity-5 z-10">
 							<div className="py-1">
-								<button
-									className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-									onClick={() => {
-										setShowOptions(false);
-									}}
-								>
-									Edit
-								</button>
+								<UpdatePostModal post={post} setShowOptions={setShowOptions} />
 								<DeletePostModal post={post} setShowOptions={setShowOptions} />
 							</div>
 						</div>

@@ -12,11 +12,11 @@ import {
 import {useEffect} from 'react';
 import {Spinner} from '@nextui-org/spinner';
 import {UseDeletePost} from '@/hooks/post.hook';
-interface DeleteCommentModalProps {
+export interface PostModalProps {
 	setShowOptions: (value: boolean) => void;
 	post: IPost;
 }
-export default function DeletePostModal({setShowOptions, post}: DeleteCommentModalProps) {
+export default function DeletePostModal({setShowOptions, post}: PostModalProps) {
 	const {isOpen, onOpen, onOpenChange} = useDisclosure();
 	const {mutate: deletePost, isPending, data} = UseDeletePost();
 

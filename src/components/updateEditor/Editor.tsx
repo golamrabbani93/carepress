@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {EditorContent, useEditor} from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Highlight from '@tiptap/extension-highlight';
@@ -8,74 +8,31 @@ import TextAlign from '@tiptap/extension-text-align';
 import Image from '@tiptap/extension-image';
 import EditorMenuBar from './EditorMenuBar';
 import './Editor.css';
-import {Check} from 'lucide-react';
+import {Check, X} from 'lucide-react';
 import {useUser} from '@/context/user.provider';
 import {useCreatePost} from '@/hooks/post.hook';
 import {Button} from '@nextui-org/button';
 import {Spinner} from '@nextui-org/spinner';
+import {PostModalProps} from '../modal/DeletePostModal';
+
 interface PostData {
 	title: string;
 	content: string;
 	category: string;
-	image: File | null;
+	images: File[]; // Change image to images
 }
 
-const Editor = ({onClose}: {onClose: () => void}) => {
+const UpdateEditor = ({onClose, post, setShowOptions}: PostModalProps & {onClose: () => void}) => {
 	const {user} = useUser();
-	// const editorRef = useRef<HTMLDivElement>(null);
-	// const proseMirror = editorRef.current?.children[0]?.childNodes[0] as unknown as HTMLDivElement;
-	// console.log('🚀🚀: Editor -> proseMirror', proseMirror);
-
-	// useEffect(() => {
-	// 	const adjustHeight = () => {
-	// 		// Access the ProseMirror element
-	// 		const proseMirror = editorRef.current?.children[0]?.childNodes[0] as HTMLDivElement;
-
-	// 		// Check if the ProseMirror element exists
-	// 		if (proseMirror) {
-	// 			// Get the scrollHeight of the ProseMirror element
-	// 			const scrollHeight = proseMirror.scrollHeight;
-	// 			console.log('🚀🚀: adjustHeight -> scrollHeight', scrollHeight);
-
-	// 			// Adjust the height based on the scrollHeight
-	// 			if (scrollHeight > 100) {
-	// 				proseMirror.style.height = 'auto'; // Set height to auto
-	// 			} else {
-	// 				proseMirror.style.height = '100px';
-	// 			}
-	// 		}
-	// 	};
-
-	// 	// Initial height adjustment on mount
-	// 	adjustHeight();
-
-	// 	// Optional: Add a mutation observer to watch for changes in the ProseMirror content
-	// 	const observer = new MutationObserver(adjustHeight);
-
-	// 	// Observe changes on the ProseMirror element
-	// 	const proseMirror = editorRef.current?.children[0]?.childNodes[0] as HTMLDivElement;
-
-	// 	if (proseMirror) {
-	// 		observer.observe(proseMirror, {
-	// 			childList: true,
-	// 			subtree: true,
-	// 		});
-	// 	}
-
-	// 	// Cleanup observer on unmount
-	// 	return () => {
-	// 		observer.disconnect();
-	// 	};
-	// }, [proseMirror]);
-	const {mutate: createPost, isPending} = useCreatePost();
+	const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+	const [imageFiles, setImageFiles] = useState<File[] | []>([]);
+	const {mutate: createPost, isPending, data} = useCreatePost();
 	const [postData, setPostData] = useState<PostData>({
 		title: '',
 		content: '',
 		category: '',
-		image: null,
+		images: [], // Initialize as an empty array
 	});
-
-	const [imagePreview, setImagePreview] = useState<string | null>('null');
 
 	const editor = useEditor({
 		extensions: [
@@ -87,26 +44,46 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 				allowBase64: true,
 			}),
 		],
-		content: '',
+		content: post.content,
 		onUpdate: ({editor}) => {
 			setPostData((prev) => ({...prev, content: editor.getHTML()}));
 		},
 	});
 
 	const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const file = e.target.files ? e.target.files[0] : null;
+		const files = e.target.files ? Array.from(e.target.files) : [];
 
-		if (file) {
-			setPostData((prev) => ({...prev, image: file}));
+		if (files.length > 0) {
+			// Update the post data with the selected images
+			setPostData((prev) => ({
+				...prev,
+				images: [...prev.images, ...files], // Append new images
+			}));
+			setImageFiles((prev) => [...prev, ...files]); // Append new files
 
-			// Preview image
-			const reader = new FileReader();
+			// Generate previews for each selected image
+			const newPreviews: string[] = [];
 
-			reader.onloadend = () => {
-				setImagePreview(reader.result as string);
-			};
-			reader.readAsDataURL(file);
+			files.forEach((file) => {
+				const reader = new FileReader();
+
+				reader.onloadend = () => {
+					setImagePreviews((prevPreviews) => [...prevPreviews, reader.result as string]);
+				};
+				reader.readAsDataURL(file);
+			});
 		}
+	};
+	const handleImageRemove = (index: number) => {
+		//* Remove the image at the specified index
+		setPostData((prev) => {
+			const updatedImages = prev.images.filter((_, i) => i !== index); // Filter out the image
+
+			return {...prev, images: updatedImages}; // Update state
+		});
+
+		//* Remove the preview of the removed image
+		setImagePreviews((prev) => prev.filter((_, i) => i !== index));
 	};
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -117,24 +94,48 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 			content: postData.content,
 			category: postData.category,
 		};
+
 		const formData = new FormData();
 
 		formData.append('data', JSON.stringify(UpdatedPostData));
-		if (postData.image) {
-			formData.append('images', postData.image);
+		// Append all selected images to the form data
+
+		if (typeof postData.images[0] === 'string') {
+			postData.images = [];
 		}
-		createPost(formData, {
-			onSuccess: (data) => {
-				if (data?.success) {
-					onClose();
-					setPostData((_prev) => ({title: '', content: '', category: '', image: null}));
-				}
-			},
-		});
+		for (let image of imageFiles) {
+			formData.append('images', image);
+		}
+
+		console.log(formData.get('data'));
+
+		console.log(formData.get('images'));
+		// createPost(formData, {
+		// 	onSuccess: (data) => {
+		// 		if (data?.success) {
+		// 			onClose();
+		// 			setPostData({title: '', content: '', category: '', images: []}); // Reset images
+		// 			setImagePreviews([]); // Clear image previews
+		// 		}
+		// 	},
+		// });
 	};
 
+	useEffect(() => {
+		if (data && data.success) {
+			setShowOptions(false);
+		}
+		setPostData({
+			title: post.title,
+			content: post.content,
+			category: post.category,
+			images: post.images as unknown as File[], // Initialize images with the post images
+		});
+		setImagePreviews(post.images);
+	}, [data, post]);
+
 	return (
-		<div className="w-full mx-auto p-4 bg-white rounded-lg ">
+		<div className="w-full mx-auto p-4 bg-white rounded-lg">
 			<form onSubmit={handleSubmit}>
 				{/* Title Field */}
 				<div className="mb-4">
@@ -175,18 +176,37 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 					<label className="block text-gray-700" htmlFor="image-upload">
 						Image:
 					</label>
-					<input accept="image/*" id="image-upload" type="file" onChange={handleImageUpload} />
+					<input
+						multiple
+						accept="image/*"
+						disabled={imagePreviews.length >= 3}
+						id="image-upload"
+						type="file"
+						onChange={handleImageUpload}
+					/>
 				</div>
 
 				{/* Image Preview */}
-				{imagePreview && (
+				{imagePreviews.length > 0 && (
 					<div className="mt-4">
 						<h3 className="text-sm text-gray-700">Image Preview:</h3>
-						<img
-							alt="Preview"
-							className="rounded-lg max-w-full h-[100px] mt-2"
-							src={imagePreview}
-						/>
+						<div className="grid grid-cols-3 gap-2 mt-2">
+							{imagePreviews.map((preview, index) => (
+								<div key={index} className="relative">
+									<img
+										alt={`Preview ${index + 1}`}
+										className="rounded-lg max-w-full h-[100px] object-cover"
+										src={preview}
+									/>
+									<div className="absolute top-1 left-1">
+										<X
+											className="bg-primary text-white rounded-full w-5 h-5 cursor-pointer"
+											onClick={() => handleImageRemove(index)}
+										/>
+									</div>
+								</div>
+							))}
+						</div>
 					</div>
 				)}
 
@@ -205,12 +225,6 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 
 				{/* Submit Button */}
 				<div className="flex justify-end">
-					{/* <button
-						className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-						type="submit"
-					>
-						Post
-					</button> */}
 					<Button color="primary" endContent={<Check />} type="submit" variant="bordered">
 						{isPending ? <Spinner color="primary" /> : 'Post'}
 					</Button>
@@ -220,4 +234,4 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 	);
 };
 
-export default Editor;
+export default UpdateEditor;
