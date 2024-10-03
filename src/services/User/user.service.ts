@@ -32,6 +32,7 @@ export const makeUnFollow = async (followId: string): Promise<any> => {
 		throw new Error('Failed to Follow');
 	}
 };
+
 const fetchOption = async () => {
 	const cookieStore = headers().get('cookie') || ''; // Access the cookie header
 	const accessToken = cookieStore.match(/accessToken=([^;]*)/)?.[1]; // Get the access token from cookies
@@ -51,6 +52,18 @@ const fetchOption = async () => {
 export const getUser = async (): Promise<any> => {
 	const options = await fetchOption(); // Get options with access token
 	const res = await fetch(`${envConfig.baseApi}/users/me`, options); // Fetch user data
+
+	if (!res.ok) {
+		throw new Error('Failed to fetch user data');
+	}
+
+	return res.json(); // Return user data
+};
+
+//* get all users
+export const getAllUser = async (): Promise<any> => {
+	const options = await fetchOption(); // Get options with access token
+	const res = await fetch(`${envConfig.baseApi}/users`, options); // Fetch user data
 
 	if (!res.ok) {
 		throw new Error('Failed to fetch user data');
