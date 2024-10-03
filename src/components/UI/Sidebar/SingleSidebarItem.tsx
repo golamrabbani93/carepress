@@ -2,14 +2,29 @@ import Link from 'next/link';
 import {ADMINITEMS} from './SidebarItems/AdminItems';
 import {useUser} from '@/context/user.provider';
 import {USERITEMS} from './SidebarItems/UserItems';
+import {useEffect, useState} from 'react';
+import SidebarItemsLoader from '@/components/Loader/SidebarItemsLoader';
 
 const SingleSidebarItem = () => {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const [loading, setLoading] = useState(true);
 	const {user} = useUser();
+	const role = user?.role;
+
+	const items = role === 'ADMIN' ? ADMINITEMS : USERITEMS;
+
+	useEffect(() => {
+		if (user) {
+			setLoading(false);
+		}
+	}, [user]);
+
+	if (loading) {
+		return <SidebarItemsLoader />;
+	}
 
 	return (
 		<ul className="space-y-4 pt-10">
-			{USERITEMS.map((item) => (
+			{items.map((item: any) => (
 				<li key={item.name}>
 					<Link
 						className="flex items-center p-3 rounded-lg text-lg hover:bg-primary transition-all"
