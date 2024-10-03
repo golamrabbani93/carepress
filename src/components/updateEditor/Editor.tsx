@@ -167,18 +167,26 @@ const UpdateEditor = ({onClose, post, setShowOptions}: PostModalProps & {onClose
 				</div>
 
 				{/* Image Upload */}
-				<div className="mb-4">
-					<label className="block text-gray-700" htmlFor="image-upload">
-						Image:
-					</label>
-					<input
-						multiple
-						accept="image/*"
-						disabled={imagePreviews.length >= 3}
-						id="image-upload"
-						type="file"
-						onChange={handleImageUpload}
-					/>
+				<div className="flex flex-wrap gap-2 py-2">
+					<div className="min-w-fit flex-1">
+						<label
+							className={`flex h-14 w-full cursor-pointer items-center justify-center border rounded-lg  shadow-sm transition-all duration-100 hover:border-default-40 ${imagePreviews.length >= 3 && 'cursor-not-allowed bg-red-500 text-white'}`}
+							htmlFor="image"
+						>
+							{imagePreviews.length >= 3 ? 'Max 3 images allowed' : 'Upload image'}
+						</label>
+						<input
+							multiple
+							className="hidden"
+							disabled={imagePreviews.length >= 3}
+							id="image"
+							type="file"
+							onChange={handleImageUpload}
+						/>
+						<span>
+							Updating new images will remove the old ones and replace them with the new selection.
+						</span>
+					</div>
 				</div>
 
 				{/* Image Preview */}

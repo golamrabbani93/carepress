@@ -8,7 +8,7 @@ import TextAlign from '@tiptap/extension-text-align';
 import Image from '@tiptap/extension-image';
 import EditorMenuBar from './EditorMenuBar';
 import './Editor.css';
-import {Check} from 'lucide-react';
+import {Check, X} from 'lucide-react';
 import {useUser} from '@/context/user.provider';
 import {useCreatePost} from '@/hooks/post.hook';
 import {Button} from '@nextui-org/button';
@@ -17,12 +17,12 @@ interface PostData {
 	title: string;
 	content: string;
 	category: string;
-	image: File | null;
+	images: File[]; // Change image to images
 }
 
 const Editor = ({onClose}: {onClose: () => void}) => {
 	const {user} = useUser();
-	// const editorRef = useRef<HTMLDivElement>(null);
+
 	// const proseMirror = editorRef.current?.children[0]?.childNodes[0] as unknown as HTMLDivElement;
 	// console.log('🚀🚀: Editor -> proseMirror', proseMirror);
 
@@ -72,10 +72,11 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 		title: '',
 		content: '',
 		category: '',
-		image: null,
+		images: [],
 	});
 
-	const [imagePreview, setImagePreview] = useState<string | null>('null');
+	const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+	const [imageFiles, setImageFiles] = useState<File[] | []>([]);
 
 	const editor = useEditor({
 		extensions: [
@@ -94,19 +95,39 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 	});
 
 	const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const file = e.target.files ? e.target.files[0] : null;
+		const files = e.target.files ? Array.from(e.target.files) : [];
 
-		if (file) {
-			setPostData((prev) => ({...prev, image: file}));
+		if (files.length > 0) {
+			// Update the post data with the selected images
+			setPostData((prev) => ({
+				...prev,
+				images: [...prev.images, ...files], // Append new images
+			}));
+			setImageFiles((prev) => [...prev, ...files]); // Append new files
 
-			// Preview image
-			const reader = new FileReader();
+			// Generate previews for each selected image
+			const newPreviews: string[] = [];
 
-			reader.onloadend = () => {
-				setImagePreview(reader.result as string);
-			};
-			reader.readAsDataURL(file);
+			files.forEach((file) => {
+				const reader = new FileReader();
+
+				reader.onloadend = () => {
+					setImagePreviews((prevPreviews) => [...prevPreviews, reader.result as string]);
+				};
+				reader.readAsDataURL(file);
+			});
 		}
+	};
+	const handleImageRemove = (index: number) => {
+		//* Remove the image at the specified index
+		setPostData((prev) => {
+			const updatedImages = prev.images.filter((_, i) => i !== index); // Filter out the image
+
+			return {...prev, images: updatedImages}; // Update state
+		});
+
+		//* Remove the preview of the removed image
+		setImagePreviews((prev) => prev.filter((_, i) => i !== index));
 	};
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -120,14 +141,14 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 		const formData = new FormData();
 
 		formData.append('data', JSON.stringify(UpdatedPostData));
-		if (postData.image) {
-			formData.append('images', postData.image);
+		for (let image of imageFiles) {
+			formData.append('images', image);
 		}
 		createPost(formData, {
 			onSuccess: (data) => {
 				if (data?.success) {
 					onClose();
-					setPostData((_prev) => ({title: '', content: '', category: '', image: null}));
+					setPostData((_prev) => ({title: '', content: '', category: '', images: []}));
 				}
 			},
 		});
@@ -171,22 +192,46 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 				</div>
 
 				{/* Image Upload */}
-				<div className="mb-4">
-					<label className="block text-gray-700" htmlFor="image-upload">
-						Image:
-					</label>
-					<input accept="image/*" id="image-upload" type="file" onChange={handleImageUpload} />
+				<div className="flex flex-wrap gap-2 py-2">
+					<div className="min-w-fit flex-1">
+						<label
+							className={`flex h-14 w-full cursor-pointer items-center justify-center border rounded-lg  shadow-sm transition-all duration-100 hover:border-default-40 ${imagePreviews.length >= 3 && 'cursor-not-allowed bg-red-500 text-white'}`}
+							htmlFor="image"
+						>
+							{imagePreviews.length >= 3 ? 'Max 3 images allowed' : 'Upload image'}
+						</label>
+						<input
+							multiple
+							className="hidden"
+							disabled={imagePreviews.length >= 3}
+							id="image"
+							type="file"
+							onChange={handleImageUpload}
+						/>
+					</div>
 				</div>
 
 				{/* Image Preview */}
-				{imagePreview && (
+				{imagePreviews.length > 0 && (
 					<div className="mt-4">
 						<h3 className="text-sm text-gray-700">Image Preview:</h3>
-						<img
-							alt="Preview"
-							className="rounded-lg max-w-full h-[100px] mt-2"
-							src={imagePreview}
-						/>
+						<div className="grid grid-cols-3 gap-2 mt-2">
+							{imagePreviews.map((preview, index) => (
+								<div key={index} className="relative">
+									<img
+										alt={`Preview ${index + 1}`}
+										className="rounded-lg max-w-full h-[100px] object-cover"
+										src={preview}
+									/>
+									<div className="absolute top-1 left-1">
+										<X
+											className="bg-primary text-white rounded-full w-5 h-5 cursor-pointer"
+											onClick={() => handleImageRemove(index)}
+										/>
+									</div>
+								</div>
+							))}
+						</div>
 					</div>
 				)}
 
