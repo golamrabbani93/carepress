@@ -52,6 +52,7 @@ export interface IPost {
 	category: string;
 	comments: any[];
 	isPremium: boolean;
+	status: boolean;
 	premiumPrice: number;
 	createdAt: string;
 	updatedAt: string;
