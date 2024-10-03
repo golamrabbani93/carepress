@@ -1,4 +1,5 @@
 import {
+	deleteUser,
 	getUser,
 	makeAdmin,
 	makeBlock,
@@ -117,6 +118,24 @@ export const useMakeAdmin = () => {
 		},
 		onError: (_error) => {
 			toast.error('Make Admin Failed');
+		},
+	});
+};
+
+//* Delete user
+export const useDeleteUser = () => {
+	return useMutation<any, Error, string>({
+		mutationKey: ['MAKE_ADMIN'],
+		mutationFn: async (userId) => await deleteUser(userId),
+		onSuccess: (data: {success: any; message: any}) => {
+			if (data.success) {
+				toast.success('User Deleted Completed');
+			} else {
+				toast.error(data.message);
+			}
+		},
+		onError: (_error) => {
+			toast.error('User Deleted Failed');
 		},
 	});
 };

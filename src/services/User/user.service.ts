@@ -76,6 +76,20 @@ export const makeAdmin = async (userId: string): Promise<any> => {
 		throw new Error('Failed to Make Admin');
 	}
 };
+// *user unblock
+export const deleteUser = async (userId: string): Promise<any> => {
+	try {
+		const {data} = await axiosInstance.delete(`/users/${userId}`);
+
+		revalidateTag('posts');
+		revalidateTag('usersData');
+		revalidateTag('my-posts');
+
+		return data;
+	} catch (error) {
+		throw new Error('Failed to Delete User');
+	}
+};
 
 const fetchOption = async () => {
 	const cookieStore = headers().get('cookie') || ''; // Access the cookie header
@@ -116,7 +130,6 @@ export const getAllUser = async (): Promise<any> => {
 	return res.json(); // Return user data
 };
 //* user update
-
 export const userUpdate = async (userData: FormData): Promise<any> => {
 	try {
 		const {data} = await axiosInstance.put('/users/me', userData, {

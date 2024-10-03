@@ -1,17 +1,22 @@
 'user client';
 
-import {useMakeAdmin, useMakeBlock, useMakefollow, useMakeUnBlock} from '@/hooks/user.hook';
+import {
+	useDeleteUser,
+	useMakeAdmin,
+	useMakeBlock,
+	useMakefollow,
+	useMakeUnBlock,
+} from '@/hooks/user.hook';
 import {IUser} from '@/types';
 import {Avatar} from '@nextui-org/avatar';
 import {Button} from '@nextui-org/button';
 import {Spinner} from '@nextui-org/spinner';
 import {UserCog, UserMinus, UserPlus, UserX} from 'lucide-react';
 const SingleUserList = ({user}: {user: IUser}) => {
-	const {isPending} = useMakefollow();
-
 	const {mutate: makeBlock, isPending: isBlockPending} = useMakeBlock();
 	const {mutate: makeUnBlock, isPending: isUnBlockPending} = useMakeUnBlock();
 	const {mutate: makeAdmin, isPending: isMakeAdminPending} = useMakeAdmin();
+	const {mutate: deleteUser, isPending: isDeletePending} = useDeleteUser();
 
 	const handleBlock = async (id: string) => {
 		makeBlock(id);
@@ -25,7 +30,7 @@ const SingleUserList = ({user}: {user: IUser}) => {
 	};
 
 	const handleDelete = async (id: string) => {
-		console.log(id);
+		deleteUser(id);
 	};
 
 	return (
@@ -76,7 +81,7 @@ const SingleUserList = ({user}: {user: IUser}) => {
 								className="mx-2"
 								color="success"
 								variant="bordered"
-								isDisabled={isPending}
+								isDisabled={isMakeAdminPending}
 								startContent={<UserCog className="w-5 h-5" />}
 							>
 								{isMakeAdminPending ? <Spinner color="success" size="sm" /> : 'Make Admin'}
@@ -87,10 +92,10 @@ const SingleUserList = ({user}: {user: IUser}) => {
 							size="sm"
 							color="primary"
 							variant="bordered"
-							isDisabled={isPending}
+							isDisabled={isDeletePending}
 							startContent={<UserX className="w-5 h-5" />}
 						>
-							{isPending ? <Spinner color="danger" size="sm" /> : 'Delete'}
+							{isDeletePending ? <Spinner color="danger" size="sm" /> : 'Delete'}
 						</Button>
 					</>
 				)}
