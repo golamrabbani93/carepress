@@ -119,3 +119,17 @@ export const deletePost = async (postId: string): Promise<any> => {
 		throw new Error('Failed to update vote');
 	}
 };
+// *Update Post status
+export const updatePostStatus = async (postId: string): Promise<any> => {
+	try {
+		const {data} = await axiosInstance.put(`/posts/status/${postId}`);
+
+		revalidateTag('posts');
+		revalidateTag('comments');
+		revalidateTag('my-posts');
+
+		return data;
+	} catch (error) {
+		throw new Error('Failed to Post status');
+	}
+};

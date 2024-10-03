@@ -4,6 +4,7 @@ import {
 	createUpvote,
 	deletePost,
 	updatePost,
+	updatePostStatus,
 } from '@/services/Post/post.service';
 import {useMutation} from '@tanstack/react-query';
 import {toast} from 'sonner';
@@ -68,6 +69,20 @@ export const UseDeletePost = () => {
 	return useMutation<any, Error, string>({
 		mutationKey: ['DELETE_POST'],
 		mutationFn: async (postId) => await deletePost(postId),
+		onSuccess: (data: {success: any; message: any}) => {
+			if (data.success) {
+				toast.success(data.message);
+			} else {
+				toast.error(data.message);
+			}
+		},
+	});
+};
+
+export const useUpdatePostStatus = () => {
+	return useMutation<any, Error, string>({
+		mutationKey: ['UPDATE_POST_STATUS'],
+		mutationFn: async (postId) => await updatePostStatus(postId),
 		onSuccess: (data: {success: any; message: any}) => {
 			if (data.success) {
 				toast.success(data.message);

@@ -1,19 +1,16 @@
 'user client';
 
-import {useMakeBlock, useMakefollow, useMakeUnBlock} from '@/hooks/user.hook';
+import {useUpdatePostStatus} from '@/hooks/post.hook';
 import {IPost} from '@/types';
 import {Avatar} from '@nextui-org/avatar';
 import {Button} from '@nextui-org/button';
 import {Spinner} from '@nextui-org/spinner';
-import {FileMinus, FilePlus, UserMinus, UserPlus} from 'lucide-react';
+import {FileMinus, FilePlus} from 'lucide-react';
 const SinglePostList = ({post}: {post: IPost}) => {
-	const {isPending} = useMakefollow();
+	const {mutate: postStatus, isPending} = useUpdatePostStatus();
 
-	const {mutate: makeBlock, isPending: isBlockPending} = useMakeBlock();
-	const {mutate: makeUnBlock, isPending: isUnBlockPending} = useMakeUnBlock();
-
-	const handleBlock = async (id: string) => {
-		makeBlock(id);
+	const handlePostStatus = async (id: string) => {
+		postStatus(id);
 	};
 
 	return (
@@ -47,15 +44,15 @@ const SinglePostList = ({post}: {post: IPost}) => {
 				</span>
 			</td>
 			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900 capitalize">
-				{post.status ? (
+				{!post.status ? (
 					<Button
 						color="success"
 						size="sm"
 						startContent={<FilePlus className="w-5 h-5" />}
 						variant="bordered"
-						onClick={() => ''}
+						onClick={() => handlePostStatus(post._id)}
 					>
-						{isUnBlockPending ? <Spinner color="success" size="sm" /> : 'Make Publish'}
+						{isPending ? <Spinner color="success" size="sm" /> : 'Make Publish'}
 					</Button>
 				) : (
 					<Button
@@ -63,9 +60,9 @@ const SinglePostList = ({post}: {post: IPost}) => {
 						size="sm"
 						startContent={<FileMinus className="w-5 h-5" />}
 						variant="bordered"
-						onClick={() => ''}
+						onClick={() => handlePostStatus(post._id)}
 					>
-						{isBlockPending ? <Spinner color="primary" size="sm" /> : 'Make Draft'}
+						{isPending ? <Spinner color="danger" size="sm" /> : 'Make Draft'}
 					</Button>
 				)}
 			</td>
