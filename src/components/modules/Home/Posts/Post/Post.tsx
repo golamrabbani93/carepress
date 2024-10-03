@@ -47,7 +47,13 @@ const Post = ({post}: PostProps) => {
 	const isFollowing = isUserFollowing ? true : false;
 
 	return (
-		<div className="bg-white p-4  mx-auto my-5">
+		<div className={`bg-white p-4  mx-auto my-5`}>
+			{!post?.status && post?.author?._id === user?._id && (
+				<h3 className="text-red-500 font-bold border border-red-500 p-3 mb-4 rounded-md ">
+					This post is currently a draft and isn&apos;t visible to anyone. Please contact the admin
+					for further assistance.
+				</h3>
+			)}
 			<div className="flex justify-between mb-4">
 				<div className="flex items-center mb-4">
 					<Image

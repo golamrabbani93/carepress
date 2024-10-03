@@ -9,7 +9,6 @@ import AddComment from '../../Home/Posts/Comment/AddComment';
 import {useEffect, useState} from 'react';
 import PostLoader from '@/components/Loader/PostLoader';
 import PostModal from '@/components/modal/PostModal';
-import {set} from 'date-fns';
 
 const PostProfile = ({posts}: {posts: any}) => {
 	const [loading, setloading] = useState(true);

@@ -17,7 +17,7 @@ const Posts = async () => {
 					return (
 						<div
 							key={post._id}
-							className="shadow-custom-all-around rounded-lg bg-white border border-gray-200 my-3 "
+							className={`shadow-custom-all-around rounded-lg bg-white border border-gray-200 my-3 ${!post.status && 'hidden'}`}
 						>
 							<Post post={post} />
 							<TotalReactionBar post={post} />
