@@ -6,12 +6,12 @@ import {toast} from 'sonner';
 import {PostProps} from '../Post/Post';
 import {useCreateComment} from '@/hooks/comment.hook';
 import {Spinner} from '@nextui-org/spinner';
+import {useRouter} from 'next/navigation';
 
 const AddComment = ({post}: PostProps) => {
 	const {user} = useUser();
 	const {mutate: handleCreateComment, isPending} = useCreateComment();
-	console.log('🚀🚀: AddComment -> isPending', isPending);
-
+	const router = useRouter();
 	const handleSendComment = (e: FieldValues) => {
 		e.preventDefault();
 		const commentText = e.target.comment.value;
@@ -25,7 +25,7 @@ const AddComment = ({post}: PostProps) => {
 
 		// !check user is logged in
 		if (!user?._id) {
-			toast.error('Please login to Comment the post');
+			router.push('/login');
 		} else {
 			handleCreateComment(commentData);
 			commentInput.value = '';

@@ -4,7 +4,7 @@ const ProfileLoader = () => {
 	return (
 		<div className="bg-gray-100 pb-5">
 			{/* Cover Photo Skeleton */}
-			<div className="relative h-60 bg-gray-300 animate-pulse">
+			<div className="relative h-60 bg-gray-300 ">
 				<Skeleton className="h-full w-full rounded-xl" />
 			</div>
 

@@ -5,6 +5,7 @@ import {useUser} from '@/context/user.provider';
 import {toast} from 'sonner';
 import {useState} from 'react';
 import {useCreateDownVote, useCreateUpVote} from '@/hooks/post.hook';
+import {useRouter} from 'next/navigation';
 
 const ReactionBar: React.FC<PostProps> = ({post}) => {
 	const {mutate: handleUpVoteUpdate} = useCreateUpVote();
@@ -12,12 +13,12 @@ const ReactionBar: React.FC<PostProps> = ({post}) => {
 	const {user} = useUser();
 	const [LikeShake, setLikeShake] = useState(false);
 	const [disLikeShake, setDisLikeShake] = useState(false);
-
+	const router = useRouter();
 	// Handle Like Button
 	const handleLike = () => {
 		setLikeShake(true);
 		if (!user?._id) {
-			toast.error('Please login to like the post');
+			router.push('/login');
 		} else {
 			handleUpVoteUpdate(post._id);
 		}
@@ -29,7 +30,7 @@ const ReactionBar: React.FC<PostProps> = ({post}) => {
 	const handleDisLike = () => {
 		setDisLikeShake(true);
 		if (!user?._id) {
-			toast.error('Please login to like the post');
+			router.push('/login');
 		} else {
 			handleDownVoteUpdate(post._id);
 		}

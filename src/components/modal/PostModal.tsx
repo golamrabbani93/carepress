@@ -6,15 +6,30 @@ import Editor from '../editor/Editor';
 import {useUser} from '@/context/user.provider';
 import {useEffect, useState} from 'react';
 import {Skeleton} from '@nextui-org/skeleton';
+import {UserRound} from 'lucide-react';
+import {useRouter} from 'next/navigation';
 
 export default function PostModal() {
+	const router = useRouter();
 	const {isOpen, onOpen, onOpenChange} = useDisclosure();
 	const [isLoading, setIsLoading] = useState(true);
 	const {user} = useUser();
 
+	const handleOpenModal = () => {
+		if (!user?._id) {
+			router.push('/login');
+		} else {
+			onOpen();
+		}
+	};
+
 	useEffect(() => {
 		if (user) {
 			setIsLoading(false);
+		} else {
+			setTimeout(() => {
+				setIsLoading(false);
+			}, 1500);
 		}
 	}, [user]);
 
@@ -26,12 +41,14 @@ export default function PostModal() {
 					{isLoading ? (
 						// Skeleton for the Avatar
 						<Skeleton className="h-10 w-11 rounded-full" />
-					) : (
+					) : user?._id ? (
 						<img
 							alt="Avatar"
 							className="h-10 w-10 rounded-full border border-primary"
 							src={user?.profilePicture}
 						/>
+					) : (
+						<UserRound className="h-10 w-11 rounded-full border border-primary" />
 					)}
 
 					{isLoading ? (
@@ -43,7 +60,7 @@ export default function PostModal() {
 							color="primary"
 							type="submit"
 							variant="bordered"
-							onPress={onOpen}
+							onPress={handleOpenModal}
 						>
 							Share A Post...
 						</Button>

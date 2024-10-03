@@ -7,12 +7,14 @@ import {timeConvert} from '@/utils/timeCovert';
 import Image from 'next/image';
 import {Spinner} from '@nextui-org/spinner';
 import {useUser} from '@/context/user.provider';
+import {useRouter} from 'next/navigation';
 
 export interface PostProps {
 	post: IPost;
 }
 const Post = ({post}: PostProps) => {
 	const {user} = useUser();
+	const router = useRouter();
 
 	// !Post Date
 	const postDate = new Date(post.updatedAt);
@@ -20,7 +22,11 @@ const Post = ({post}: PostProps) => {
 	// *handle Make follow
 	const {mutate: followUser, isPending} = useMakefollow();
 	const handleFollow = async () => {
-		await followUser(post.author._id);
+		if (!user?._id) {
+			router.push('/login');
+		} else {
+			await followUser(post.author._id);
+		}
 	};
 	// check is my post or not
 	const isMyPost = post?.author?._id === user?._id;
