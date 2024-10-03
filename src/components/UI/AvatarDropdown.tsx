@@ -32,14 +32,14 @@ const AvatarDropdown = () => {
 						<Avatar className="cursor-pointer" src={user?.profilePicture} />
 					</DropdownTrigger>
 					<DropdownMenu aria-label="Link Actions">
-						<DropdownItem key="profile" href={`/profile/${1}`}>
-							Profile
+						<DropdownItem key="profile" href={`/profile`}>
+							{user?.name}
 						</DropdownItem>
-						<DropdownItem key="Create-Post" href="/profile/create-post">
-							Create-Post
-						</DropdownItem>
-						<DropdownItem key="setting" href="/profile/setting">
-							Setting
+						<DropdownItem
+							key="Create-Post"
+							href={user?.role === 'ADMIN' ? '/dashboard/admin' : '/dashboard/user'}
+						>
+							Dashboard
 						</DropdownItem>
 
 						<DropdownItem

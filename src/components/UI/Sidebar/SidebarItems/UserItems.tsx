@@ -1,10 +1,8 @@
-import {Home, ShoppingCart, Package, ClipboardList, User, BarChart2} from 'lucide-react';
+import {Home, ScrollText, UserRoundCheck, Rss} from 'lucide-react';
 
 export const USERITEMS = [
-	{name: 'Dashboard', icon: <Home />},
-	{name: 'Shop', icon: <ShoppingCart />},
-	{name: 'Products', icon: <Package />},
-	{name: 'Orders', icon: <ClipboardList />},
-	{name: 'Profile', icon: <User />},
-	{name: 'Reports', icon: <BarChart2 />},
+	{name: 'Dashboard', icon: <Home />, path: '/dashboard/user'},
+	{name: 'My Posts', icon: <ScrollText />, path: '/dashboard/user/posts'},
+	{name: 'My Followers', icon: <UserRoundCheck />, path: '/dashboard/user/followers'},
+	{name: 'My Followings', icon: <Rss />, path: '/dashboard/user/following'},
 ];

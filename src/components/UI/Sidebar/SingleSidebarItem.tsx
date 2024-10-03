@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import {ADMINITEMS} from './SidebarItems/AdminItems';
 import {useUser} from '@/context/user.provider';
+import {USERITEMS} from './SidebarItems/UserItems';
 
 const SingleSidebarItem = () => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -8,11 +9,11 @@ const SingleSidebarItem = () => {
 
 	return (
 		<ul className="space-y-4 pt-10">
-			{ADMINITEMS.map((item) => (
+			{USERITEMS.map((item) => (
 				<li key={item.name}>
 					<Link
 						className="flex items-center p-3 rounded-lg text-lg hover:bg-gray-700 transition-all"
-						href="#"
+						href={item?.path || '/'}
 					>
 						<span className="mr-4">{item.icon}</span>
 						{item.name}

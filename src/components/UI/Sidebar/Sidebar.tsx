@@ -1,5 +1,5 @@
 'use client';
-import {Home, LogOut, Menu, X} from 'lucide-react';
+import {Home, HousePlus, LogOut, Menu, X} from 'lucide-react';
 import {useState} from 'react';
 import {motion} from 'framer-motion';
 import SingleSidebarItem from './SingleSidebarItem';
@@ -27,8 +27,8 @@ export default function Sidebar() {
 					</button>
 				</div>
 				<div className="flex space-x-6 justify-center items-center">
-					<Link className="flex items-center text-lg hover:text-gray-300 transition-all" href="/">
-						<Home className="mr-2" />
+					<Link className="flex items-center text-lg hover:text-red-400 transition-all" href="/">
+						<HousePlus className="mr-2" />
 						Home
 					</Link>
 					<Link
