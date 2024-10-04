@@ -1,5 +1,11 @@
+import LatestPosts from './LatestPosts/LatestPosts';
+
 const RightSideBar = () => {
-	return <div className="bg-primary">This is RightSideBar</div>;
+	return (
+		<div className="">
+			<LatestPosts />
+		</div>
+	);
 };
 
 export default RightSideBar;
