@@ -14,6 +14,7 @@ export const makeFollow = async (followId: string): Promise<any> => {
 		revalidateTag('usersData');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+
 		return data;
 	} catch (error) {
 		throw new Error('Failed to Follow');
@@ -28,6 +29,7 @@ export const makeUnFollow = async (followId: string): Promise<any> => {
 		revalidateTag('usersData');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+
 		return data;
 	} catch (error) {
 		throw new Error('Failed to Follow');
@@ -43,6 +45,7 @@ export const makeBlock = async (userId: string): Promise<any> => {
 		revalidateTag('usersData');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+
 		return data;
 	} catch (error) {
 		throw new Error('Failed to Follow');
@@ -57,6 +60,7 @@ export const makeUnBlock = async (userId: string): Promise<any> => {
 		revalidateTag('usersData');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+
 		return data;
 	} catch (error) {
 		throw new Error('Failed to Follow');
@@ -71,6 +75,7 @@ export const makeAdmin = async (userId: string): Promise<any> => {
 		revalidateTag('usersData');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+
 		return data;
 	} catch (error) {
 		throw new Error('Failed to Make Admin');
@@ -85,6 +90,7 @@ export const deleteUser = async (userId: string): Promise<any> => {
 		revalidateTag('usersData');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+
 		return data;
 	} catch (error) {
 		throw new Error('Failed to Delete User');
@@ -142,6 +148,7 @@ export const userUpdate = async (userData: FormData): Promise<any> => {
 		revalidateTag('usersData');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+
 		return data;
 	} catch (error) {
 		throw new Error('Failed to Update post');

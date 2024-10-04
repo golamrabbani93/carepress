@@ -31,6 +31,7 @@ export const createPost = async (formData: FormData): Promise<any> => {
 		revalidateTag('posts');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+
 		return data;
 	} catch (error) {
 		throw new Error('Failed to create post');
@@ -49,6 +50,7 @@ export const updatePost = async (postId: string, formData: FormData): Promise<an
 		revalidateTag('posts');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+
 		return data;
 	} catch (error) {
 		throw new Error('Failed to create post');
@@ -101,6 +103,7 @@ export const createUpvote = async (postId: string): Promise<any> => {
 		revalidateTag('posts');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+
 		return data;
 	} catch (error) {
 		throw new Error('Failed to update vote');
@@ -115,6 +118,7 @@ export const createDownVote = async (postId: string): Promise<any> => {
 		revalidateTag('posts');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+
 		return data;
 	} catch (error) {
 		throw new Error('Failed to update vote');
@@ -130,6 +134,7 @@ export const deletePost = async (postId: string): Promise<any> => {
 		revalidateTag('comments');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+
 		return data;
 	} catch (error) {
 		throw new Error('Failed to update vote');
@@ -144,6 +149,7 @@ export const updatePostStatus = async (postId: string): Promise<any> => {
 		revalidateTag('comments');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+
 		return data;
 	} catch (error) {
 		throw new Error('Failed to Post status');
@@ -171,6 +177,7 @@ export const getSinglePost = async (postId: string): Promise<any> => {
 
 		// Parse the response as JSON
 		const data = await res.json();
+
 		return data;
 	} catch (error) {
 		throw new Error('Failed to get post');
