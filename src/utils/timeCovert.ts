@@ -17,5 +17,5 @@ export const timeConvert = (date: Date) => {
 		return timeAgo === '1 day' ? '1 day ago' : `${timeAgo.replace('days', 'days')} ago`;
 	}
 
-	return `${timeAgo} ago`;
+	return 'Just now';
 };

@@ -28,7 +28,7 @@ const Post = ({post}: PostProps) => {
 	};
 
 	// !Post Date
-	const postDate = new Date(post?.updatedAt);
+	const postDate = new Date(post?.createdAt as string);
 
 	// *handle Make follow
 	const {mutate: followUser, isPending} = useMakefollow();
@@ -86,7 +86,7 @@ const Post = ({post}: PostProps) => {
 								</button>
 							) : null}
 						</div>
-						{post.updatedAt && <p className="text-gray-400 text-sm">{timeConvert(postDate)}</p>}
+						{post.createdAt && <p className="text-gray-400 text-sm">{timeConvert(postDate)}</p>}
 					</div>
 				</div>
 				<div className="relative">
