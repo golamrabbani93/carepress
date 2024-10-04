@@ -4,7 +4,7 @@ import {getAllPosts} from '@/services/Post/post.service';
 
 const ManageContents = async () => {
 	try {
-		const posts = await getAllPosts();
+		const posts = await getAllPosts('');
 
 		return (
 			<div>

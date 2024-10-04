@@ -65,7 +65,6 @@ export const getAllPosts = async (query: any) => {
 		};
 
 		const queryString = new URLSearchParams(query).toString();
-		console.log('🚀🚀: getAllPosts -> queryString', queryString);
 
 		const res = await fetch(`http://localhost:5000/api/posts?${queryString}`, fetchOption);
 
