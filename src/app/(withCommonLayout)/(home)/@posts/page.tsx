@@ -12,7 +12,8 @@ const Posts = async ({searchParams}: {searchParams: any}) => {
 		const params = new URLSearchParams(searchParams as string);
 		const searchTerm = params.get('searchTerm')?.trim() || '';
 		const category = params.get('category')?.trim() || null;
-		const query: {searchTerm?: string; category?: string | null} = {};
+		const sort = params.get('sort')?.trim() || null;
+		const query: {searchTerm?: string; category?: string | null; sort?: string | null} = {};
 
 		if (searchTerm) {
 			query.searchTerm = searchTerm;
@@ -20,6 +21,9 @@ const Posts = async ({searchParams}: {searchParams: any}) => {
 
 		if (category) {
 			query.category = category;
+		}
+		if (sort) {
+			query.sort = sort;
 		}
 		const posts = await getAllPosts(query);
 
