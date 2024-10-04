@@ -31,7 +31,7 @@ const Search = () => {
 		<>
 			<SidebarTitle title="Seacrh" />
 
-			<form>
+			<form className="ml-3">
 				<Input
 					{...register('search')}
 					aria-label="Search"
@@ -42,7 +42,7 @@ const Search = () => {
 					placeholder="Search Post..."
 					size="md"
 					startContent={
-						<SearchIcon className="pointer-events-none flex-shrink-0 text-base text-default-400" />
+						<SearchIcon className="pointer-events-none flex-shrink-0 text-base text-default-400 ml-" />
 					}
 					type="text"
 					variant="bordered"

@@ -1,6 +1,6 @@
 'use server';
 import axiosInstance from '@/lib/AxiosInstance';
-import {param} from 'lightgallery/plugins/video/lg-video-utils';
+
 import {revalidateTag} from 'next/cache';
 import {headers} from 'next/headers';
 

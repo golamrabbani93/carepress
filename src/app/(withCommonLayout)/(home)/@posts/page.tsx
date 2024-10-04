@@ -8,12 +8,20 @@ import {getAllPosts} from '@/services/Post/post.service';
 import {IPost} from '@/types';
 
 const Posts = async ({searchParams}: {searchParams: any}) => {
-	const params = new URLSearchParams(searchParams as string);
-
 	try {
-		const posts = await getAllPosts({
-			searchTerm: params.get('searchTerm') || '',
-		});
+		const params = new URLSearchParams(searchParams as string);
+		const searchTerm = params.get('searchTerm')?.trim() || '';
+		const category = params.get('category')?.trim() || null;
+		const query: {searchTerm?: string; category?: string | null} = {};
+
+		if (searchTerm) {
+			query.searchTerm = searchTerm;
+		}
+
+		if (category) {
+			query.category = category;
+		}
+		const posts = await getAllPosts(query);
 
 		return (
 			<div>
