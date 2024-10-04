@@ -1,3 +1,4 @@
+import AutoModal from '@/components/modal/PremiumModal';
 import {Navbar} from '@/components/UI/navbar';
 
 const commonLayout = ({children}: {children: React.ReactNode}) => {
@@ -6,6 +7,7 @@ const commonLayout = ({children}: {children: React.ReactNode}) => {
 			<div className="relative flex flex-col h-screen">
 				<Navbar />
 				<main>{children}</main>
+				<AutoModal />
 			</div>
 		</div>
 	);
