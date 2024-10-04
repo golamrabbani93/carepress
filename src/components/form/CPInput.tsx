@@ -31,7 +31,7 @@ export default function CPInput({
 		<Input
 			{...register(name)}
 			className={className}
-			errorMessage={errors[name] ? (errors[name].message as string) : ''}
+			errorMessage={errors[name]?.message as string}
 			isInvalid={!!errors[name]}
 			label={label}
 			required={required}

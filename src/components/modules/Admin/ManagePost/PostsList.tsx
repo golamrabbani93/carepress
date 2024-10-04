@@ -4,7 +4,6 @@ import {IPost} from '@/types';
 
 import React, {useEffect, useState} from 'react';
 
-import {DashboardUserLoader} from '@/components/Loader/DashboardUserLoader';
 import SinglePostList from './SinglePostsList';
 import {DashboardPostsLoader} from '@/components/Loader/DashboardPostLoader';
 const PostsLists = ({posts}: any) => {

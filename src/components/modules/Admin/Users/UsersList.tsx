@@ -1,5 +1,4 @@
 'use client';
-import {TableLoader} from '@/components/Loader/TableLoader';
 
 import {IUser} from '@/types';
 

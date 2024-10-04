@@ -1,5 +1,5 @@
 import {useUser} from '@/context/user.provider';
-import {useMakefollow, useMakeUnfollow} from '@/hooks/user.hook';
+import {useMakefollow} from '@/hooks/user.hook';
 import {IUser} from '@/types';
 import {Avatar} from '@nextui-org/avatar';
 import {Button} from '@nextui-org/button';
@@ -29,16 +29,16 @@ const SingleFollowerList = ({user}: {user: IUser}) => {
 
 			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900 capitalize">
 				{isFollowing ? (
-					<Button size="sm" color="primary" variant="bordered">
+					<Button color="primary" size="sm" variant="bordered">
 						{isPending ? <Spinner color="primary" size="sm" /> : 'Following'}
 					</Button>
 				) : (
 					<Button
-						onClick={() => handleFollow(user._id)}
-						size="sm"
 						color="primary"
-						variant="bordered"
 						isDisabled={isPending}
+						size="sm"
+						variant="bordered"
+						onClick={() => handleFollow(user._id)}
 					>
 						{isPending ? <Spinner color="primary" size="sm" /> : 'Follow Back'}
 					</Button>

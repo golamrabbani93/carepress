@@ -1,4 +1,4 @@
-import {ThumbsUp, Heart, ThumbsDown} from 'lucide-react';
+import {ThumbsUp, ThumbsDown} from 'lucide-react';
 import {PostProps} from '../Post/Post';
 
 const TotalReactionBar = ({post}: PostProps) => {

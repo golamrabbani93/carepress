@@ -1,12 +1,5 @@
 import React from 'react';
 
-interface IUser {
-	_id: string;
-	name: string;
-	email: string;
-	profilePicture: string;
-}
-
 export const TableLoader = () => (
 	<div className="animate-pulse">
 		<div className="overflow-x-auto">

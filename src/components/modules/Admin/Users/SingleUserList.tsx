@@ -4,7 +4,6 @@ import {
 	useDeleteUser,
 	useMakeAdmin,
 	useMakeBlock,
-	useMakefollow,
 	useMakeUnBlock,
 } from '@/hooks/user.hook';
 import {IUser} from '@/types';
@@ -55,9 +54,9 @@ const SingleUserList = ({user}: {user: IUser}) => {
 					''
 				) : user.status === 'blocked' ? (
 					<Button
-						startContent={<UserPlus className="w-5 h-5" />}
-						size="sm"
 						color="danger"
+						size="sm"
+						startContent={<UserPlus className="w-5 h-5" />}
 						variant="bordered"
 						onClick={() => handleUnBlock(user._id)}
 					>
@@ -66,9 +65,9 @@ const SingleUserList = ({user}: {user: IUser}) => {
 				) : (
 					<>
 						<Button
-							startContent={<UserMinus className="w-5 h-5" />}
-							size="sm"
 							color="danger"
+							size="sm"
+							startContent={<UserMinus className="w-5 h-5" />}
 							variant="bordered"
 							onClick={() => handleBlock(user._id)}
 						>
@@ -76,24 +75,24 @@ const SingleUserList = ({user}: {user: IUser}) => {
 						</Button>
 						{user.role === 'USER' && (
 							<Button
-								onClick={() => handleMakeAdmin(user._id)}
-								size="sm"
 								className="mx-2"
 								color="success"
-								variant="bordered"
 								isDisabled={isMakeAdminPending}
+								size="sm"
 								startContent={<UserCog className="w-5 h-5" />}
+								variant="bordered"
+								onClick={() => handleMakeAdmin(user._id)}
 							>
 								{isMakeAdminPending ? <Spinner color="success" size="sm" /> : 'Make Admin'}
 							</Button>
 						)}
 						<Button
-							onClick={() => handleDelete(user._id)}
-							size="sm"
 							color="primary"
-							variant="bordered"
 							isDisabled={isDeletePending}
+							size="sm"
 							startContent={<UserX className="w-5 h-5" />}
+							variant="bordered"
+							onClick={() => handleDelete(user._id)}
 						>
 							{isDeletePending ? <Spinner color="danger" size="sm" /> : 'Delete'}
 						</Button>

@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 'use client';
 
+import {Suspense} from 'react'; // Import Suspense
 import {useUserLogin} from '@/hooks/auth.hook';
 import {loginValidationSchema} from '@/schemas/login.schema';
 import {useUser} from '@/context/user.provider';
@@ -12,15 +13,34 @@ import {FieldValues, SubmitHandler} from 'react-hook-form';
 import CPForm from '@/components/form/CPForm';
 import CPInput from '@/components/form/CPInput';
 import {Spinner} from '@nextui-org/spinner';
+
 export default function LoginPage() {
 	const {setIsLoading: userLoader} = useUser();
 	const {mutate: handleUserLogin, isPending, isSuccess, data} = useUserLogin();
-	const searchParams = useSearchParams();
 	const router = useRouter();
+
 	const onSubmit: SubmitHandler<FieldValues> = async (data) => {
 		handleUserLogin(data);
 		userLoader(true);
 	};
+
+	// Wrap useSearchParams logic inside Suspense
+	return (
+		<Suspense fallback={<Spinner />}>
+			{/* Add Suspense */}
+			<LoginForm
+				data={data}
+				isPending={isPending}
+				isSuccess={isSuccess}
+				router={router}
+				onSubmit={onSubmit}
+			/>
+		</Suspense>
+	);
+}
+
+function LoginForm({isPending, isSuccess, data, onSubmit, router}: any) {
+	const searchParams = useSearchParams(); // Client-side hook
 	const redirect = searchParams.get('redirect');
 
 	if (!isPending && isSuccess && data?.success) {
@@ -49,7 +69,6 @@ export default function LoginPage() {
 							</h3>
 
 							<CPForm
-								//! Only for development
 								defaultValues={{
 									email: 'rabbani@gmail.com',
 									password: '123456',
@@ -78,9 +97,9 @@ export default function LoginPage() {
 
 								<Button
 									className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-full shadow-lg hover:from-pink-600 hover:to-red-500 transition-transform transform hover:scale-105 font-semibold"
+									isDisabled={isPending}
 									size="lg"
 									type="submit"
-									isDisabled={isPending}
 								>
 									{isPending ? <Spinner color="white" /> : 'Login'}
 								</Button>
@@ -101,8 +120,6 @@ export default function LoginPage() {
 					</div>
 				</div>
 			</div>
-
-			{/* Right side with login form */}
 		</div>
 	);
 }

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
-import {useEffect, useRef, useState} from 'react';
+import { useState} from 'react';
 import {EditorContent, useEditor} from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Highlight from '@tiptap/extension-highlight';
@@ -252,7 +252,7 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 				<div className="flex justify-end">
 					{isPending ? (
 						<Button color="primary" type="submit" variant="bordered">
-							<Spinner size="sm" color="primary" />
+							<Spinner color="primary" size="sm" />
 						</Button>
 					) : (
 						<Button color="primary" endContent={<Check />} type="submit" variant="bordered">

@@ -27,10 +27,10 @@ export default function ProfilePage({data}: any) {
 			{/* "Cover photo" */}
 			<div className="relative h-60 bg-gray-300">
 				<Image
-					src="https://res.cloudinary.com/dolttvkme/image/upload/v1727672718/login_x2qqqq.jpg"
 					alt="Cover Photo"
 					layout="fill"
 					objectFit="cover"
+					src="https://res.cloudinary.com/dolttvkme/image/upload/v1727672718/login_x2qqqq.jpg"
 				/>
 			</div>
 
@@ -55,18 +55,18 @@ export default function ProfilePage({data}: any) {
 			{/* Navigation Tabs */}
 			<div className="mt-6 ">
 				<div className="max-w-4xl mx-auto px-4 flex space-x-8">
-					<Link href={'/profile'} className="text-primary border-b-2 border-primary py-2">
+					<Link className="text-primary border-b-2 border-primary py-2" href={'/profile'}>
 						Posts
 					</Link>
 					<Link
-						href={'/profile/following'}
 						className="hover:text-primary hover:border-b-2 hover:border-primary py-2"
+						href={'/profile/following'}
 					>
 						Following
 					</Link>
 					<Link
-						href={'/profile/follower'}
 						className="hover:text-primary hover:border-b-2 hover:border-primary py-2"
+						href={'/profile/follower'}
 					>
 						Follower
 					</Link>

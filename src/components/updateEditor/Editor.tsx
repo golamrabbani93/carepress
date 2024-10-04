@@ -10,7 +10,7 @@ import EditorMenuBar from './EditorMenuBar';
 import './Editor.css';
 import {Check, X} from 'lucide-react';
 import {useUser} from '@/context/user.provider';
-import {useCreatePost, useUpdatePost} from '@/hooks/post.hook';
+import {useUpdatePost} from '@/hooks/post.hook';
 import {Button} from '@nextui-org/button';
 import {Spinner} from '@nextui-org/spinner';
 import {PostModalProps} from '../modal/DeletePostModal';
@@ -27,7 +27,7 @@ const UpdateEditor = ({onClose, post, setShowOptions}: PostModalProps & {onClose
 	const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 	const [imageFiles, setImageFiles] = useState<File[] | []>([]);
 	const {mutate: updatePost, isPending, data} = useUpdatePost();
-	console.log('🚀🚀: UpdateEditor -> data', data);
+
 	const [postData, setPostData] = useState<PostData>({
 		title: '',
 		content: '',
@@ -229,7 +229,7 @@ const UpdateEditor = ({onClose, post, setShowOptions}: PostModalProps & {onClose
 				<div className="flex justify-end">
 					{isPending ? (
 						<Button color="primary" type="submit" variant="bordered">
-							<Spinner size="sm" color="primary" />
+							<Spinner color="primary" size="sm" />
 						</Button>
 					) : (
 						<Button color="primary" endContent={<Check />} type="submit" variant="bordered">

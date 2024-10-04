@@ -10,10 +10,6 @@ export const registerUser = async (userData: FieldValues) => {
 	try {
 		const {data} = await axiosInstance.post('/auth/signup', userData);
 
-		if (data.success) {
-			cookies().set('accessToken', data?.token);
-		}
-
 		return data;
 	} catch (error: any) {
 		return error.response.data;
@@ -23,7 +19,7 @@ export const registerUser = async (userData: FieldValues) => {
 // * Login A User
 export const loginUser = async (userData: FieldValues) => {
 	try {
-		const {data} = await axiosInstance.post('/auth/login', userData);
+		const {data} = await axiosInstance.post('/api/auth/login', userData);
 
 		if (data.success) {
 			cookies().set('accessToken', data?.token);

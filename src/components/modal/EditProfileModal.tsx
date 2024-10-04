@@ -1,14 +1,7 @@
 import {IUser} from '@/types';
 import {Button} from '@nextui-org/button';
-import {
-	Modal,
-	ModalContent,
-	ModalHeader,
-	ModalBody,
-	ModalFooter,
-	useDisclosure,
-} from '@nextui-org/modal';
-import {FieldValues, FormProvider, SubmitHandler, useFieldArray, useForm} from 'react-hook-form';
+import {Modal, ModalContent, ModalHeader, ModalBody, useDisclosure} from '@nextui-org/modal';
+import {FieldValues, SubmitHandler} from 'react-hook-form';
 import {Divider} from '@nextui-org/divider';
 import {ChangeEvent, useEffect, useState} from 'react';
 import CPInput from '../form/CPInput';
@@ -48,13 +41,13 @@ export default function ProfileEditModal({user}: {user: IUser}) {
 	const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files![0];
 
-		setImageFiles((prev) => [file]);
+		setImageFiles((_prev) => [file]);
 
 		if (file) {
 			const reader = new FileReader();
 
 			reader.onloadend = () => {
-				setImagePreviews((prev) => [reader.result as string]);
+				setImagePreviews((_prev) => [reader.result as string]);
 			};
 
 			reader.readAsDataURL(file);
@@ -68,20 +61,20 @@ export default function ProfileEditModal({user}: {user: IUser}) {
 	return (
 		<>
 			<div className="flex space-x-4 items-center">
-				<Button onPress={onOpen} className="bg-primary text-white font-extrabold">
+				<Button className="bg-primary text-white font-extrabold" onPress={onOpen}>
 					Edit profile
 				</Button>
 			</div>
-			<Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
+			<Modal isOpen={isOpen} placement="top-center" onOpenChange={onOpenChange}>
 				<ModalContent>
 					{() => (
 						<>
 							<ModalHeader className="flex flex-col gap-1">Update Profile</ModalHeader>
 							<ModalBody>
 								<CPForm
-									onSubmit={handleSubmit}
 									defaultValues={UserDefaultValue}
 									resolver={zodResolver(UserUpadteSchema)}
+									onSubmit={handleSubmit}
 								>
 									<div className="min-w-fit flex-1 mb-3">
 										<CPInput label="name" name="name" variant="bordered" />
@@ -127,8 +120,8 @@ export default function ProfileEditModal({user}: {user: IUser}) {
 									<Divider className="my-5" />
 
 									<div className="flex justify-end">
-										<Button type="submit" className="bg-primary text-white font-extrabold">
-											{isPending ? <Spinner size="sm" color="white" /> : 'Save profile'}
+										<Button className="bg-primary text-white font-extrabold" type="submit">
+											{isPending ? <Spinner color="white" size="sm" /> : 'Save profile'}
 										</Button>
 									</div>
 								</CPForm>

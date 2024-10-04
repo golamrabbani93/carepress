@@ -3,16 +3,20 @@ import DashboardHeader from '@/components/UI/DashboardHeader';
 import {getAllPosts} from '@/services/Post/post.service';
 
 const ManageContents = async () => {
-	const posts = await getAllPosts();
+	try {
+		const posts = await getAllPosts();
 
-	return (
-		<div>
-			<DashboardHeader text="User Posts Update or delete " />
-			<div className="mt-10">
-				<AllPosts posts={posts} />
+		return (
+			<div>
+				<DashboardHeader text="User Posts Update or delete" />
+				<div className="mt-10">
+					<AllPosts posts={posts} />
+				</div>
 			</div>
-		</div>
-	);
+		);
+	} catch (error) {
+		return <p>Failed to load posts. Please try again later.</p>;
+	}
 };
 
 export default ManageContents;

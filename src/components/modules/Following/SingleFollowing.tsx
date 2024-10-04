@@ -21,11 +21,11 @@ const SingleFollowingList = ({user}: {user: IUser}) => {
 
 			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900 capitalize">
 				<Button
-					onClick={() => handleFollow(user._id)}
-					size="sm"
 					color="primary"
-					variant="bordered"
 					isDisabled={isPending}
+					size="sm"
+					variant="bordered"
+					onClick={() => handleFollow(user._id)}
 				>
 					{isPending ? <Spinner color="primary" size="sm" /> : 'Unfollow'}
 				</Button>

@@ -8,28 +8,32 @@ import {getAllPosts} from '@/services/Post/post.service';
 import {IPost} from '@/types';
 
 const Posts = async () => {
-	const posts = await getAllPosts();
+	try {
+		const posts = await getAllPosts();
 
-	return (
-		<div>
-			<div className="min-h-screen">
-				{posts?.data?.map((post: IPost) => {
-					return (
-						<div
-							key={post._id}
-							className={`shadow-custom-all-around rounded-lg bg-white border border-gray-200 my-3 ${!post.status && 'hidden'}`}
-						>
-							<Post post={post} />
-							<TotalReactionBar post={post} />
-							<ReactionBar post={post} />
-							<CommentSection post={post} />
-							<AddComment post={post} />
-						</div>
-					);
-				})}
+		return (
+			<div>
+				<div className="min-h-screen">
+					{posts?.data?.map((post: IPost) => {
+						return (
+							<div
+								key={post._id}
+								className={`shadow-custom-all-around rounded-lg bg-white border border-gray-200 my-3 ${!post.status && 'hidden'}`}
+							>
+								<Post post={post} />
+								<TotalReactionBar post={post} />
+								<ReactionBar post={post} />
+								<CommentSection post={post} />
+								<AddComment post={post} />
+							</div>
+						);
+					})}
+				</div>
 			</div>
-		</div>
-	);
+		);
+	} catch (error) {
+		return <p>Failed to load posts. Please try again later.</p>;
+	}
 };
 
 export default Posts;

@@ -1,4 +1,3 @@
-import {UseDeleteComment} from '@/hooks/comment.hook';
 import {IPost} from '@/types';
 import {Button} from '@nextui-org/button';
 import {

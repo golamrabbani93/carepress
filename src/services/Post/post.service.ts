@@ -1,6 +1,4 @@
 'use server';
-
-import envConfig from '@/config/envConfig';
 import axiosInstance from '@/lib/AxiosInstance';
 import {revalidateTag} from 'next/cache';
 import {headers} from 'next/headers';
@@ -58,21 +56,36 @@ export const updatePost = async (postId: string, formData: FormData): Promise<an
 
 //*get Post Data
 export const getAllPosts = async () => {
-	const fetchOption = {
-		next: {
-			tags: ['posts'],
-		},
-	};
+	try {
+		const fetchOption = {
+			next: {
+				tags: ['posts'],
+			},
+		};
 
-	const res = await fetch(`${envConfig.baseApi}/posts`, fetchOption);
+		const res = await fetch(`http://localhost:5000/api/posts`, fetchOption);
 
-	return res.json();
+		// Check if the response is successful
+		if (!res.ok) {
+			// Handle non-200 responses
+			const errorText = await res.text();
+
+			throw new Error(`Error: ${res.status} - ${errorText}`);
+		}
+
+		// Parse the response as JSON
+		const data = await res.json();
+
+		return data;
+	} catch (error) {
+		throw error; // Optionally re-throw the error to handle it in the calling code
+	}
 };
 
 export const getMyPosts = async () => {
 	const options = await fetchOption();
 
-	const res = await fetch(`${envConfig.baseApi}/posts/me`, options);
+	const res = await fetch(`http://localhost:5000/api/posts/me`, options);
 
 	return res.json();
 };

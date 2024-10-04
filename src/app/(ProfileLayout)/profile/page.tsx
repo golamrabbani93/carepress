@@ -3,7 +3,6 @@ import {getMyPosts} from '@/services/Post/post.service';
 
 const profilePage = async () => {
 	const posts = await getMyPosts();
-	console.log('🚀🚀: profilePage -> posts', posts);
 
 	return (
 		<div>

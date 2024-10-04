@@ -72,9 +72,9 @@ export default function RegisterPage() {
 
 									<Button
 										className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-full shadow-lg hover:from-pink-600 hover:to-red-500 transition-transform transform hover:scale-105 font-semibold"
+										isDisabled={isPending}
 										size="lg"
 										type="submit"
-										isDisabled={isPending}
 									>
 										{isPending ? <Spinner color="white" /> : 'Register'}
 									</Button>

@@ -2,7 +2,6 @@
 import {useUser} from '@/context/user.provider';
 import {ChevronDown, Star, Smile, ImageIcon, Gift, Trash2, SendHorizontal} from 'lucide-react';
 import {FieldValues} from 'react-hook-form';
-import {toast} from 'sonner';
 import {PostProps} from '../Post/Post';
 import {useCreateComment} from '@/hooks/comment.hook';
 import {Spinner} from '@nextui-org/spinner';

@@ -49,8 +49,8 @@ export default function Sidebar() {
 						Home
 					</Link>
 					<button
-						onClick={handleLogout}
 						className="flex items-center text-lg hover:text-primary transition-all"
+						onClick={handleLogout}
 					>
 						<LogOut className="mr-2" />
 						Logout

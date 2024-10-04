@@ -34,7 +34,7 @@ export default function UpdatePostModal({setShowOptions, post}: PostModalProps) 
 					{(onClose) => (
 						<>
 							<ModalHeader className="flex flex-col gap-1 h-full">Create A Post</ModalHeader>
-							<UpdateEditor onClose={onClose} post={post} setShowOptions={setShowOptions} />
+							<UpdateEditor post={post} setShowOptions={setShowOptions} onClose={onClose} />
 						</>
 					)}
 				</ModalContent>
