@@ -1,5 +1,6 @@
 'use server';
 import axiosInstance from '@/lib/AxiosInstance';
+import {param} from 'lightgallery/plugins/video/lg-video-utils';
 import {revalidateTag} from 'next/cache';
 import {headers} from 'next/headers';
 
@@ -55,7 +56,7 @@ export const updatePost = async (postId: string, formData: FormData): Promise<an
 };
 
 //*get Post Data
-export const getAllPosts = async () => {
+export const getAllPosts = async (query: any) => {
 	try {
 		const fetchOption = {
 			next: {
@@ -63,7 +64,10 @@ export const getAllPosts = async () => {
 			},
 		};
 
-		const res = await fetch(`http://localhost:5000/api/posts`, fetchOption);
+		const queryString = new URLSearchParams(query).toString();
+		console.log('🚀🚀: getAllPosts -> queryString', queryString);
+
+		const res = await fetch(`http://localhost:5000/api/posts?${queryString}`, fetchOption);
 
 		// Check if the response is successful
 		if (!res.ok) {
