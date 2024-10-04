@@ -13,7 +13,7 @@ export const createComment = async (commentData: FieldValues) => {
 
 		revalidateTag('posts');
 		revalidateTag('my-posts');
-
+		revalidateTag('Single_Post');
 		return data;
 	} catch (error) {
 		throw new Error('Failed to create comment');
@@ -42,7 +42,7 @@ export const updateComment = async (commentData: FieldValues) => {
 
 		revalidateTag('posts');
 		revalidateTag('my-posts');
-
+		revalidateTag('Single_Post');
 		return data;
 	} catch (error) {
 		throw new Error('Failed to create comment');
@@ -57,7 +57,7 @@ export const deleteComment = async (commentId: string): Promise<any> => {
 		revalidateTag('posts');
 		revalidateTag('comments');
 		revalidateTag('my-posts');
-
+		revalidateTag('Single_Post');
 		return data;
 	} catch (error) {
 		throw new Error('Failed to update vote');

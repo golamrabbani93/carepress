@@ -30,7 +30,7 @@ export const createPost = async (formData: FormData): Promise<any> => {
 
 		revalidateTag('posts');
 		revalidateTag('my-posts');
-
+		revalidateTag('Single_Post');
 		return data;
 	} catch (error) {
 		throw new Error('Failed to create post');
@@ -48,7 +48,7 @@ export const updatePost = async (postId: string, formData: FormData): Promise<an
 
 		revalidateTag('posts');
 		revalidateTag('my-posts');
-
+		revalidateTag('Single_Post');
 		return data;
 	} catch (error) {
 		throw new Error('Failed to create post');
@@ -100,7 +100,7 @@ export const createUpvote = async (postId: string): Promise<any> => {
 
 		revalidateTag('posts');
 		revalidateTag('my-posts');
-
+		revalidateTag('Single_Post');
 		return data;
 	} catch (error) {
 		throw new Error('Failed to update vote');
@@ -114,7 +114,7 @@ export const createDownVote = async (postId: string): Promise<any> => {
 
 		revalidateTag('posts');
 		revalidateTag('my-posts');
-
+		revalidateTag('Single_Post');
 		return data;
 	} catch (error) {
 		throw new Error('Failed to update vote');
@@ -129,7 +129,7 @@ export const deletePost = async (postId: string): Promise<any> => {
 		revalidateTag('posts');
 		revalidateTag('comments');
 		revalidateTag('my-posts');
-
+		revalidateTag('Single_Post');
 		return data;
 	} catch (error) {
 		throw new Error('Failed to update vote');
@@ -143,9 +143,36 @@ export const updatePostStatus = async (postId: string): Promise<any> => {
 		revalidateTag('posts');
 		revalidateTag('comments');
 		revalidateTag('my-posts');
-
+		revalidateTag('Single_Post');
 		return data;
 	} catch (error) {
 		throw new Error('Failed to Post status');
+	}
+};
+
+// *get single post
+export const getSinglePost = async (postId: string): Promise<any> => {
+	const fetchOption = {
+		next: {
+			tags: ['Single_Post'],
+		},
+	};
+
+	try {
+		const res = await fetch(`http://localhost:5000/api//posts/${postId}`, fetchOption);
+
+		// Check if the response is successful
+		if (!res.ok) {
+			// Handle non-200 responses
+			const errorText = await res.text();
+
+			throw new Error(`Error: ${res.status} - ${errorText}`);
+		}
+
+		// Parse the response as JSON
+		const data = await res.json();
+		return data;
+	} catch (error) {
+		throw new Error('Failed to get post');
 	}
 };
