@@ -133,9 +133,9 @@ const CheckoutForm: React.FC<TProps> = ({amount, onClose}) => {
 						},
 					}}
 				/>
-
+				{cardError && <p className="text-red-500 mt-2">{cardError}</p>}
 				<Button
-					className="mt-8 px-6 py-3 text-white font-bold uppercase rounded-lg  transition duration-300"
+					className="mt-8 px-6 mb-3 text-white font-bold uppercase rounded-lg  transition duration-300"
 					color="primary"
 					disabled={!stripe || !clientSecret}
 					type="submit"
@@ -144,7 +144,6 @@ const CheckoutForm: React.FC<TProps> = ({amount, onClose}) => {
 					{processing ? <Spinner color={'white'} size="sm" /> : `Pay $${amount}`}
 				</Button>
 			</form>
-			{cardError && <p className="text-red-500 mt-2">{cardError}</p>}
 		</div>
 	);
 };
