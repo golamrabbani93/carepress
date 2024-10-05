@@ -1,6 +1,6 @@
 'use client';
 import {Button} from '@nextui-org/button';
-import {Modal, ModalContent, ModalHeader, ModalBody, useDisclosure} from '@nextui-org/modal';
+import {Modal, ModalContent, ModalBody, useDisclosure} from '@nextui-org/modal';
 import {loadStripe} from '@stripe/stripe-js';
 import {Elements} from '@stripe/react-stripe-js';
 import CheckoutForm from './CheckoutForm';
@@ -18,7 +18,6 @@ export default function PaymentModal() {
 			<Modal
 				backdrop="opaque"
 				isOpen={isOpen}
-				onOpenChange={onOpenChange}
 				motionProps={{
 					variants: {
 						enter: {
@@ -39,6 +38,7 @@ export default function PaymentModal() {
 						},
 					},
 				}}
+				onOpenChange={onOpenChange}
 			>
 				<ModalContent>
 					{(onClose) => (

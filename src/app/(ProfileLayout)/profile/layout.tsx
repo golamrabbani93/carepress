@@ -2,7 +2,7 @@
 import ProfilePage from '@/components/modules/Profile/Profile/Profile';
 import Container from '@/components/UI/Container';
 import {Navbar} from '@/components/UI/navbar';
-import {getUser} from '@/services/Payment/payment.service';
+import {getUser} from '@/services/User/user.service';
 
 import {Metadata} from 'next';
 import {ReactNode} from 'react';

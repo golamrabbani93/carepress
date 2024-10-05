@@ -27,7 +27,7 @@ const AutoModal = () => {
 
 	return (
 		<>
-			<Modal isOpen={isOpen} onOpenChange={setIsOpen} isDismissable={false} backdrop="blur">
+			<Modal backdrop="blur" isDismissable={false} isOpen={isOpen} onOpenChange={setIsOpen}>
 				<ModalContent>
 					<>
 						<ModalHeader>Welcome to the Website</ModalHeader>

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
-import { useState} from 'react';
+import {useState} from 'react';
 import {EditorContent, useEditor} from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Highlight from '@tiptap/extension-highlight';
@@ -8,19 +8,22 @@ import TextAlign from '@tiptap/extension-text-align';
 import Image from '@tiptap/extension-image';
 import EditorMenuBar from './EditorMenuBar';
 import './Editor.css';
-import {Check, X} from 'lucide-react';
+import {Check, MoveRightIcon, X} from 'lucide-react';
 import {useUser} from '@/context/user.provider';
 import {useCreatePost} from '@/hooks/post.hook';
 import {Button} from '@nextui-org/button';
 import {Spinner} from '@nextui-org/spinner';
+import {Checkbox} from '@nextui-org/checkbox';
 interface PostData {
 	title: string;
 	content: string;
 	category: string;
+	isPremium?: boolean;
 	images: File[]; // Change image to images
 }
 
 const Editor = ({onClose}: {onClose: () => void}) => {
+	const [premium, setPremium] = useState(false);
 	const {user} = useUser();
 
 	// const proseMirror = editorRef.current?.children[0]?.childNodes[0] as unknown as HTMLDivElement;
@@ -72,6 +75,7 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 		title: '',
 		content: '',
 		category: '',
+		isPremium: false,
 		images: [],
 	});
 
@@ -101,7 +105,7 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 			// Update the post data with the selected images
 			setPostData((prev) => ({
 				...prev,
-				images: [...prev.images, ...files], // Append new images
+				images: [...prev.images, ...files],
 			}));
 			setImageFiles((prev) => [...prev, ...files]); // Append new files
 
@@ -137,6 +141,7 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 			title: postData.title,
 			content: postData.content,
 			category: postData.category,
+			isPremium: premium,
 		};
 		const formData = new FormData();
 
@@ -148,7 +153,13 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 			onSuccess: (data) => {
 				if (data?.success) {
 					onClose();
-					setPostData((_prev) => ({title: '', content: '', category: '', images: []}));
+					setPostData((_prev) => ({
+						title: '',
+						content: '',
+						category: '',
+						images: [],
+					}));
+					setPremium(false);
 				}
 			},
 		});
@@ -170,6 +181,17 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 						type="text"
 						value={postData.title}
 						onChange={(e) => setPostData((prev) => ({...prev, title: e.target.value}))}
+					/>
+				</div>
+				{/* "premium button" */}
+				<div className="my-3 flex items-center">
+					<span className="text-primary font-bold">Make Premium Content</span>
+					<MoveRightIcon className="w-5 h-5 text-primary mr-2" />
+					<Checkbox
+						color="primary"
+						isSelected={premium}
+						name="isPremium"
+						onChange={() => setPremium((prev) => !prev)}
 					/>
 				</div>
 

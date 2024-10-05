@@ -54,6 +54,7 @@ export const getCurrentUser = async () => {
 			followers: decodedToken.followers || [],
 			following: decodedToken.following || [],
 			role: decodedToken.role,
+			status: decodedToken.status,
 			createdAt: decodedToken.createdAt,
 			updatedAt: decodedToken.updatedAt,
 		};

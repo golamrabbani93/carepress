@@ -1,5 +1,5 @@
 import FollowingList from '@/components/modules/Following/FollowingList';
-import {getUser} from '@/services/Payment/payment.service';
+import {getUser} from '@/services/User/user.service';
 
 const DashboardFollowingPage = async () => {
 	const users = await getUser();

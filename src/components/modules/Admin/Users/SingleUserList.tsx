@@ -6,7 +6,6 @@ import {Avatar} from '@nextui-org/avatar';
 import {Button} from '@nextui-org/button';
 import {Spinner} from '@nextui-org/spinner';
 import {UserCog, UserMinus, UserPlus, UserX} from 'lucide-react';
-import {Chip} from '@nextui-org/chip';
 const SingleUserList = ({user}: {user: IUser}) => {
 	const {mutate: makeBlock, isPending: isBlockPending} = useMakeBlock();
 	const {mutate: makeUnBlock, isPending: isUnBlockPending} = useMakeUnBlock();
@@ -56,9 +55,9 @@ const SingleUserList = ({user}: {user: IUser}) => {
 					''
 				) : user.status === 'blocked' ? (
 					<Button
+						className="my-2"
 						color="danger"
 						size="sm"
-						className="my-2"
 						startContent={<UserPlus className="w-5 h-5" />}
 						variant="bordered"
 						onClick={() => handleUnBlock(user._id)}
@@ -68,9 +67,9 @@ const SingleUserList = ({user}: {user: IUser}) => {
 				) : (
 					<>
 						<Button
+							className="my-2"
 							color="danger"
 							size="sm"
-							className="my-2"
 							startContent={<UserMinus className="w-5 h-5" />}
 							variant="bordered"
 							onClick={() => handleBlock(user._id)}

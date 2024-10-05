@@ -31,6 +31,7 @@ export const createPost = async (formData: FormData): Promise<any> => {
 		revalidateTag('posts');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+		revalidateTag('latest-posts');
 
 		return data;
 	} catch (error) {
@@ -50,6 +51,7 @@ export const updatePost = async (postId: string, formData: FormData): Promise<an
 		revalidateTag('posts');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+		revalidateTag('latest-posts');
 
 		return data;
 	} catch (error) {
@@ -103,6 +105,7 @@ export const createUpvote = async (postId: string): Promise<any> => {
 		revalidateTag('posts');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+		revalidateTag('latest-posts');
 
 		return data;
 	} catch (error) {
@@ -118,6 +121,7 @@ export const createDownVote = async (postId: string): Promise<any> => {
 		revalidateTag('posts');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+		revalidateTag('latest-posts');
 
 		return data;
 	} catch (error) {
@@ -134,6 +138,7 @@ export const deletePost = async (postId: string): Promise<any> => {
 		revalidateTag('comments');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+		revalidateTag('latest-posts');
 
 		return data;
 	} catch (error) {
@@ -149,6 +154,7 @@ export const updatePostStatus = async (postId: string): Promise<any> => {
 		revalidateTag('comments');
 		revalidateTag('my-posts');
 		revalidateTag('Single_Post');
+		revalidateTag('latest-posts');
 
 		return data;
 	} catch (error) {

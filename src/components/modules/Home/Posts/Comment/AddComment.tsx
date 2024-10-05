@@ -50,7 +50,7 @@ const AddComment = ({post}: PostProps) => {
 						required
 						className="w-full bg-white p-2 pr-10 rounded-md border border-gray-300 focus:outline-none"
 						name="comment"
-						placeholder={`Comment as ${user?.name}`}
+						placeholder={`Comment as ${user?.name || 'Guest...'}`}
 						type="text"
 					/>
 					<button
