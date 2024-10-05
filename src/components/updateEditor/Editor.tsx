@@ -8,22 +8,24 @@ import TextAlign from '@tiptap/extension-text-align';
 import Image from '@tiptap/extension-image';
 import EditorMenuBar from './EditorMenuBar';
 import './Editor.css';
-import {Check, X} from 'lucide-react';
-import {useUser} from '@/context/user.provider';
+import {Check, MoveRightIcon, X} from 'lucide-react';
+
 import {useUpdatePost} from '@/hooks/post.hook';
 import {Button} from '@nextui-org/button';
 import {Spinner} from '@nextui-org/spinner';
 import {PostModalProps} from '../modal/DeletePostModal';
+import {Checkbox} from '@nextui-org/checkbox';
 
 interface PostData {
 	title: string;
 	content: string;
 	category: string;
+	isPremium?: boolean;
 	images: File[]; // Change image to images
 }
 
 const UpdateEditor = ({onClose, post, setShowOptions}: PostModalProps & {onClose: () => void}) => {
-	const {user} = useUser();
+	const [premium, setPremium] = useState(false);
 	const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 	const [imageFiles, setImageFiles] = useState<File[] | []>([]);
 	const {mutate: updatePost, isPending, data} = useUpdatePost();
@@ -32,6 +34,7 @@ const UpdateEditor = ({onClose, post, setShowOptions}: PostModalProps & {onClose
 		title: '',
 		content: '',
 		category: '',
+		isPremium: false,
 		images: [], // Initialize as an empty array
 	});
 
@@ -89,10 +92,12 @@ const UpdateEditor = ({onClose, post, setShowOptions}: PostModalProps & {onClose
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+
 		const UpdatedPostData = {
 			title: postData.title,
 			content: postData.content,
 			category: postData.category,
+			isPremium: premium,
 		};
 
 		const formData = new FormData();
@@ -126,6 +131,7 @@ const UpdateEditor = ({onClose, post, setShowOptions}: PostModalProps & {onClose
 			images: post.images as unknown as File[], // Initialize images with the post images
 		});
 		setImagePreviews(post.images);
+		setPremium(post.isPremium);
 	}, [data, post]);
 
 	return (
@@ -144,6 +150,18 @@ const UpdateEditor = ({onClose, post, setShowOptions}: PostModalProps & {onClose
 						type="text"
 						value={postData.title}
 						onChange={(e) => setPostData((prev) => ({...prev, title: e.target.value}))}
+					/>
+				</div>
+
+				{/* "premium button" */}
+				<div className="my-3 flex items-center">
+					<span className="text-primary font-bold">Make Premium Content</span>
+					<MoveRightIcon className="w-5 h-5 text-primary mr-2" />
+					<Checkbox
+						color="primary"
+						isSelected={premium}
+						name="isPremium"
+						onChange={() => setPremium((prev) => !prev)}
 					/>
 				</div>
 

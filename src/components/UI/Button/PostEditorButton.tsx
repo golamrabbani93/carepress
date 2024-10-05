@@ -15,7 +15,7 @@ const PostEditorButton = () => {
 			{/* <hr className="my-2" /> */}
 
 			{/* Button Group */}
-			<div className="hidden flex justify-between mt-2">
+			<div className="hidden  justify-between mt-2">
 				<button className="flex items-center space-x-2 px-4 py-2 bg-gray-100 rounded-lg hover:bg-gray-200">
 					<img
 						alt="Live Video"
