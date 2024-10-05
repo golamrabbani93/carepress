@@ -32,7 +32,7 @@ const AddComment = ({post}: PostProps) => {
 	};
 
 	return (
-		<div className="flex items-center p-4 bg-gray-100 rounded-lg shadow-md space-x-4">
+		<div className="flex items-center px-4 pb-3  rounded-lg shadow-md space-x-4">
 			{/* Profile Picture */}
 			<img
 				alt="profile"
@@ -48,7 +48,7 @@ const AddComment = ({post}: PostProps) => {
 				<form className="relative w-full customText" onSubmit={(e) => handleSendComment(e)}>
 					<input
 						required
-						className="w-full bg-white p-2 pr-10 rounded-md border border-gray-300 focus:outline-none"
+						className="w-full  p-2 pr-10 rounded-md border border-gray-300 focus:outline-none"
 						name="comment"
 						placeholder={`Comment as ${user?.name || 'Guest...'}`}
 						type="text"

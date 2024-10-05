@@ -35,7 +35,7 @@ export default function PostModal() {
 
 	return (
 		<>
-			<div className="p-4 my-5  mx-auto bg-white rounded-lg shadow-custom-all-around">
+			<div className="p-4 my-5  mx-auto border border-gray-100 rounded-lg shadow-custom-all-around">
 				{/* Avatar and Input */}
 				<div className="flex items-center space-x-3 mb-3">
 					{isLoading ? (
@@ -56,7 +56,7 @@ export default function PostModal() {
 						<Skeleton className="h-10 w-full rounded-full" />
 					) : (
 						<Button
-							className="w-full  rounded-full py-2 px-4"
+							className="w-full  rounded-full py-2 px-4 hover:bg-primary hover:text-white"
 							color="primary"
 							type="submit"
 							variant="bordered"
@@ -77,7 +77,9 @@ export default function PostModal() {
 				<ModalContent>
 					{(onClose) => (
 						<>
-							<ModalHeader className="flex flex-col gap-1 h-full">Create A Post</ModalHeader>
+							<ModalHeader className="flex flex-col gap-1 h-full uppercase text-primary font-bold text-2xl">
+								Create A Post
+							</ModalHeader>
 							<Editor onClose={onClose} />
 						</>
 					)}

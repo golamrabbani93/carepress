@@ -40,7 +40,7 @@ const SinglePost = ({data}: {data: IPost}) => {
 					<div className="min-h-screen">
 						<div
 							key={post._id}
-							className={`shadow-custom-all-around rounded-lg bg-white border border-gray-200 my-3 ${!post.status && 'hidden'}`}
+							className={`shadow-custom-all-around rounded-lg  border border-gray-100 my-3 ${!post.status && 'hidden'}`}
 						>
 							<Post post={post} />
 							<TotalReactionBar post={post} />

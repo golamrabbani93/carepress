@@ -47,7 +47,7 @@ const Post = ({post}: PostProps) => {
 	const isFollowing = isUserFollowing ? true : false;
 
 	return (
-		<div className={`bg-white p-4  mx-auto my-5`}>
+		<div className={` p-4  mx-auto my-5`}>
 			{!post?.status && post?.author?._id === user?._id && (
 				<h3 className="text-red-500 font-bold border border-red-500 p-3 mb-4 rounded-md ">
 					This post is currently a draft and isn&apos;t visible to anyone. Please contact the admin
@@ -86,7 +86,7 @@ const Post = ({post}: PostProps) => {
 								</button>
 							) : null}
 						</div>
-						{post.createdAt && <p className="text-gray-400 text-sm">{timeConvert(postDate)}</p>}
+						{post.createdAt && <p className="text-sm text-gray-400">{timeConvert(postDate)}</p>}
 					</div>
 				</div>
 				<div className="relative">

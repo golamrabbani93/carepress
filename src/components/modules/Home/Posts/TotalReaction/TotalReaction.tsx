@@ -3,7 +3,7 @@ import {PostProps} from '../Post/Post';
 
 const TotalReactionBar = ({post}: PostProps) => {
 	return (
-		<div className="flex items-center justify-between text-sm text-gray-700 mx-3 mb-2">
+		<div className="flex items-center justify-between text-sm mx-3 mb-2">
 			{/* Reactions Section */}
 			<div className="flex items-center space-x-2">
 				{post?.upvotes?.length > 0 && (
@@ -13,7 +13,7 @@ const TotalReactionBar = ({post}: PostProps) => {
 							<ThumbsUp className="w-4 h-4 text-blue-600" />
 						</div>
 						{/* Likes Text */}
-						<span>{post?.upvotes?.length} Likes</span>
+						<span className="">{post?.upvotes?.length} Likes</span>
 					</div>
 				)}
 				{post?.downvotes?.length > 0 && (

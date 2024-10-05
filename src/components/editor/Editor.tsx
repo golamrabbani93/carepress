@@ -166,11 +166,11 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 	};
 
 	return (
-		<div className="w-full mx-auto p-4 bg-white rounded-lg ">
+		<div className="w-full mx-auto p-4  rounded-lg ">
 			<form onSubmit={handleSubmit}>
 				{/* Title Field */}
 				<div className="mb-4">
-					<label className="block text-gray-700" htmlFor="title">
+					<label className="block text-primary font-bold" htmlFor="title">
 						Title:
 					</label>
 					<input
@@ -197,11 +197,11 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 
 				{/* Category Dropdown */}
 				<div className="mb-4">
-					<label className="block text-gray-700" htmlFor="category">
+					<label className="block text-primary font-bold" htmlFor="category">
 						Category:
 					</label>
 					<select
-						required
+					
 						className="w-full px-3 py-2 border rounded-lg"
 						id="category"
 						value={postData.category}
@@ -228,6 +228,7 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 							disabled={imagePreviews.length >= 3}
 							id="image"
 							type="file"
+							required
 							onChange={handleImageUpload}
 						/>
 					</div>
@@ -236,7 +237,7 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 				{/* Image Preview */}
 				{imagePreviews.length > 0 && (
 					<div className="mt-4">
-						<h3 className="text-sm text-gray-700">Image Preview:</h3>
+						<h3 className="text-sm text-primary font-bold">Image Preview:</h3>
 						<div className="grid grid-cols-3 gap-2 mt-2">
 							{imagePreviews.map((preview, index) => (
 								<div key={index} className="relative">
@@ -258,8 +259,8 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 				)}
 
 				{/* Rich Text Editor */}
-				<div className="mb-4">
-					<label className="block text-gray-700" htmlFor="content">
+				<div className="mb-4 mt-2">
+					<label className="block text-primary font-bold" htmlFor="content">
 						Content:
 					</label>
 					<div className="mb-3">

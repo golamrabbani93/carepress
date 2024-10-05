@@ -2,9 +2,9 @@ import {Skeleton} from '@nextui-org/skeleton';
 
 const ProfileLoader = () => {
 	return (
-		<div className="bg-gray-100 pb-5">
+		<div className=" pb-5">
 			{/* Cover Photo Skeleton */}
-			<div className="relative h-60 bg-gray-300 ">
+			<div className="relative h-60 ">
 				<Skeleton className="h-full w-full rounded-xl" />
 			</div>
 
@@ -12,7 +12,7 @@ const ProfileLoader = () => {
 			<div className="relative -mt-16 flex justify-between px-8">
 				<div className="flex items-end space-x-4">
 					{/* Profile picture skeleton */}
-					<Skeleton className="w-36 h-36 rounded-full border-4 border-white " />
+					<Skeleton className="w-36 h-36 rounded-full border-4  " />
 
 					{/* User details skeleton */}
 					<div>

@@ -23,9 +23,9 @@ export default function ProfilePage({data}: any) {
 	}
 
 	return (
-		<div className=" bg-gray-100 shadow-custom-all-around">
+		<div className="  shadow-custom-all-around">
 			{/* "Cover photo" */}
-			<div className="relative h-60 bg-gray-300">
+			<div className="relative h-60 ">
 				<Image
 					alt="Cover Photo"
 					layout="fill"
@@ -45,7 +45,7 @@ export default function ProfilePage({data}: any) {
 					{/* User details */}
 					<div>
 						<h1 className="text-2xl font-semibold">{user?.name}</h1>
-						<p className="text-gray-600">{user?.followers?.length} Followers</p>
+						<p className="text-gray-500">{user?.followers?.length} Followers</p>
 					</div>
 				</div>
 
