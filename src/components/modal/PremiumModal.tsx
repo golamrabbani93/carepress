@@ -11,7 +11,7 @@ const AutoModal = () => {
 
 	// Automatically open the modal when the component mounts
 	useEffect(() => {
-		if (user?._id) {
+		if (user?.status === 'basic' || user === null) {
 			setTimeout(() => {
 				setIsOpen(true);
 			}, 1500);
