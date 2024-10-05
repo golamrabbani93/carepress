@@ -7,11 +7,13 @@ import {FieldValues, SubmitHandler} from 'react-hook-form';
 import {Spinner} from '@nextui-org/spinner';
 import {toast} from 'sonner';
 import {Button} from '@nextui-org/button';
+import {useSavePayment} from '@/hooks/payment.hook';
 
 type TProps = {
 	amount: number;
+	onClose: () => void;
 };
-const CheckoutForm: React.FC<TProps> = ({amount}) => {
+const CheckoutForm: React.FC<TProps> = ({amount, onClose}) => {
 	const stripe = useStripe();
 	const elements = useElements();
 	const [cardError, SetCardError] = useState('');
@@ -20,6 +22,8 @@ const CheckoutForm: React.FC<TProps> = ({amount}) => {
 	// * get Payment Secret
 	const [clientSecret, setClientSecret] = useState('');
 	const {user} = useUser();
+
+	const {mutate: handleMakePayment, isPending} = useSavePayment();
 
 	useEffect(() => {
 		const createPaymentIntent = async () => {
@@ -87,10 +91,22 @@ const CheckoutForm: React.FC<TProps> = ({amount}) => {
 		} else {
 			if (paymentIntent.status === 'succeeded') {
 				const toastId = toast.loading('Payment Processing...');
+				const paymentData = {
+					paymentId: paymentIntent.id,
+					userId: user?._id,
+					amount: amount,
+				};
 
-				setTimeout(() => {
-					toast.success('Payment Success', {id: toastId});
-				}, 2000);
+				handleMakePayment(paymentData, {
+					onSuccess: (data) => {
+						if (data?.success) {
+							onClose();
+							toast.success('Payment Successful', {id: toastId});
+						} else {
+							toast.error('Payment Failed', {id: toastId});
+						}
+					},
+				});
 			}
 		}
 		setProcessing(false);
@@ -119,11 +135,11 @@ const CheckoutForm: React.FC<TProps> = ({amount}) => {
 				/>
 
 				<Button
+					className="mt-8 px-6 py-3 text-white font-bold uppercase rounded-lg  transition duration-300"
+					color="primary"
 					disabled={!stripe || !clientSecret}
 					type="submit"
 					variant="bordered"
-					color="primary"
-					className="mt-8 px-6 py-3 text-white font-bold uppercase rounded-lg  transition duration-300"
 				>
 					{processing ? <Spinner color={'white'} size="sm" /> : `Pay $${amount}`}
 				</Button>

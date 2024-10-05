@@ -41,11 +41,11 @@ export default function PaymentModal() {
 				}}
 			>
 				<ModalContent>
-					{() => (
+					{(onClose) => (
 						<>
 							<ModalBody>
 								<Elements stripe={stripePromise}>
-									<CheckoutForm amount={10} />
+									<CheckoutForm amount={10} onClose={onClose} />
 								</Elements>
 							</ModalBody>
 						</>

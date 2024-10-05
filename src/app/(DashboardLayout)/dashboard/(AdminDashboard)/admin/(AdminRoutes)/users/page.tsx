@@ -1,6 +1,6 @@
 import UsersList from '@/components/modules/Admin/Users/UsersList';
 import DashboardHeader from '@/components/UI/DashboardHeader';
-import {getAllUser} from '@/services/User/user.service';
+import {getAllUser} from '@/services/Payment/payment.service';
 
 const ManageUsers = async () => {
 	try {
