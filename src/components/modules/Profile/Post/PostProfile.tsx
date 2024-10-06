@@ -8,8 +8,11 @@ import CommentSection from '../../Home/Posts/Comment/Comment';
 import AddComment from '../../Home/Posts/Comment/AddComment';
 import {useEffect, useState} from 'react';
 import PostLoader from '@/components/Loader/PostLoader';
+import {useUser} from '@/context/user.provider';
+import PremiumPost from '@/components/PremiumPost/PremiumPost';
 
 const PostProfile = ({posts, query}: {posts: any; query?: any}) => {
+	const {user} = useUser();
 	const [post, setPost] = useState<IPost[]>([]);
 
 	const [loading, setLoading] = useState(true);
@@ -91,8 +94,10 @@ const PostProfile = ({posts, query}: {posts: any; query?: any}) => {
 			{loading ? (
 				[...Array(2)].map((_, index) => <PostLoader key={index} />)
 			) : post?.length > 0 ? (
-				post?.map((post: IPost) => {
-					return (
+				post?.map((post: IPost) =>
+					post?.isPremium && user?.status === 'basic' ? (
+						<PremiumPost key={post._id} post={post} />
+					) : (
 						<div
 							key={post._id}
 							className="shadow-custom-all-around rounded-lg border border-gray-100 my-3 "
@@ -103,8 +108,8 @@ const PostProfile = ({posts, query}: {posts: any; query?: any}) => {
 							<CommentSection post={post} />
 							<AddComment post={post} />
 						</div>
-					);
-				})
+					),
+				)
 			) : (
 				<div className="text-center text-primary font-bold">No Post Available</div>
 			)}

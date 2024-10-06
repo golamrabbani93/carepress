@@ -14,7 +14,15 @@ export default function PaymentModal() {
 
 	return (
 		<>
-			<Button onPress={onOpen}>Pay</Button>
+			<Button
+				className="hover:bg-primary text-white"
+				variant="bordered"
+				color="primary"
+				size="md"
+				onPress={onOpen}
+			>
+				SUBSCRIBE NOW
+			</Button>
 			<Modal
 				backdrop="opaque"
 				className="bg-black"
