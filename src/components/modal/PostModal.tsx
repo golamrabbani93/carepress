@@ -8,6 +8,7 @@ import {useEffect, useState} from 'react';
 import {Skeleton} from '@nextui-org/skeleton';
 import {UserRound} from 'lucide-react';
 import {useRouter} from 'next/navigation';
+import PremiumAvatar from '../PremiumPost/PremiumAvatar';
 
 export default function PostModal() {
 	const router = useRouter();
@@ -45,10 +46,10 @@ export default function PostModal() {
 						// Skeleton for the Avatar
 						<Skeleton className="h-10 w-11 rounded-full" />
 					) : user?._id ? (
-						<img
-							alt="Avatar"
-							className="h-10 w-10 rounded-full border border-primary"
-							src={user?.profilePicture}
+						<PremiumAvatar
+							altText={user?.name as string}
+							imgSrc={user?.profilePicture}
+							status={user?.status === 'premium'}
 						/>
 					) : (
 						<UserRound className="h-10 w-11 rounded-full border border-primary" />

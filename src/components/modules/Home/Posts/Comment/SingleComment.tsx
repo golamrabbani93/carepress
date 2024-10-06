@@ -9,6 +9,7 @@ import {toast} from 'sonner';
 import {Spinner} from '@nextui-org/spinner';
 import DeleteCommentModal from './DeleteCommentModal';
 import {timeConvert} from '@/utils/timeCovert';
+import PremiumAvatar from '@/components/PremiumPost/PremiumAvatar';
 interface CommentProps {
 	comment: IComment;
 }
@@ -54,11 +55,13 @@ const SingleComment = ({comment}: CommentProps) => {
 
 	return (
 		<div className="flex items-start mb-4">
-			<img
-				alt="Profile"
-				className="w-10 h-10 rounded-full mr-3"
-				src={comment.author.profilePicture}
-			/>
+			<div className="mr-3">
+				<PremiumAvatar
+					altText={comment?.author?.name as string}
+					imgSrc={comment.author.profilePicture}
+					status={comment?.author?.status === 'premium'}
+				/>
+			</div>
 			<div className="flex items-center justify-center">
 				<div className="border border-gray-300 p-2 rounded-lg w-[300px] ]">
 					<div className="flex justify-between">

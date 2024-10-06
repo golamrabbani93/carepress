@@ -9,6 +9,8 @@ import {LoginIcon} from '../icons';
 import Link from 'next/link';
 import {usePathname, useRouter} from 'next/navigation';
 import {protectedRoutes} from '@/constants/private-routes';
+import PremiumAvatar from '../PremiumPost/PremiumAvatar';
+import {Crown} from 'lucide-react';
 
 const AvatarDropdown = () => {
 	const {user, setIsLoading: userLoader} = useUser();
@@ -29,7 +31,17 @@ const AvatarDropdown = () => {
 			{user?._id ? (
 				<Dropdown>
 					<DropdownTrigger>
-						<Avatar className="cursor-pointer" src={user?.profilePicture} />
+						<div className="relative cursor-pointer">
+							{/* Avatar Component */}
+							<Avatar src={user?.profilePicture} radius="full" />
+
+							{/* Premium Badge */}
+							{user?.status === 'premium' && (
+								<div className="absolute bottom-0 right-0 bg-blue-700 rounded-full p-1.5 shadow-lg">
+									<Crown className="text-white" size={11} />
+								</div>
+							)}
+						</div>
 					</DropdownTrigger>
 					<DropdownMenu aria-label="Link Actions">
 						<DropdownItem key="profile" href={`/profile`}>

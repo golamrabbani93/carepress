@@ -14,6 +14,7 @@ import {useState} from 'react';
 import UpdatePostModal from '@/components/modal/updatePostModal';
 import ImageGallery from '../ImageGallery/ImageGallery';
 import Link from 'next/link';
+import PremiumAvatar from '@/components/PremiumPost/PremiumAvatar';
 
 export interface PostProps {
 	post: IPost;
@@ -62,13 +63,13 @@ const Post = ({post}: PostProps) => {
 			)}
 			<div className="flex justify-between mb-4">
 				<div className="flex items-center mb-4">
-					<Image
-						alt="Profile Image"
-						className="rounded-full mr-4"
-						height={40}
-						src={post?.author?.profilePicture as string} // Replace with actual image path
-						width={40}
-					/>
+					<div className="mr-4">
+						<PremiumAvatar
+							altText={post?.author?.name as string}
+							imgSrc={post?.author?.profilePicture as string}
+							status={post?.author?.status === 'premium'}
+						/>
+					</div>
 					<div>
 						<div className="flex justify-center items-center">
 							<h2 className="font-semibold mr-3">{post?.author?.name}</h2>

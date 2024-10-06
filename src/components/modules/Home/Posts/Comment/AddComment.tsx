@@ -6,6 +6,7 @@ import {PostProps} from '../Post/Post';
 import {useCreateComment} from '@/hooks/comment.hook';
 import {Spinner} from '@nextui-org/spinner';
 import {useRouter} from 'next/navigation';
+import PremiumAvatar from '@/components/PremiumPost/PremiumAvatar';
 
 const AddComment = ({post}: PostProps) => {
 	const {user} = useUser();
@@ -34,13 +35,21 @@ const AddComment = ({post}: PostProps) => {
 	return (
 		<div className="flex items-center px-4 pb-3  rounded-lg shadow-md space-x-4">
 			{/* Profile Picture */}
-			<img
+			{/* <img
 				alt="profile"
 				className="rounded-full w-10 h-10"
 				src={
 					user?.profilePicture ||
 					'https://res.cloudinary.com/dolttvkme/image/upload/v1727577381/profile_acc17l.webp'
 				}
+			/> */}
+			<PremiumAvatar
+				altText={user?.name as string}
+				imgSrc={
+					user?.profilePicture ||
+					'https://res.cloudinary.com/dolttvkme/image/upload/v1727577381/profile_acc17l.webp'
+				}
+				status={user?.status === 'premium'}
 			/>
 
 			{/* Input Area */}

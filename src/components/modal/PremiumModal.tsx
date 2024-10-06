@@ -11,12 +11,12 @@ const AutoModal = () => {
 
 	// Automatically open the modal when the component mounts
 	useEffect(() => {
-		if (user?.status === 'basic' || user === null) {
+		if (user?.status != 'basic' && user != null) {
+			setIsOpen(false);
+		} else {
 			setTimeout(() => {
 				setIsOpen(true);
-			}, 1500);
-		} else {
-			setIsOpen(false);
+			}, 3000);
 		}
 	}, [user]);
 

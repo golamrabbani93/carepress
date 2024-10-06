@@ -3,6 +3,7 @@
 import ProfileLoader from '@/components/Loader/ProfileLoader';
 import ProfileEditModal from '@/components/modal/EditProfileModal';
 import {Avatar} from '@nextui-org/avatar';
+import {Crown} from 'lucide-react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -38,8 +39,14 @@ export default function ProfilePage({data}: any) {
 			<div className="relative -mt-16 flex justify-between px-8">
 				<div className="flex items-end space-x-4">
 					{/* Profile picture */}
-					<div className="w-36 h-36 rounded-full border-4 border-white overflow-hidden">
+					<div className="relative w-36 h-36 rounded-full border-4 border-white ">
+						{/* Avatar Component */}
 						<Avatar className="w-full h-full object-cover" size="lg" src={user?.profilePicture} />
+
+						{/* Premium Badge */}
+						<div className="absolute bottom-2 right-5 bg-blue-700 rounded-full p-1.5 shadow-lg z-20">
+							<Crown className="text-white" size={16} />
+						</div>
 					</div>
 
 					{/* User details */}

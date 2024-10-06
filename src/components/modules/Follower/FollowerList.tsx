@@ -24,19 +24,19 @@ const FollowerList = ({users}: any) => {
 	return (
 		<div className="overflow-x-auto">
 			{followersUsers?.length > 0 ? (
-				<table className="min-w-full bg-white border border-gray-200">
+				<table className="min-w-full  border border-gray-200">
 					<thead>
 						<tr>
-							<th className="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-700">
+							<th className="py-2 px-4 border-b border-gray-200  text-left text-sm font-semibold ">
 								Image
 							</th>
-							<th className="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-700">
+							<th className="py-2 px-4 border-b border-gray-200  text-left text-sm font-semibold ">
 								Name
 							</th>
-							<th className="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-700">
+							<th className="py-2 px-4 border-b border-gray-200  text-left text-sm font-semibold ">
 								Email
 							</th>
-							<th className="py-2 px-4 border-b border-gray-200 bg-gray-100 text-left text-sm font-semibold text-gray-700">
+							<th className="py-2 px-4 border-b border-gray-200  text-left text-sm font-semibold ">
 								Status
 							</th>
 						</tr>
