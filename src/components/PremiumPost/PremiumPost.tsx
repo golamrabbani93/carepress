@@ -48,7 +48,9 @@ const PremiumPost = ({post}: PostProps) => {
 	const isFollowing = isUserFollowing ? true : false;
 
 	return (
-		<div className={` p-4  mx-auto my-5 border border-gray-100 rounded-md`}>
+		<div
+			className={` p-4  mx-auto my-5 border border-gray-100 rounded-md shadow-custom-all-around`}
+		>
 			{!post?.status && post?.author?._id === user?._id && (
 				<h3 className="text-red-500 font-bold border border-red-500 p-3 mb-4 rounded-md ">
 					This post is currently a draft and isn&apos;t visible to anyone. Please contact the admin
@@ -121,7 +123,7 @@ const PremiumPost = ({post}: PostProps) => {
 						<p className="font-extrabold  text-2xl text-white w-2/3 text-center">
 							This is a Pemium Content, Please Subscribe to view more.
 						</p>
-						<div className="mt-3">
+						<div className="mt-3 text-white">
 							<PaymentModal />
 						</div>
 					</div>

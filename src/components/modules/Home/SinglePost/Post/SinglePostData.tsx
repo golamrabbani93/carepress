@@ -18,7 +18,7 @@ import Link from 'next/link';
 export interface PostProps {
 	post: IPost;
 }
-const Post = ({post}: PostProps) => {
+const SinglePostData = ({post}: PostProps) => {
 	const {user} = useUser();
 	const router = useRouter();
 
@@ -48,7 +48,7 @@ const Post = ({post}: PostProps) => {
 	const isFollowing = isUserFollowing ? true : false;
 
 	return (
-		<div className={` p-4  mx-auto my-5`}>
+		<div className={`p-4  mx-auto my-5`}>
 			{!post?.status && post?.author?._id === user?._id && (
 				<h3 className="text-red-500 font-bold border border-red-500 p-3 mb-4 rounded-md ">
 					This post is currently a draft and isn&apos;t visible to anyone. Please contact the admin
@@ -106,22 +106,13 @@ const Post = ({post}: PostProps) => {
 					)}
 				</div>
 			</div>
-			<div className="mb-2">
-				<h1 className="text-xl font-bold mb-3 w-fit">
-					<Link href={`/post/${post._id}`} className="hover:text-primary transition-all">
-						{post?.title}
-					</Link>
-				</h1>
+			<div className="mb-3">
+				<h1 className="text-2xl font-bold mb-3 w-fit">{post?.title}</h1>
 				<div
 					dangerouslySetInnerHTML={{
-						__html: `${post.content.length > 200 ? `${post?.content.slice(0, 200)}......` : post?.content}`,
+						__html: `${post.content}`,
 					}}
 				/>
-				{post.content.length > 200 && (
-					<Link href={`/post/${post._id}`} className="text-primary hover:underline transition-all">
-						see more
-					</Link>
-				)}
 			</div>
 
 			<ImageGallery images={post?.images} />
@@ -129,4 +120,4 @@ const Post = ({post}: PostProps) => {
 	);
 };
 
-export default Post;
+export default SinglePostData;
