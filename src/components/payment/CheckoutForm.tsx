@@ -9,6 +9,9 @@ import {toast} from 'sonner';
 import {Button} from '@nextui-org/button';
 import {useSavePayment} from '@/hooks/payment.hook';
 
+import {format} from 'date-fns';
+import {useRouter} from 'next/navigation';
+
 type TProps = {
 	amount: number;
 	onClose: () => void;
@@ -22,7 +25,7 @@ const CheckoutForm: React.FC<TProps> = ({amount, onClose}) => {
 	// * get Payment Secret
 	const [clientSecret, setClientSecret] = useState('');
 	const {user} = useUser();
-
+	const router = useRouter();
 	const {mutate: handleMakePayment, isPending} = useSavePayment();
 
 	useEffect(() => {
@@ -96,11 +99,20 @@ const CheckoutForm: React.FC<TProps> = ({amount, onClose}) => {
 					userId: user?._id,
 					amount: amount,
 				};
+				const successPaymentModalData = {
+					paymentId: paymentIntent.id,
+					userId: user?._id,
+					date: format(new Date(), 'MMMM dd, yyyy'),
+					amount: amount,
+				};
 
 				handleMakePayment(paymentData, {
 					onSuccess: (data) => {
 						if (data?.success) {
 							onClose();
+							router.push(
+								`/payment?data=${encodeURIComponent(JSON.stringify(successPaymentModalData))}`,
+							);
 							toast.success('Payment Successful', {id: toastId});
 						} else {
 							toast.error('Payment Failed', {id: toastId});
@@ -114,7 +126,10 @@ const CheckoutForm: React.FC<TProps> = ({amount, onClose}) => {
 
 	return (
 		<div className="w-[400px]">
-			<h2 className=" text-white p-4 text-xl font-bold uppercase mb-5">Payment with Card</h2>
+			<h2 className=" text-white p-4 text-xl font-bold uppercase">Payment with Card</h2>
+			<h2 className=" text-primary  text-xl font-bold uppercase mb-5">
+				1 month subcription only $10
+			</h2>
 			<form onSubmit={handleSubmit}>
 				<CardElement
 					className="border p-4"
