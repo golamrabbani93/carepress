@@ -4,6 +4,7 @@ import axiosInstance from '@/lib/AxiosInstance';
 import {jwtDecode} from 'jwt-decode';
 import {cookies} from 'next/headers';
 import {FieldValues} from 'react-hook-form';
+import {getUser} from '../User/user.service';
 
 //* Register A User
 export const registerUser = async (userData: FieldValues) => {
@@ -46,18 +47,22 @@ export const getCurrentUser = async () => {
 	if (accessToken) {
 		decodedToken = await jwtDecode(accessToken);
 
-		return {
-			_id: decodedToken._id,
-			name: decodedToken.name,
-			email: decodedToken.email,
-			profilePicture: decodedToken.profilePicture,
-			followers: decodedToken.followers || [],
-			following: decodedToken.following || [],
-			role: decodedToken.role,
-			status: decodedToken.status,
-			createdAt: decodedToken.createdAt,
-			updatedAt: decodedToken.updatedAt,
-		};
+		const {data} = await getUser();
+
+		if (decodedToken?.role === data?.role) {
+			return {
+				_id: data._id,
+				name: data.name,
+				email: data.email,
+				profilePicture: data.profilePicture,
+				followers: data.followers || [],
+				following: data.following || [],
+				role: data.role,
+				status: data.status,
+				createdAt: data.createdAt,
+				updatedAt: data.updatedAt,
+			};
+		}
 	}
 
 	return decodedToken;
