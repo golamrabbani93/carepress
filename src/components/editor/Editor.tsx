@@ -14,6 +14,7 @@ import {useCreatePost} from '@/hooks/post.hook';
 import {Button} from '@nextui-org/button';
 import {Spinner} from '@nextui-org/spinner';
 import {Checkbox} from '@nextui-org/checkbox';
+import PaymentModal from '../payment/PaymentModal';
 interface PostData {
 	title: string;
 	content: string;
@@ -187,12 +188,16 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 				<div className="my-3 flex items-center">
 					<span className="text-primary font-bold">Make Premium Content</span>
 					<MoveRightIcon className="w-5 h-5 text-primary mr-2" />
-					<Checkbox
-						color="primary"
-						isSelected={premium}
-						name="isPremium"
-						onChange={() => setPremium((prev) => !prev)}
-					/>
+					{user?.status === 'basic' ? (
+						<PaymentModal />
+					) : (
+						<Checkbox
+							color="primary"
+							isSelected={premium}
+							name="isPremium"
+							onChange={() => setPremium((prev) => !prev)}
+						/>
+					)}
 				</div>
 
 				{/* Category Dropdown */}
@@ -201,7 +206,6 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 						Category:
 					</label>
 					<select
-					
 						className="w-full px-3 py-2 border rounded-lg"
 						id="category"
 						value={postData.category}
@@ -278,7 +282,13 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 							<Spinner color="primary" size="sm" />
 						</Button>
 					) : (
-						<Button color="primary" endContent={<Check />} type="submit" variant="bordered">
+						<Button
+							color="primary"
+							className="hover:bg-primary hover:text-white"
+							endContent={<Check />}
+							type="submit"
+							variant="bordered"
+						>
 							Post
 						</Button>
 					)}

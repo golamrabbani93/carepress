@@ -32,13 +32,17 @@ export default function DeletePostModal({setShowOptions, post}: PostModalProps) 
 
 	return (
 		<>
-			<Button
-				className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-				variant="light"
-				onPress={onOpen}
-			>
-				Delete
-			</Button>
+			<div className="flex items-center mb-3">
+				<Button
+					className={`mx-auto  rounded-lg shadow-custom-all-around  hover:bg-primary hover:text-white uppercase`}
+					variant="bordered"
+					color="primary"
+					onPress={onOpen}
+					size="sm"
+				>
+					Delete
+				</Button>
+			</div>
 			{/* "<button
 				className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
 				onClick={handleOpenModal}
@@ -51,7 +55,7 @@ export default function DeletePostModal({setShowOptions, post}: PostModalProps) 
 						<>
 							<ModalHeader className="flex flex-col gap-1">Post Delete Action</ModalHeader>
 							<ModalBody>
-								<p>Are you sure you want to delete this comment?</p>
+								<p>Are you sure you want to delete this Post?</p>
 							</ModalBody>
 							<ModalFooter>
 								<Button

@@ -15,6 +15,7 @@ import {Button} from '@nextui-org/button';
 import {Spinner} from '@nextui-org/spinner';
 import {PostModalProps} from '../modal/DeletePostModal';
 import {Checkbox} from '@nextui-org/checkbox';
+import PaymentModal from '../payment/PaymentModal';
 
 interface PostData {
 	title: string;
@@ -135,11 +136,11 @@ const UpdateEditor = ({onClose, post, setShowOptions}: PostModalProps & {onClose
 	}, [data, post]);
 
 	return (
-		<div className="w-full mx-auto p-4 bg-white rounded-lg">
+		<div className="w-full mx-auto p-4 rounded-lg">
 			<form onSubmit={handleSubmit}>
 				{/* Title Field */}
 				<div className="mb-4">
-					<label className="block text-gray-700" htmlFor="title">
+					<label className="block text-primary font-bold" htmlFor="title">
 						Title:
 					</label>
 					<input
@@ -153,21 +154,24 @@ const UpdateEditor = ({onClose, post, setShowOptions}: PostModalProps & {onClose
 					/>
 				</div>
 
-				{/* "premium button" */}
 				<div className="my-3 flex items-center">
 					<span className="text-primary font-bold">Make Premium Content</span>
 					<MoveRightIcon className="w-5 h-5 text-primary mr-2" />
-					<Checkbox
-						color="primary"
-						isSelected={premium}
-						name="isPremium"
-						onChange={() => setPremium((prev) => !prev)}
-					/>
+					{post?.author?.status === 'basic' ? (
+						<PaymentModal />
+					) : (
+						<Checkbox
+							color="primary"
+							isSelected={premium}
+							name="isPremium"
+							onChange={() => setPremium((prev) => !prev)}
+						/>
+					)}
 				</div>
 
 				{/* Category Dropdown */}
 				<div className="mb-4">
-					<label className="block text-gray-700" htmlFor="category">
+					<label className="block text-primary font-bold" htmlFor="category">
 						Category:
 					</label>
 					<select
@@ -209,7 +213,7 @@ const UpdateEditor = ({onClose, post, setShowOptions}: PostModalProps & {onClose
 				{/* Image Preview */}
 				{imagePreviews.length > 0 && (
 					<div className="mt-4">
-						<h3 className="text-sm text-gray-700">Image Preview:</h3>
+						<h3 className="text-sm text-primary font-bold">Image Preview:</h3>
 						<div className="grid grid-cols-3 gap-2 mt-2">
 							{imagePreviews.map((preview, index) => (
 								<div key={index} className="relative">
@@ -231,8 +235,8 @@ const UpdateEditor = ({onClose, post, setShowOptions}: PostModalProps & {onClose
 				)}
 
 				{/* Rich Text Editor */}
-				<div className="mb-4">
-					<label className="block text-gray-700" htmlFor="content">
+				<div className="mb-4 mt-3">
+					<label className="block text-primary font-bold" htmlFor="content">
 						Content:
 					</label>
 					<div className="mb-3">

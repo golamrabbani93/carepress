@@ -96,7 +96,7 @@ const Post = ({post}: PostProps) => {
 						</div>
 					)}
 					{showOptions && (
-						<div className="absolute -top-[6px] right-[35px] mt-2 w-32 bg-white rounded-md shadow-custom-all-around ring-1 ring-black ring-opacity-5 z-10">
+						<div className="absolute -top-[6px] right-[35px] mt-2 w-32 border border-gray-100 rounded-md shadow-custom-all-around ring-1 ring-black ring-opacity-5 z-10">
 							<div className="py-1">
 								<UpdatePostModal post={post} setShowOptions={setShowOptions} />
 								<DeletePostModal post={post} setShowOptions={setShowOptions} />

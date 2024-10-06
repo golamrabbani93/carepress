@@ -15,10 +15,10 @@ export default function PaymentModal() {
 	return (
 		<>
 			<Button
-				className="hover:bg-primary text-white"
+				className="hover:bg-primary hover:text-white"
 				variant="bordered"
 				color="primary"
-				size="md"
+				size="sm"
 				onPress={onOpen}
 			>
 				SUBSCRIBE NOW

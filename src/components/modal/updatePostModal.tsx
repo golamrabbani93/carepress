@@ -13,11 +13,13 @@ export default function UpdatePostModal({setShowOptions, post}: PostModalProps) 
 	return (
 		<>
 			{/* Avatar and Input */}
-			<div className="flex items-center space-x-3 mb-3">
+			<div className="flex items-center mb-3">
 				<Button
-					className="block w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-					variant="light"
+					className={`mt-2  mx-auto  rounded-lg shadow-custom-all-around  hover:bg-primary hover:text-white uppercase`}
+					variant="bordered"
+					color="primary"
 					onPress={onOpen}
+					size="sm"
 				>
 					Edit Post
 				</Button>
@@ -33,7 +35,7 @@ export default function UpdatePostModal({setShowOptions, post}: PostModalProps) 
 				<ModalContent>
 					{(onClose) => (
 						<>
-							<ModalHeader className="flex flex-col gap-1 h-full">Create A Post</ModalHeader>
+							<ModalHeader className="flex flex-col gap-1 h-full">Update Post</ModalHeader>
 							<UpdateEditor post={post} setShowOptions={setShowOptions} onClose={onClose} />
 						</>
 					)}
