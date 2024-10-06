@@ -8,34 +8,94 @@ import CommentSection from '../../Home/Posts/Comment/Comment';
 import AddComment from '../../Home/Posts/Comment/AddComment';
 import {useEffect, useState} from 'react';
 import PostLoader from '@/components/Loader/PostLoader';
-import PostModal from '@/components/modal/PostModal';
 
-const PostProfile = ({posts}: {posts: any}) => {
-	const [loading, setloading] = useState(true);
+const PostProfile = ({posts, query}: {posts: any; query?: any}) => {
+	const [post, setPost] = useState<IPost[]>([]);
+
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		if (posts.success) {
-			setloading(false);
+		if (
+			query?.sort ||
+			query?.category ||
+			query?.searchTerm ||
+			query?.page > 0 ||
+			query?.limit > 0
+		) {
+			setPost([]);
+			if (posts !== undefined && posts.success) {
+				const newPosts = posts.data || [];
+
+				setPost((prev: IPost[]) => [
+					...prev,
+					...newPosts.filter(
+						(newPost: IPost) => !prev.some((prevPost: IPost) => prevPost._id === newPost._id),
+					),
+				]); // Ensure you're using the correct data property
+				setLoading(false);
+			} else {
+				setPost(posts.data);
+			}
+		}
+	}, [query, query?.sort, query?.category, query?.searchTerm, posts]);
+
+	// useEffect(() => {
+	// 	if (posts !== undefined && posts.success) {
+	// 		const newPosts = posts.data || [];
+
+	// 		setPost((prev: IPost[]) => [
+	// 			...newPosts,
+	// 			...post.filter(
+	// 				(newPost: IPost) => !prev.some((prevPost: IPost) => prevPost._id === newPost._id),
+	// 			),
+	// 		]); // Ensure you're using the correct data property
+	// 		setloading(false);
+	// 	}
+	// }, [posts]);
+
+	// useEffect(() => {
+	// 	// Clear the posts only if page and limit are not provided
+	// 	if (query?.sort || query?.category || query?.searchTerm) {
+	// 		setPost([]);
+	// 		setLoading(true);
+	// 	}
+	// }, [query]);
+
+	// Handle posts updates and filter out duplicates
+	useEffect(() => {
+		if (posts !== undefined && posts.success) {
+			const newPosts = posts.data || [];
+
+			setPost((prevPosts: IPost[]) => {
+				// Filter out the new posts that already exist in the previous posts
+				const filteredNewPosts = newPosts.filter(
+					(newPost: IPost) => !prevPosts.some((prevPost: IPost) => prevPost._id === newPost._id),
+				);
+
+				// Return combined posts without duplicates
+				return [...prevPosts, ...filteredNewPosts];
+			});
+
+			setLoading(false);
 		}
 	}, [posts]);
 
 	if (!posts.data) {
 		setTimeout(() => {
-			setloading(false);
-		}, 1500);
+			setLoading(false);
+		}, 2000);
 	}
 
 	return (
 		<div className="min-h-screen">
-			<PostModal />
 			{loading ? (
-				[...Array(5)].map((_, index) => <PostLoader key={index} />)
-			) : posts?.data?.length > 0 ? (
-				posts?.data?.map((post: IPost) => {
+				[...Array(2)].map((_, index) => <PostLoader key={index} />)
+			) : post?.length > 0 ? (
+				post?.map((post: IPost) => {
 					return (
 						<div
 							key={post._id}
-							className="shadow-custom-all-around rounded-lg bg-white border border-gray-200 my-3 "
+							className="shadow-custom-all-around rounded-lg border border-gray-100 my-3 "
 						>
 							<Post post={post} />
 							<TotalReactionBar post={post} />

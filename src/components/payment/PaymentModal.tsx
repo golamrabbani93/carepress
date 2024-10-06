@@ -16,8 +16,8 @@ export default function PaymentModal() {
 		<>
 			<Button onPress={onOpen}>Pay</Button>
 			<Modal
-				className="bg-black"
 				backdrop="opaque"
+				className="bg-black"
 				isOpen={isOpen}
 				motionProps={{
 					variants: {

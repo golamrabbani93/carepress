@@ -8,6 +8,7 @@ import {useUser} from '@/context/user.provider';
 import {usePathname, useRouter} from 'next/navigation';
 import {logout} from '@/services/AuthService';
 import {protectedRoutes} from '@/constants/private-routes';
+import {ThemeSwitch} from '../theme-switch';
 
 export default function Sidebar() {
 	const [isOpen, setIsOpen] = useState(false); //* Control sidebar for mobile
@@ -48,6 +49,8 @@ export default function Sidebar() {
 						<HousePlus className="mr-2" />
 						Home
 					</Link>
+
+					<ThemeSwitch />
 					<button
 						className="flex items-center text-lg hover:text-primary transition-all"
 						onClick={handleLogout}

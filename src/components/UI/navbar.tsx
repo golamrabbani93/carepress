@@ -7,7 +7,6 @@ import {
 	NavbarItem,
 	NavbarMenuItem,
 } from '@nextui-org/navbar';
-import {link as linkStyles} from '@nextui-org/theme';
 import NextLink from 'next/link';
 import clsx from 'clsx';
 import logo from '../../assets/images/logo.png';
@@ -18,7 +17,7 @@ import Image from 'next/image';
 
 export const Navbar = () => {
 	return (
-		<NextUINavbar className="bg-white" maxWidth="xl" position="sticky">
+		<NextUINavbar className="" maxWidth="xl" position="sticky">
 			<NavbarContent className="basis-1/5 sm:basis-full" justify="start">
 				<NavbarBrand as="li" className="gap-3 max-w-fit">
 					<NextLink className="w-[200px]" href="/">
@@ -30,7 +29,6 @@ export const Navbar = () => {
 						<NavbarItem key={item.href}>
 							<NextLink
 								className={clsx(
-									'text-black',
 									'hover:text-primary',
 									'data-[active=true]:text-primary',
 									'transition-all duration-300 font-bold text-xl',
@@ -61,8 +59,9 @@ export const Navbar = () => {
 						<NavbarMenuItem key={`${item}-${index}`}>
 							<NextLink
 								className={clsx(
-									linkStyles({color: 'foreground'}),
-									'data-[active=true]:text-primary data-[active=true]:font-medium',
+									'hover:text-primary',
+									'data-[active=true]:text-primary',
+									'transition-all duration-300 font-bold text-xl',
 								)}
 								color="foreground"
 								href={item.href}

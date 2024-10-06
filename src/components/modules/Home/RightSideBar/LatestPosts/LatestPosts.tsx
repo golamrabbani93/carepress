@@ -3,7 +3,7 @@
 
 import SidebarTitle from '@/components/UI/SidebarTitle';
 import {useUser} from '@/context/user.provider';
-import {IPost, IUser} from '@/types';
+import {IPost} from '@/types';
 import {Skeleton} from '@nextui-org/skeleton';
 import Link from 'next/link';
 import React, {useEffect, useState} from 'react';

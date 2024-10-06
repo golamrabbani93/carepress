@@ -4,7 +4,7 @@ import RightSideBar from '@/components/modules/Home/RightSideBar/RightSideBar';
 import Container from '@/components/UI/Container';
 import {ReactNode} from 'react';
 
-export default function layout({children, posts}: {children: ReactNode; posts: ReactNode}) {
+export default async function layout({children, posts}: {children: ReactNode; posts: ReactNode}) {
 	return (
 		<Container>
 			<div className="grid grid-cols-12 gap-2">
@@ -16,7 +16,7 @@ export default function layout({children, posts}: {children: ReactNode; posts: R
 					{posts}
 				</div>
 				<div className="col-span-3">
-					<RightSideBar />
+					{await RightSideBar()}
 					<AutoModal />
 				</div>
 			</div>

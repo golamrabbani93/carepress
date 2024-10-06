@@ -224,11 +224,11 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 						</label>
 						<input
 							multiple
+							required
 							className="hidden"
 							disabled={imagePreviews.length >= 3}
 							id="image"
 							type="file"
-							required
 							onChange={handleImageUpload}
 						/>
 					</div>

@@ -32,10 +32,13 @@ export default function PostModal() {
 			}, 1500);
 		}
 	}, [user]);
+	1;
 
 	return (
 		<>
-			<div className="p-4 my-5  mx-auto border border-gray-100 rounded-lg shadow-custom-all-around">
+			<div
+				className={`p-4 my-5  mx-auto  ${!isLoading && 'border'} border-gray-100 rounded-lg shadow-custom-all-around`}
+			>
 				{/* Avatar and Input */}
 				<div className="flex items-center space-x-3 mb-3">
 					{isLoading ? (
