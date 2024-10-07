@@ -13,7 +13,6 @@ import DeletePostModal from '@/components/modal/DeletePostModal';
 import {useState} from 'react';
 import UpdatePostModal from '@/components/modal/updatePostModal';
 import ImageGallery from '../ImageGallery/ImageGallery';
-import Link from 'next/link';
 
 export interface PostProps {
 	post: IPost;

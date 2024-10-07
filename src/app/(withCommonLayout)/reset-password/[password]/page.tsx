@@ -68,17 +68,17 @@ const ResetPassword = () => {
 				)}
 
 				{token && id ? (
-					<form onSubmit={handleSubmit} className="space-y-4">
+					<form className="space-y-4" onSubmit={handleSubmit}>
 						<Input
 							fullWidth
+							required
 							color="primary"
-							size="lg"
 							placeholder="New Password"
+							size="lg"
 							value={newPassword}
 							onChange={(e) => setNewPassword(e.target.value)}
-							required
 						/>
-						<Button type="submit" color="primary" fullWidth>
+						<Button fullWidth color="primary" type="submit">
 							Reset Password
 						</Button>
 					</form>

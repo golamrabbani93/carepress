@@ -85,7 +85,7 @@ function LoginForm({isPending, isSuccess, data, onSubmit, router}: any) {
 									/>
 								</div>
 
-								<div className="py-4">
+								<div className="pt-4">
 									<CPInput
 										className="text-black"
 										label="Password"
@@ -93,6 +93,15 @@ function LoginForm({isPending, isSuccess, data, onSubmit, router}: any) {
 										size="sm"
 										type="password"
 									/>
+								</div>
+
+								<div className="text-right">
+									<Link
+										className="underline text-black text-sm pb-4 pt-2 hover:text-primary transition-all block"
+										href={'/forgot-password'}
+									>
+										Forgot Password?
+									</Link>
 								</div>
 
 								<Button

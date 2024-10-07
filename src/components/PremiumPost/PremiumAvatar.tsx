@@ -16,10 +16,10 @@ const PremiumAvatar = ({
 		<div className="relative ">
 			{/* Avatar Component */}
 			<Avatar
-				src={imgSrc || ''}
 				alt={altText}
-				// className="w-full h-full rounded-full object-cover"
 				radius="full"
+				src={imgSrc || ''}
+				// className="w-full h-full rounded-full object-cover"
 			/>
 
 			{/* Premium Badge */}

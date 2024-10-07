@@ -9,7 +9,6 @@ import {LoginIcon} from '../icons';
 import Link from 'next/link';
 import {usePathname, useRouter} from 'next/navigation';
 import {protectedRoutes} from '@/constants/private-routes';
-import PremiumAvatar from '../PremiumPost/PremiumAvatar';
 import {Crown} from 'lucide-react';
 
 const AvatarDropdown = () => {
@@ -33,7 +32,7 @@ const AvatarDropdown = () => {
 					<DropdownTrigger>
 						<div className="relative cursor-pointer">
 							{/* Avatar Component */}
-							<Avatar src={user?.profilePicture} radius="full" />
+							<Avatar radius="full" src={user?.profilePicture} />
 
 							{/* Premium Badge */}
 							{user?.status === 'premium' && (

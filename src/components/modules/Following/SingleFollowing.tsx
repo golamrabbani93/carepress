@@ -1,7 +1,6 @@
 import PremiumAvatar from '@/components/PremiumPost/PremiumAvatar';
 import {useMakeUnfollow} from '@/hooks/user.hook';
 import {IUser} from '@/types';
-import {Avatar} from '@nextui-org/avatar';
 import {Button} from '@nextui-org/button';
 import {Spinner} from '@nextui-org/spinner';
 const SingleFollowingList = ({user}: {user: IUser}) => {
@@ -16,8 +15,8 @@ const SingleFollowingList = ({user}: {user: IUser}) => {
 				<div className="w-10 h-10 rounded  overflow-hidden">
 					{/* <Avatar className="w-full h-full object-cover" size="sm" src={user?.profilePicture} /> */}
 					<PremiumAvatar
-						imgSrc={user?.profilePicture}
 						altText={user?.name}
+						imgSrc={user?.profilePicture}
 						status={user.status === 'premium'}
 					/>
 				</div>

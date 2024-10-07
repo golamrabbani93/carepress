@@ -1,4 +1,3 @@
-import AutoModal from '@/components/modal/PremiumModal';
 import LeftSidebar from '@/components/modules/Home/LeftSideBar/LeftSidebar';
 import RightSideBar from '@/components/modules/Home/RightSideBar/RightSideBar';
 import Container from '@/components/UI/Container';

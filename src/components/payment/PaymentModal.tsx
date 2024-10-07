@@ -16,9 +16,9 @@ export default function PaymentModal() {
 		<>
 			<Button
 				className="hover:bg-primary hover:text-white"
-				variant="bordered"
 				color="primary"
 				size="sm"
+				variant="bordered"
 				onPress={onOpen}
 			>
 				SUBSCRIBE NOW

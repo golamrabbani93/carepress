@@ -111,7 +111,7 @@ const CheckoutForm: React.FC<TProps> = ({amount, onClose}) => {
 						if (data?.success) {
 							onClose();
 							router.push(
-								`/payment?data=${encodeURIComponent(JSON.stringify(successPaymentModalData))}`,
+								`/payment/${user?._id}?data=${encodeURIComponent(JSON.stringify(successPaymentModalData))}`,
 							);
 							toast.success('Payment Successful', {id: toastId});
 						} else {

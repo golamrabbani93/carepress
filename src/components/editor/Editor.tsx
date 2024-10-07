@@ -283,8 +283,8 @@ const Editor = ({onClose}: {onClose: () => void}) => {
 						</Button>
 					) : (
 						<Button
-							color="primary"
 							className="hover:bg-primary hover:text-white"
+							color="primary"
 							endContent={<Check />}
 							type="submit"
 							variant="bordered"

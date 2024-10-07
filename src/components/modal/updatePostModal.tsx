@@ -16,10 +16,10 @@ export default function UpdatePostModal({setShowOptions, post}: PostModalProps) 
 			<div className="flex items-center mb-3">
 				<Button
 					className={`mt-2  mx-auto  rounded-lg shadow-custom-all-around  hover:bg-primary hover:text-white uppercase`}
-					variant="bordered"
 					color="primary"
-					onPress={onOpen}
 					size="sm"
+					variant="bordered"
+					onPress={onOpen}
 				>
 					Edit Post
 				</Button>

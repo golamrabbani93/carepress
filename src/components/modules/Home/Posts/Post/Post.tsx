@@ -4,7 +4,6 @@ import {useMakefollow} from '@/hooks/user.hook';
 import {IPost} from '@/types';
 import {timeConvert} from '@/utils/timeCovert';
 
-import Image from 'next/image';
 import {Spinner} from '@nextui-org/spinner';
 import {useUser} from '@/context/user.provider';
 import {useRouter} from 'next/navigation';
@@ -109,7 +108,7 @@ const Post = ({post}: PostProps) => {
 			</div>
 			<div className="mb-2">
 				<h1 className="text-xl font-bold mb-3 w-fit">
-					<Link href={`/post/${post._id}`} className="hover:text-primary transition-all">
+					<Link className="hover:text-primary transition-all" href={`/post/${post._id}`}>
 						{post?.title}
 					</Link>
 				</h1>
@@ -119,7 +118,7 @@ const Post = ({post}: PostProps) => {
 					}}
 				/>
 				{post.content.length > 200 && (
-					<Link href={`/post/${post._id}`} className="text-primary hover:underline transition-all">
+					<Link className="text-primary hover:underline transition-all" href={`/post/${post._id}`}>
 						see more
 					</Link>
 				)}

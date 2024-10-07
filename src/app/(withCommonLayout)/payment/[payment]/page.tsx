@@ -58,8 +58,8 @@ const Profile = () => {
 						</ModalBody>
 
 						<ModalFooter className="justify-center">
-							<Link href="/" className="w-full block">
-								<Button color="primary" className="w-full" onClick={handleClose}>
+							<Link className="w-full block" href="/">
+								<Button className="w-full" color="primary" onClick={handleClose}>
 									Close
 								</Button>
 							</Link>
