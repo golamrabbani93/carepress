@@ -6,7 +6,7 @@ import {ReactNode} from 'react';
 export default async function layout({children, posts}: {children: ReactNode; posts: ReactNode}) {
 	return (
 		<Container>
-			<div className="md:grid grid-cols-12 gap-2">
+			<div className="lg:grid grid-cols-12 gap-2">
 				<div className="col-span-3">
 					<LeftSidebar />
 				</div>

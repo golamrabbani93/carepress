@@ -7,7 +7,7 @@ import CategorySidebar from './Category/Category';
 const LeftSidebar = () => {
 	return (
 		<>
-			<div className="hidden md:block">
+			<div className="hidden lg:block">
 				<div>
 					<Search />
 				</div>

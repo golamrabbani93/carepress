@@ -5,7 +5,6 @@ import {
 	NavbarMenuToggle,
 	NavbarBrand,
 	NavbarItem,
-	NavbarMenuItem,
 } from '@nextui-org/navbar';
 import NextLink from 'next/link';
 import clsx from 'clsx';
@@ -14,11 +13,13 @@ import {siteConfig} from '@/config/site';
 import {ThemeSwitch} from '@/components/UI/theme-switch';
 import AvatarDropdown from './AvatarDropdown';
 import Image from 'next/image';
-import RightSideBar from '../modules/Home/RightSideBar/RightSideBar';
 import Search from '../modules/Home/LeftSideBar/Search/Search';
 import CategorySidebar from '../modules/Home/LeftSideBar/Category/Category';
 import FilterSider from '../modules/Home/LeftSideBar/Filter/Filter';
-import LatestPosts from '../modules/Home/RightSideBar/LatestPosts/LatestPosts';
+import PaymentModal from '../payment/PaymentModal';
+import Link from 'next/link';
+import {Button} from '@nextui-org/button';
+import {LogInIcon} from 'lucide-react';
 
 export const Navbar = () => {
 	return (
@@ -29,7 +30,7 @@ export const Navbar = () => {
 						<Image alt="logo" src={logo} />
 					</NextLink>
 				</NavbarBrand>
-				<ul className="hidden md:flex gap-4 justify-center ml-2">
+				<ul className="hidden lg:flex gap-4 justify-center ml-2">
 					{siteConfig.navItems.map((item) => (
 						<NavbarItem key={item.href}>
 							<NextLink
@@ -48,11 +49,14 @@ export const Navbar = () => {
 				</ul>
 			</NavbarContent>
 
-			<NavbarContent className="hidden md:flex basis-1 pl-4" justify="end">
+			<NavbarContent className="hidden lg:flex basis-1 pl-4" justify="end">
 				<ThemeSwitch />
 				<AvatarDropdown />
+				<div className="lg:flex">
+					<PaymentModal />
+				</div>
 			</NavbarContent>
-			<NavbarContent className="md:hidden basis-1 pl-4" justify="end">
+			<NavbarContent className="lg:hidden basis-1 pl-4" justify="end">
 				<ThemeSwitch />
 				<AvatarDropdown />
 				<NavbarMenuToggle />
@@ -77,10 +81,25 @@ export const Navbar = () => {
 							</NextLink>
 						</NavbarItem>
 					))}
-
+					<div className="flex lg:hidden mt-3">
+						<Link href={'/login'}>
+							<Button
+								size="sm"
+								color="primary"
+								startContent={<LogInIcon />}
+								variant="bordered"
+								className="hover:bg-primary hover:text-white mr-2"
+							>
+								Login
+							</Button>
+						</Link>
+						<PaymentModal />
+					</div>
 					{/* "left side bar" */}
 
-					<div className="md:hidden">
+					<div className="lg:hidden border-t-1 mt-2"> </div>
+
+					<div className="lg:hidden mt-10 pb-4">
 						<div>
 							<Search />
 						</div>

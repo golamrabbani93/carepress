@@ -11,7 +11,7 @@ const RightSideBar = async () => {
 
 		return (
 			<>
-				<div className="hidden md:block">
+				<div className="hidden lg:block">
 					<LatestPosts data={posts} />
 				</div>
 			</>
