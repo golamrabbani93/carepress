@@ -17,7 +17,7 @@ export default async function layout({children, posts}: {children: ReactNode; po
 				</div>
 				<div className="col-span-3">
 					{await RightSideBar()}
-					<AutoModal />
+					{/* <AutoModal /> */}
 				</div>
 			</div>
 		</Container>

@@ -7,6 +7,9 @@ import {Button} from '@nextui-org/button';
 import {CheckCircle} from 'lucide-react';
 import Link from 'next/link';
 
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic';
+
 const Profile = () => {
 	const [isOpen, setIsOpen] = useState(true);
 	const searchParams = useSearchParams();
@@ -55,13 +58,11 @@ const Profile = () => {
 						</ModalBody>
 
 						<ModalFooter className="justify-center">
-							{
-								<Link href="/" className="w-full block">
-									<Button color="primary" className="w-full" onClick={handleClose}>
-										Close
-									</Button>
-								</Link>
-							}
+							<Link href="/" className="w-full block">
+								<Button color="primary" className="w-full" onClick={handleClose}>
+									Close
+								</Button>
+							</Link>
 						</ModalFooter>
 					</ModalContent>
 				</Modal>

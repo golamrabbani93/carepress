@@ -19,31 +19,17 @@ const Posts = async ({searchParams}: {searchParams: any}) => {
 		limit?: number;
 	} = {};
 
+	query.page = 1;
+	query.limit = 4;
 	if (searchTerm) {
 		query.searchTerm = searchTerm;
-		query.page = 0;
-		query.limit = 0;
-	} else {
-		query.page = 1;
-		query.limit = 2;
 	}
 	if (category) {
 		query.category = category;
-		query.page = 0;
-		query.limit = 0;
-	} else {
-		query.page = 1;
-		query.limit = 2;
 	}
 	if (sort) {
 		query.sort = sort;
-		query.page = 0;
-		query.limit = 0;
-	} else {
-		query.page = 1;
-		query.limit = 2;
 	}
-
 	try {
 		const posts = await getAllPosts(query);
 
