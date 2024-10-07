@@ -52,8 +52,8 @@ const ReactionBar: React.FC<PostProps> = ({post}) => {
 				className={`flex items-center space-x-2 text-gray-500 hover:text-primary ${isLike && 'text-primary'} ${LikeShake && 'animate-shake'}`}
 				onClick={() => handleLike()}
 			>
-				<ThumbsUp className="w-5 h-5" />
-				<span>Like</span>
+				<ThumbsUp className="w-4 h-4 md:w-5 md:h-5" />
+				<span className="text-sm md:text-base">Like</span>
 			</button>
 
 			{/* Dislike Button */}
@@ -61,14 +61,14 @@ const ReactionBar: React.FC<PostProps> = ({post}) => {
 				className={`flex items-center space-x-2 text-gray-500 hover:text-primary ${isDisLike && 'text-primary'} ${disLikeShake && 'animate-shake'}`}
 				onClick={handleDisLike}
 			>
-				<ThumbsDown className="w-5 h-5" />
-				<span>Dislike</span>
+				<ThumbsDown className="w-4 h-4 md:w-5 md:h-5" />
+				<span className="text-sm md:text-base">Dislike</span>
 			</button>
 
 			{/* Comment Button */}
 			<button className="flex items-center space-x-2 text-gray-500 hover:text-primary">
-				<MessageCircle className="w-5 h-5" />
-				<span>Comment</span>
+				<MessageCircle className="w-4 h-4 md:w-5 md:h-5" />
+				<span className="text-sm md:text-base">Comment</span>
 			</button>
 		</div>
 	);

@@ -30,7 +30,7 @@ export default function ImageGallery({images}: IProps) {
 				>
 					<Image
 						alt={`image-${index}`}
-						className="h-[400px] w-full object-cover rounded-md"
+						className="h-200 md:h-[400px] w-full object-cover rounded-md"
 						height={500}
 						src={image}
 						width={500}

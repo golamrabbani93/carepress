@@ -42,7 +42,6 @@ const PostProfile = ({posts, query}: {posts: any; query?: any}) => {
 		}
 	}, [query, query?.sort, query?.category, query?.searchTerm, posts]);
 
-	// useEffect(() => {
 	// 	if (posts !== undefined && posts.success) {
 	// 		const newPosts = posts.data || [];
 

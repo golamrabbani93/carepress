@@ -29,7 +29,7 @@ export const Navbar = () => {
 						<Image alt="logo" src={logo} />
 					</NextLink>
 				</NavbarBrand>
-				<ul className="hidden lg:flex gap-4 justify-center ml-2">
+				<ul className="hidden md:flex gap-4 justify-center ml-2">
 					{siteConfig.navItems.map((item) => (
 						<NavbarItem key={item.href}>
 							<NextLink
@@ -48,11 +48,11 @@ export const Navbar = () => {
 				</ul>
 			</NavbarContent>
 
-			<NavbarContent className="hidden sm:flex basis-1 pl-4" justify="end">
+			<NavbarContent className="hidden md:flex basis-1 pl-4" justify="end">
 				<ThemeSwitch />
 				<AvatarDropdown />
 			</NavbarContent>
-			<NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
+			<NavbarContent className="md:hidden basis-1 pl-4" justify="end">
 				<ThemeSwitch />
 				<AvatarDropdown />
 				<NavbarMenuToggle />

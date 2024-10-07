@@ -55,7 +55,7 @@ const Post = ({post}: PostProps) => {
 	const isFollowing = isUserFollowing ? true : false;
 
 	return (
-		<div className={` p-4  mx-auto my-5`}>
+		<div className={`p-4  mx-auto my-5`}>
 			{!post?.status && post?.author?._id === user?._id && (
 				<h3 className="text-red-500 font-bold border border-red-500 p-3 mb-4 rounded-md ">
 					This post is currently a draft and isn&apos;t visible to anyone. Please contact the admin
@@ -69,7 +69,7 @@ const Post = ({post}: PostProps) => {
 			)}
 			<div className="flex justify-between mb-4">
 				<div className="flex items-center mb-4">
-					<div className="mr-4">
+					<div className="mr-2 md:mr-4">
 						<PremiumAvatar
 							altText={post?.author?.name as string}
 							imgSrc={post?.author?.profilePicture as string}
@@ -78,23 +78,25 @@ const Post = ({post}: PostProps) => {
 					</div>
 					<div>
 						<div className="flex justify-center items-center">
-							<h2 className="font-semibold mr-3">{post?.author?.name}</h2>
+							<h2 className="text-xs md:text-sm font-semibold mr-3">{post?.author?.name}</h2>
 							{isFollowing ? (
-								<button disabled className="text-primary font-semibold text-xs">
+								<button disabled className="text-primary font-semibold  text-[10px] md:text-xs">
 									Following
 								</button>
 							) : isPending ? (
 								<Spinner color="primary" size="sm" />
 							) : !isMyPost ? (
 								<button
-									className="text-primary font-semibold text-xs  hover:scale-110 transition-transform"
+									className="text-primary font-semibold text-[10px] md:text-xs  hover:scale-110 transition-transform"
 									onClick={handleFollow}
 								>
 									Follow
 								</button>
 							) : null}
 						</div>
-						{post.createdAt && <p className="text-sm text-gray-400">{timeConvert(postDate)}</p>}
+						{post.createdAt && (
+							<p className="text-xs md:text-sm text-gray-400">{timeConvert(postDate)}</p>
+						)}
 					</div>
 				</div>
 
@@ -108,7 +110,7 @@ const Post = ({post}: PostProps) => {
 						<PdfGenerator data={pdfData} />
 					</div>
 					{showOptions && (
-						<div className="absolute -top-[6px] right-[35px] mt-2 w-32 border border-gray-100 rounded-md shadow-custom-all-around ring-1 ring-black ring-opacity-5 z-10">
+						<div className="absolute -top-[6px] right-[35px] mt-2 w-32 border bg-gray-100 rounded-md shadow-custom-all-around ring-1 ring-black ring-opacity-5 z-10">
 							<div className="py-1">
 								<UpdatePostModal post={post} setShowOptions={setShowOptions} />
 								<DeletePostModal post={post} setShowOptions={setShowOptions} />
@@ -118,12 +120,13 @@ const Post = ({post}: PostProps) => {
 				</div>
 			</div>
 			<div className="mb-2">
-				<h1 className="text-xl font-bold mb-3 w-fit">
+				<h1 className="text-sm md:text-xl font-bold mb-3 w-fit">
 					<Link className="hover:text-primary transition-all" href={`/post/${post._id}`}>
 						{post?.title}
 					</Link>
 				</h1>
 				<div
+					className="text-xs md:text-base"
 					dangerouslySetInnerHTML={{
 						__html: `${post.content.length > 200 ? `${post?.content.slice(0, 200)}......` : post?.content}`,
 					}}

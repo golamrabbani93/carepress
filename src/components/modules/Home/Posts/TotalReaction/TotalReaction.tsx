@@ -7,23 +7,23 @@ const TotalReactionBar = ({post}: PostProps) => {
 			{/* Reactions Section */}
 			<div className="flex items-center space-x-2">
 				{post?.upvotes?.length > 0 && (
-					<div className="flex items-center space-x-2">
+					<div className="flex items-center  md:space-x-2">
 						{/* Icons */}
-						<div className="flex items-center space-x-1">
-							<ThumbsUp className="w-4 h-4 text-blue-600" />
+						<div className="flex items-center ">
+							<ThumbsUp className="w-4 h-4 text-blue-600 mr-1 md:mr-0" />
 						</div>
 						{/* Likes Text */}
-						<span className="">{post?.upvotes?.length} Likes</span>
+						<span className="text-xs md:text-base">{post?.upvotes?.length} Likes</span>
 					</div>
 				)}
 				{post?.downvotes?.length > 0 && (
-					<div className="flex items-center space-x-2">
+					<div className="flex items-center md:space-x-2">
 						{/* Icons */}
-						<div className="flex items-center space-x-1">
+						<div className="flex items-center mr-1 md:mr-0">
 							<ThumbsDown className="w-4 h-4 text-primary" />
 						</div>
 						{/* Likes Text */}
-						<span>{post?.downvotes?.length} Dislikes</span>
+						<span className="text-xs md:text-base">{post?.downvotes?.length} Dislikes</span>
 					</div>
 				)}
 			</div>

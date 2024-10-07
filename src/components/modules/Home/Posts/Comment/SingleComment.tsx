@@ -55,18 +55,20 @@ const SingleComment = ({comment}: CommentProps) => {
 
 	return (
 		<div className="flex items-start mb-4">
-			<div className="mr-3">
+			<div className="mr-1 md:mr-3">
 				<PremiumAvatar
 					altText={comment?.author?.name as string}
 					imgSrc={comment.author.profilePicture}
 					status={comment?.author?.status === 'premium'}
 				/>
 			</div>
-			<div className="flex items-center justify-center">
-				<div className="border border-gray-300 p-2 rounded-lg w-[300px] ]">
+			<div className="flex items-center justify-center ">
+				<div className="border border-gray-300 p-2 rounded-lg md:w-[300px] ]">
 					<div className="flex justify-between">
-						<h3 className="font-semibold">{comment.author.name}</h3>
-						<span className="text-[12px] text-gray-500 ml-2">{timeConvert(commentDate)}</span>
+						<h3 className="text-sm md:text-base font-semibold">{comment.author.name}</h3>
+						<span className="text-[10px] md:text-[12px] text-gray-500 ml-2">
+							{timeConvert(commentDate)}
+						</span>
 					</div>
 					<div>
 						{edit ? (
@@ -97,7 +99,7 @@ const SingleComment = ({comment}: CommentProps) => {
 								</button>
 							</>
 						) : (
-							<p>{comment.content}</p>
+							<p className="text-sm md:text-base">{comment.content}</p>
 						)}
 					</div>
 				</div>
