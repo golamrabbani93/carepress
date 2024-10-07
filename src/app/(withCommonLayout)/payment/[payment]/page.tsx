@@ -33,7 +33,13 @@ const Profile = () => {
 	return (
 		<>
 			{isOpen && (
-				<Modal backdrop="blur" isDismissable={false} isOpen={isOpen} onOpenChange={setIsOpen}>
+				<Modal
+					backdrop="blur"
+					hideCloseButton={true}
+					isDismissable={false}
+					isOpen={isOpen}
+					onOpenChange={setIsOpen}
+				>
 					<ModalContent>
 						<ModalHeader className="text-center">
 							<div className="flex items-center justify-center mb-4">
@@ -70,8 +76,8 @@ const Profile = () => {
 
 			{!isOpen && (
 				<div className="flex flex-col items-center justify-center h-screen">
-					<h1 className="text-2xl font-bold">Redirecting To Profile Page...</h1>
-					<p className="text-gray-500">Please wait while we redirect you to the profile page.</p>
+					<h1 className="text-2xl font-bold">Redirecting To Home Page...</h1>
+					<p className="text-gray-500">Please wait while we redirect you to the home page.</p>
 				</div>
 			)}
 		</>

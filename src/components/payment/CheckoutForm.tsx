@@ -113,6 +113,7 @@ const CheckoutForm: React.FC<TProps> = ({amount, onClose}) => {
 							router.push(
 								`/payment/${user?._id}?data=${encodeURIComponent(JSON.stringify(successPaymentModalData))}`,
 							);
+							setProcessing(false);
 							toast.success('Payment Successful', {id: toastId});
 						} else {
 							toast.error('Payment Failed', {id: toastId});
@@ -152,11 +153,11 @@ const CheckoutForm: React.FC<TProps> = ({amount, onClose}) => {
 				<Button
 					className="mt-8 px-6 mb-3 text-white font-bold uppercase rounded-lg  transition duration-300"
 					color="primary"
-					disabled={!stripe || !clientSecret}
+					disabled={!stripe || !clientSecret || processing || isPending}
 					type="submit"
 					variant="bordered"
 				>
-					{processing ? <Spinner color={'white'} size="sm" /> : `Pay $${amount}`}
+					{isPending || processing ? <Spinner color={'white'} size="sm" /> : `Pay $${amount}`}
 				</Button>
 			</form>
 		</div>
