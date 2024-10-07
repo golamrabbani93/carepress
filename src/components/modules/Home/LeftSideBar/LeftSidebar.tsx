@@ -6,7 +6,9 @@ import Search from './Search/Search';
 const LeftSidebar = () => {
 	return (
 		<div className="">
-			<Search />
+			<div>
+				<Search />
+			</div>
 			<div className="mt-10">
 				<Category />
 			</div>

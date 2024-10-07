@@ -14,6 +14,7 @@ import UpdatePostModal from '@/components/modal/updatePostModal';
 import ImageGallery from '../ImageGallery/ImageGallery';
 import Link from 'next/link';
 import PremiumAvatar from '@/components/PremiumPost/PremiumAvatar';
+import PdfGenerator from '@/components/PdfGenerator/PdfGenerator';
 
 export interface PostProps {
 	post: IPost;
@@ -21,6 +22,12 @@ export interface PostProps {
 const Post = ({post}: PostProps) => {
 	const {user} = useUser();
 	const router = useRouter();
+
+	const pdfData = {
+		title: post.title,
+		content: post.content.replace(/<[^>]*>/g, '').trim(),
+		imageUrl: post.images[0],
+	};
 
 	// *handle options for post delete and edit
 	const [showOptions, setShowOptions] = useState(false);
@@ -90,12 +97,16 @@ const Post = ({post}: PostProps) => {
 						{post.createdAt && <p className="text-sm text-gray-400">{timeConvert(postDate)}</p>}
 					</div>
 				</div>
+
 				<div className="relative">
 					{(isMyPost || user?.role === 'ADMIN') && (
 						<div>
 							<EllipsisVertical className="cursor-pointer" onClick={handleToggleOptions} />
 						</div>
 					)}
+					<div>
+						<PdfGenerator data={pdfData} />
+					</div>
 					{showOptions && (
 						<div className="absolute -top-[6px] right-[35px] mt-2 w-32 border border-gray-100 rounded-md shadow-custom-all-around ring-1 ring-black ring-opacity-5 z-10">
 							<div className="py-1">
