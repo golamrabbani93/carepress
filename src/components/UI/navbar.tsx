@@ -14,13 +14,18 @@ import {siteConfig} from '@/config/site';
 import {ThemeSwitch} from '@/components/UI/theme-switch';
 import AvatarDropdown from './AvatarDropdown';
 import Image from 'next/image';
+import RightSideBar from '../modules/Home/RightSideBar/RightSideBar';
+import Search from '../modules/Home/LeftSideBar/Search/Search';
+import CategorySidebar from '../modules/Home/LeftSideBar/Category/Category';
+import FilterSider from '../modules/Home/LeftSideBar/Filter/Filter';
+import LatestPosts from '../modules/Home/RightSideBar/LatestPosts/LatestPosts';
 
 export const Navbar = () => {
 	return (
 		<NextUINavbar className="" maxWidth="xl" position="sticky">
 			<NavbarContent className="basis-1/5 sm:basis-full" justify="start">
 				<NavbarBrand as="li" className="gap-3 max-w-fit">
-					<NextLink className="w-[200px]" href="/">
+					<NextLink className="w-[125px] md:w-[200px]" href="/">
 						<Image alt="logo" src={logo} />
 					</NextLink>
 				</NavbarBrand>
@@ -54,9 +59,11 @@ export const Navbar = () => {
 			</NavbarContent>
 
 			<NavbarMenu>
+				{/* "small nav ite, for mobile" */}
+
 				<div className="mx-4 mt-2 flex flex-col gap-2">
-					{siteConfig.navItems.map((item, index) => (
-						<NavbarMenuItem key={`${item}-${index}`}>
+					{siteConfig.navItems.map((item) => (
+						<NavbarItem key={item.href}>
 							<NextLink
 								className={clsx(
 									'hover:text-primary',
@@ -68,8 +75,22 @@ export const Navbar = () => {
 							>
 								{item.label}
 							</NextLink>
-						</NavbarMenuItem>
+						</NavbarItem>
 					))}
+
+					{/* "left side bar" */}
+
+					<div className="md:hidden">
+						<div>
+							<Search />
+						</div>
+						<div className="mt-10">
+							<CategorySidebar />
+						</div>
+						<div className="mt-10">
+							<FilterSider />
+						</div>
+					</div>
 				</div>
 			</NavbarMenu>
 		</NextUINavbar>

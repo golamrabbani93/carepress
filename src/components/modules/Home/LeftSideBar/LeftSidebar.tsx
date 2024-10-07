@@ -1,24 +1,27 @@
 import PaymentModal from '@/components/payment/PaymentModal';
-import Category from './Category/Category';
+
 import FilterSider from './Filter/Filter';
 import Search from './Search/Search';
+import CategorySidebar from './Category/Category';
 
 const LeftSidebar = () => {
 	return (
-		<div className="">
-			<div>
-				<Search />
+		<>
+			<div className="hidden md:block">
+				<div>
+					<Search />
+				</div>
+				<div className="mt-10">
+					<CategorySidebar />
+				</div>
+				<div className="mt-10">
+					<FilterSider />
+				</div>
+				<div className="mt-10">
+					<PaymentModal />
+				</div>
 			</div>
-			<div className="mt-10">
-				<Category />
-			</div>
-			<div className="mt-10">
-				<FilterSider />
-			</div>
-			<div className="mt-10">
-				<PaymentModal />
-			</div>
-		</div>
+		</>
 	);
 };
 

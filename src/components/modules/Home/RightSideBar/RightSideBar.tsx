@@ -10,9 +10,11 @@ const RightSideBar = async () => {
 		const posts = await getAllPosts(query);
 
 		return (
-			<div className="">
-				<LatestPosts data={posts} />
-			</div>
+			<>
+				<div className="hidden md:block">
+					<LatestPosts data={posts} />
+				</div>
+			</>
 		);
 	} catch (error) {
 		return <div>Latest Data Fetch Error</div>;
