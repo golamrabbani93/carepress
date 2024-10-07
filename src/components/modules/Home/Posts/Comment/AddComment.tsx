@@ -11,6 +11,7 @@ import PremiumAvatar from '@/components/PremiumPost/PremiumAvatar';
 const AddComment = ({post}: PostProps) => {
 	const {user} = useUser();
 	const {mutate: handleCreateComment, isPending} = useCreateComment();
+
 	const router = useRouter();
 	const handleSendComment = (e: FieldValues) => {
 		e.preventDefault();

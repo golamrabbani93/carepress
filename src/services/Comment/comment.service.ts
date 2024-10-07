@@ -16,7 +16,8 @@ export const createComment = async (commentData: FieldValues) => {
 		revalidateTag('Single_Post');
 
 		return data;
-	} catch (error) {
+	} catch (error: any) {
+		return error?.data?.message;
 		throw new Error('Failed to create comment');
 	}
 };
