@@ -7,11 +7,14 @@ import {Crown} from 'lucide-react';
 
 import Image from 'next/image';
 import Link from 'next/link';
+import {usePathname} from 'next/navigation';
 import {useEffect, useState} from 'react';
 
 export default function ProfilePage({data}: any) {
 	const [loading, setloading] = useState(true);
 	const user = data?.data;
+
+	const pathnames = usePathname();
 
 	useEffect(() => {
 		if (data.success) {
@@ -51,28 +54,36 @@ export default function ProfilePage({data}: any) {
 
 					{/* User details */}
 					<div>
-						<h1 className="text-2xl font-semibold">{user?.name}</h1>
+						<h1 className="sm:text-2xl font-semibold">{user?.name}</h1>
 						<p className="text-gray-500">{user?.followers?.length} Followers</p>
 					</div>
 				</div>
 
+				<div className="hidden sm:block">
+					<ProfileEditModal user={user} />
+				</div>
+			</div>
+			<div className="flex justify-center items-center sm:hidden mt-4">
+				{/* Navigation Tabs */}
 				<ProfileEditModal user={user} />
 			</div>
-
 			{/* Navigation Tabs */}
 			<div className="mt-6 ">
 				<div className="max-w-4xl mx-auto px-4 flex space-x-8">
-					<Link className="text-primary border-b-2 border-primary py-2" href={'/profile'}>
+					<Link
+						className={`hover:text-primary hover:border-b-2 hover:border-primary py-2 ${pathnames === '/profile' && 'text-primary border-b-2 border-primary'}`}
+						href={'/profile'}
+					>
 						Posts
 					</Link>
 					<Link
-						className="hover:text-primary hover:border-b-2 hover:border-primary py-2"
+						className={`hover:text-primary hover:border-b-2 hover:border-primary py-2 ${pathnames === '/profile/following' && 'text-primary border-b-2 border-primary'}`}
 						href={'/profile/following'}
 					>
 						Following
 					</Link>
 					<Link
-						className="hover:text-primary hover:border-b-2 hover:border-primary py-2"
+						className={`hover:text-primary hover:border-b-2 hover:border-primary py-2 ${pathnames === '/profile/follower' && 'text-primary border-b-2 border-primary'}`}
 						href={'/profile/follower'}
 					>
 						Follower

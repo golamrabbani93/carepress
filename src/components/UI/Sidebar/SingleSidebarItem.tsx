@@ -4,12 +4,15 @@ import {useUser} from '@/context/user.provider';
 import {USERITEMS} from './SidebarItems/UserItems';
 import {useEffect, useState} from 'react';
 import SidebarItemsLoader from '@/components/Loader/SidebarItemsLoader';
+import {usePathname} from 'next/navigation';
+import path from 'path';
 
 const SingleSidebarItem = () => {
 	const [loading, setLoading] = useState(true);
 	const {user} = useUser();
 	const role = user?.role;
 
+	const pathname = usePathname();
 	const items = role === 'ADMIN' ? ADMINITEMS : USERITEMS;
 
 	useEffect(() => {
@@ -27,7 +30,7 @@ const SingleSidebarItem = () => {
 			{items.map((item: any) => (
 				<li key={item.name}>
 					<Link
-						className="flex items-center p-3 rounded-lg text-lg hover:bg-primary transition-all"
+						className={`flex items-center p-3 rounded-lg text-lg hover:bg-primary transition-all duration-300 ${pathname === item.path && 'bg-primary'}`}
 						href={item?.path || '/'}
 					>
 						<span className="mr-4">{item.icon}</span>

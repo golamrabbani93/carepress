@@ -14,8 +14,8 @@ const SinglePostList = ({post}: {post: IPost}) => {
 	};
 
 	return (
-		<tr key={post._id} className="hover:bg-gray-50">
-			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900">
+		<tr key={post._id} className="">
+			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-400">
 				<div className="w-10 h-10  overflow-hidden">
 					{post.images.map((image, index) => {
 						return (
@@ -31,19 +31,19 @@ const SinglePostList = ({post}: {post: IPost}) => {
 					})}
 				</div>
 			</td>
-			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900">{post.title}</td>
-			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900">
+			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-400">{post.title}</td>
+			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-400">
 				{post.author.name}
 			</td>
 
-			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900">
+			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-400">
 				<span
 					className={`border px-3 py-1 rounded-md uppercase text-xs ${!post.status ? 'border-red-500' : 'border-green-500'}`}
 				>
 					{post.status ? 'Published' : 'Draft'}
 				</span>
 			</td>
-			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900 capitalize">
+			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-400 capitalize">
 				{!post.status ? (
 					<Button
 						color="success"

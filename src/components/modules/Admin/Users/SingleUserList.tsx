@@ -28,29 +28,29 @@ const SingleUserList = ({user}: {user: IUser}) => {
 	};
 
 	return (
-		<tr key={user._id} className="hover:bg-gray-50">
-			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900">
+		<tr key={user._id} className="">
+			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-400">
 				<div className="w-10 h-10 rounded  overflow-hidden">
 					<Avatar className="w-full h-full object-cover" size="sm" src={user?.profilePicture} />
 				</div>
 			</td>
-			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900">{user.name}</td>
-			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900">{user.email}</td>
-			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900">
+			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-400">{user.name}</td>
+			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-400">{user.email}</td>
+			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-400">
 				<span
 					className={` px-3 py-1 rounded-md uppercase text-xs border-2 ${user.role === 'ADMIN' ? 'border-sky-500' : 'border-purple-500'}`}
 				>
 					{user.role}
 				</span>
 			</td>
-			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900">
+			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-400">
 				<span
 					className={` px-3 py-1 rounded-md uppercase text-xs border-2 ${user.status === 'blocked' ? 'border-red-500' : user.status === 'premium' ? 'border-green-500' : 'border-yellow-500'}`}
 				>
 					{user.status}
 				</span>
 			</td>
-			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-900 capitalize">
+			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-400 capitalize">
 				{user.role === 'ADMIN' ? (
 					''
 				) : user.status === 'blocked' ? (

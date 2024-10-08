@@ -44,7 +44,7 @@ const AvatarDropdown = () => {
 					</DropdownTrigger>
 					<DropdownMenu aria-label="Link Actions">
 						<DropdownItem key="profile" href={`/profile`}>
-							{user?.name}
+							My Profile
 						</DropdownItem>
 						<DropdownItem
 							key="Create-Post"

@@ -1,4 +1,6 @@
-import PostProfile from '@/components/modules/Profile/Post/PostProfile';
+import PostModal from '@/components/modal/PostModal';
+import AllPosts from '@/components/modules/Admin/AllPosts/AllPosts';
+
 import {getMyPosts} from '@/services/Post/post.service';
 
 const profilePage = async () => {
@@ -6,7 +8,8 @@ const profilePage = async () => {
 
 	return (
 		<div>
-			<PostProfile posts={posts} />
+			<PostModal />
+			<AllPosts posts={posts} />
 		</div>
 	);
 };

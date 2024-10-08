@@ -3,3 +3,7 @@
 	border-radius: 6px !important;
 	padding: 10px !important;
 }
+
+.is-active {
+	color: #ff4880;
+}

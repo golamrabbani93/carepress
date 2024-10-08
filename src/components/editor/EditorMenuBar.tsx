@@ -18,10 +18,10 @@ const EditorMenuBar = ({editor}: {editor: any}) => {
 	}
 
 	return (
-		<div className="control-group">
-			<div className="button-group flex space-x-2">
+		<div className="control-group ">
+			<div className="button-group flex space-x-1 sm:space-x-2 ">
 				<button
-					className={editor.isActive('heading', {level: 1}) ? 'is-active' : ''}
+					className={`${editor.isActive('heading', {level: 1}) ? 'is-active' : ''}`}
 					type="button"
 					onClick={() => editor.chain().focus().toggleHeading({level: 1}).run()}
 				>

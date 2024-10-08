@@ -16,11 +16,9 @@ import Image from 'next/image';
 import Search from '../modules/Home/LeftSideBar/Search/Search';
 import CategorySidebar from '../modules/Home/LeftSideBar/Category/Category';
 import FilterSider from '../modules/Home/LeftSideBar/Filter/Filter';
-
-import Link from 'next/link';
-import {Button} from '@nextui-org/button';
-import {LogInIcon} from 'lucide-react';
 import {PaymentModal} from '../payment/PaymentModal';
+import LoginButton from './Sidebar/LoginButton';
+import ActiveNav from './ActiveNav';
 
 export const Navbar = () => {
 	return (
@@ -32,7 +30,7 @@ export const Navbar = () => {
 					</NextLink>
 				</NavbarBrand>
 				<ul className="hidden lg:flex gap-4 justify-center ml-2">
-					{siteConfig.navItems.map((item) => (
+					{/* {siteConfig.navItems.map((item) => (
 						<NavbarItem key={item.href}>
 							<NextLink
 								className={clsx(
@@ -46,7 +44,8 @@ export const Navbar = () => {
 								{item.label}
 							</NextLink>
 						</NavbarItem>
-					))}
+					))} */}
+					<ActiveNav />
 				</ul>
 			</NavbarContent>
 
@@ -68,7 +67,7 @@ export const Navbar = () => {
 
 				<div className="mx-4 mt-2 flex flex-col gap-2">
 					{siteConfig.navItems.map((item) => (
-						<NavbarItem key={item.href}>
+						<NavbarItem key={item.href} isActive>
 							<NextLink
 								className={clsx(
 									'hover:text-primary',
@@ -83,17 +82,7 @@ export const Navbar = () => {
 						</NavbarItem>
 					))}
 					<div className="flex lg:hidden mt-3">
-						<Link href={'/login'}>
-							<Button
-								className="hover:bg-primary hover:text-white mr-2"
-								color="primary"
-								size="sm"
-								startContent={<LogInIcon />}
-								variant="bordered"
-							>
-								Login
-							</Button>
-						</Link>
+						<LoginButton />
 						<PaymentModal />
 					</div>
 					{/* "left side bar" */}
