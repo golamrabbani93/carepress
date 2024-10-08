@@ -70,7 +70,10 @@ export const getAllPosts = async (query: any) => {
 
 		const queryString = new URLSearchParams(query).toString();
 
-		const res = await fetch(`http://localhost:5000/api/posts?${queryString}`, fetchOption);
+		const res = await fetch(
+			`https://carepress-backend.vercel.app/api/posts?${queryString}`,
+			fetchOption,
+		);
 
 		// Check if the response is successful
 		if (!res.ok) {
@@ -92,7 +95,7 @@ export const getAllPosts = async (query: any) => {
 export const getMyPosts = async () => {
 	const options = await fetchOption();
 
-	const res = await fetch(`http://localhost:5000/api/posts/me`, options);
+	const res = await fetch(`https://carepress-backend.vercel.app/api/posts/me`, options);
 
 	return res.json();
 };
@@ -171,7 +174,10 @@ export const getSinglePost = async (postId: string): Promise<any> => {
 	};
 
 	try {
-		const res = await fetch(`http://localhost:5000/api//posts/${postId}`, fetchOption);
+		const res = await fetch(
+			`https://carepress-backend.vercel.app/api//posts/${postId}`,
+			fetchOption,
+		);
 
 		// Check if the response is successful
 		if (!res.ok) {

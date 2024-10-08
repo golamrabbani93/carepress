@@ -31,11 +31,14 @@ const CheckoutForm: React.FC<TProps> = ({amount, onClose}) => {
 	useEffect(() => {
 		const createPaymentIntent = async () => {
 			try {
-				const res = await fetch('http://localhost:5000/api/payments/create-payment-intent', {
-					method: 'POST',
-					headers: {'Content-Type': 'application/json'},
-					body: JSON.stringify({price: amount}),
-				});
+				const res = await fetch(
+					'https://carepress-backend.vercel.app/api/payments/create-payment-intent',
+					{
+						method: 'POST',
+						headers: {'Content-Type': 'application/json'},
+						body: JSON.stringify({price: amount}),
+					},
+				);
 
 				const {data} = await res.json();
 

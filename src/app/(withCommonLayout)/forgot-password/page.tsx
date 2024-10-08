@@ -26,7 +26,7 @@ const AutoModal = () => {
 		};
 
 		try {
-			const res = await fetch('http://localhost:5000/api/auth/forget-password', {
+			const res = await fetch('https://carepress-backend.vercel.app/api/auth/forget-password', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

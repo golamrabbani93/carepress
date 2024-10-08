@@ -1,5 +1,4 @@
 'use client';
-import {DashboardPostsLoader} from '@/components/Loader/DashboardPostLoader';
 import {useEffect, useState} from 'react';
 import Singlepayment from './Singlepayment';
 import {PaymentLoader} from '@/components/Loader/PaymentLoader';

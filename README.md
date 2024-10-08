@@ -1,53 +1,99 @@
-# Next.js & NextUI Template
+# CarePress - Pet Care Tips & Stories
 
-This is a template for creating applications using Next.js 14 (app directory) and NextUI (v2).
+## Project Overview
 
-[Try it on CodeSandbox](https://githubbox.com/nextui-org/next-app-template)
+"CarePress" is a frontend web application that provides practical pet care tips and inspiring
+stories for pet owners. The platform allows users to share and explore tips on nutrition, grooming,
+exercise, and more, as well as stories about the bond between pets and their owners. Users can
+engage by upvoting, commenting, and following others, with access to premium content through payment
+integration.
 
-## Technologies Used
+## Features
 
-- [Next.js 14](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+- **User Authentication**:
 
-## How to Use
+  - Register/Login with JWT-based authentication.
+  - Password recovery and reset functionality.
 
-### Use the template with create-next-app
+- **User Profiles**:
 
-To create a new project based on this template using `create-next-app`, run the following command:
+  - Manage personal profiles, view user-specific posts, and follow/unfollow others.
+
+- **Content Creation**:
+
+  - Create and edit pet care tips and stories using a rich text editor.
+  - Categorize posts as either "Tip" or "Story."
+  - Attach images to posts for enhanced engagement.
+
+- **Voting and Comments**:
+
+  - Upvote/downvote posts.
+  - Comment on and reply to posts, with the ability to edit or delete comments.
+
+- **Premium Content**:
+
+  - Stripe payment integration for accessing premium content.
+
+- **News Feed**:
+
+  - Infinite scrolling news feed with real-time content updates.
+  - Advanced search and filter functionality based on categories and keywords.
+
+- **Responsive Design**:
+  - Fully responsive, adapting to different screen sizes.
+
+## Technology Stack
+
+- **Framework**: Next.js 14
+- **Programming Language**: TypeScript
+- **CSS Framework**: Tailwind CSS
+- **Forms**: React Hook Form + Zod validation
+- **Rich Text Editor**: TipTap
+- **UI Components**: NextUI (Avatar, Button, Modal, etc.)
+- **Payment Integration**: Stripe
+- **HTTP Requests**: Axios
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **State Management**: React Query
+- **Miscellaneous**: JWT Decode, clsx, date-fns, LightGallery, Intersection Observer
+
+## Installation
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/your-username/carepress.git
+   ```
+
+2. **Navigate to the project directory**:
+
+   ```bash
+   cd carepress
+   ```
+
+3. **Install dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+## Running the Application
+
+1. **Start the development server**:
+
+   ```bash
+   npm run dev
+   ```
+
+2. Open your browser and navigate to `http://localhost:3000`.
+
+## Project Structure
 
 ```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
+├── components          # Reusable UI components
+├── pages               # Next.js pages (routes)
+├── public              # Static files (images, fonts)
+├── styles              # Global and component-specific styles (Tailwind CSS)
+├── utils               # Utility functions (helper functions, axios, etc.)
+└── .env.example        # Example environment variables for the project
 ```
-
-### Install dependencies
-
-You can use one of them `npm`, `yarn`, `pnpm`, `bun`, Example using `npm`:
-
-```bash
-npm install
-```
-
-### Run the development server
-
-```bash
-npm run dev
-```
-
-### Setup pnpm (optional)
-
-If you are using `pnpm`, you need to add the following code to your `.npmrc` file:
-
-```bash
-public-hoist-pattern[]=*@nextui-org/*
-```
-
-After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
-
-## License
-
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
