@@ -5,7 +5,6 @@ import {USERITEMS} from './SidebarItems/UserItems';
 import {useEffect, useState} from 'react';
 import SidebarItemsLoader from '@/components/Loader/SidebarItemsLoader';
 import {usePathname} from 'next/navigation';
-import path from 'path';
 
 const SingleSidebarItem = () => {
 	const [loading, setLoading] = useState(true);

@@ -4,12 +4,9 @@ import {
 	NavbarMenu,
 	NavbarMenuToggle,
 	NavbarBrand,
-	NavbarItem,
 } from '@nextui-org/navbar';
 import NextLink from 'next/link';
-import clsx from 'clsx';
 import logo from '../../assets/images/logo.png';
-import {siteConfig} from '@/config/site';
 import {ThemeSwitch} from '@/components/UI/theme-switch';
 import AvatarDropdown from './AvatarDropdown';
 import Image from 'next/image';
@@ -30,21 +27,6 @@ export const Navbar = () => {
 					</NextLink>
 				</NavbarBrand>
 				<ul className="hidden lg:flex gap-4 justify-center ml-2">
-					{/* {siteConfig.navItems.map((item) => (
-						<NavbarItem key={item.href}>
-							<NextLink
-								className={clsx(
-									'hover:text-primary',
-									'data-[active=true]:text-primary',
-									'transition-all duration-300 font-bold text-xl',
-								)}
-								color="foreground"
-								href={item.href}
-							>
-								{item.label}
-							</NextLink>
-						</NavbarItem>
-					))} */}
 					<ActiveNav />
 				</ul>
 			</NavbarContent>
@@ -66,21 +48,8 @@ export const Navbar = () => {
 				{/* "small nav ite, for mobile" */}
 
 				<div className="mx-4 mt-2 flex flex-col gap-2">
-					{siteConfig.navItems.map((item) => (
-						<NavbarItem key={item.href} isActive>
-							<NextLink
-								className={clsx(
-									'hover:text-primary',
-									'data-[active=true]:text-primary',
-									'transition-all duration-300 font-bold text-xl',
-								)}
-								color="foreground"
-								href={item.href}
-							>
-								{item.label}
-							</NextLink>
-						</NavbarItem>
-					))}
+					<ActiveNav />
+
 					<div className="flex lg:hidden mt-3">
 						<LoginButton />
 						<PaymentModal />

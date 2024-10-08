@@ -105,7 +105,7 @@ const SingleComment = ({comment}: CommentProps) => {
 						</div>
 					</div>
 					<div className="relative inline-block text-left">
-						{user?._id === comment.author._id && (
+						{(user?._id === comment.author._id || user?.role === 'ADMIN') && (
 							<button className="ml-2 cursor-pointer" onClick={handleToggleOptions}>
 								<EllipsisVertical />
 							</button>

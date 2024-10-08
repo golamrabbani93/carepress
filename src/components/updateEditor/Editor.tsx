@@ -16,6 +16,7 @@ import {Spinner} from '@nextui-org/spinner';
 import {PostModalProps} from '../modal/DeletePostModal';
 import {Checkbox} from '@nextui-org/checkbox';
 import {PaymentModal} from '../payment/PaymentModal';
+import {useUser} from '@/context/user.provider';
 
 interface PostData {
 	title: string;
@@ -30,7 +31,7 @@ const UpdateEditor = ({onClose, post, setShowOptions}: PostModalProps & {onClose
 	const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 	const [imageFiles, setImageFiles] = useState<File[] | []>([]);
 	const {mutate: updatePost, isPending, data} = useUpdatePost();
-
+	const {user} = useUser();
 	const [postData, setPostData] = useState<PostData>({
 		title: '',
 		content: '',

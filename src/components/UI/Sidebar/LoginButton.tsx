@@ -8,19 +8,21 @@ const LoginButton = () => {
 	const {user} = useUser();
 
 	return (
-		!user && (
-			<Link href={'/login'}>
-				<Button
-					className="hover:bg-primary hover:text-white mr-2"
-					color="primary"
-					size="sm"
-					startContent={<LogInIcon />}
-					variant="bordered"
-				>
-					Login
-				</Button>
-			</Link>
-		)
+		<>
+			{!user && (
+				<Link href={'/login'}>
+					<Button
+						className="hover:bg-primary hover:text-white mr-2"
+						color="primary"
+						size="sm"
+						startContent={<LogInIcon />}
+						variant="bordered"
+					>
+						Login
+					</Button>
+				</Link>
+			)}
+		</>
 	);
 };
 

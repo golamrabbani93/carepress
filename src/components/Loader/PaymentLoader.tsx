@@ -1,28 +1,19 @@
 import {Skeleton} from '@nextui-org/skeleton';
 import React from 'react';
 
-export const DashboardPostsLoader = () => (
+export const PaymentLoader = () => (
 	<div className="text-center">
 		<div className="overflow-x-auto">
 			<table className="min-w-full  border border-gray-200 ">
-				<thead>
+				<thead className="text-center">
 					<tr>
-						<th className="py-2 px-4 border-b border-gray-200  font-semibold text-gray-700">
-							Post Images
+						<th className="py-2 px-4 border-b border-gray-200  text-sm font-semibold  ">Image</th>
+						<th className="py-2 px-4 border-b border-gray-200  text-sm font-semibold ">Name</th>
+						<th className="py-2 px-4 border-b border-gray-200  text-sm font-semibold ">Email</th>
+						<th className="py-2 px-4 border-b border-gray-200  text-sm font-semibold ">
+							Transaction ID
 						</th>
-						<th className="py-2 px-4 border-b border-gray-200   font-semibold text-gray-700">
-							Post Title
-						</th>
-						<th className="py-2 px-4 border-b border-gray-200   font-semibold text-gray-700">
-							Post Author
-						</th>
-						<th className="py-2 px-4 border-b border-gray-200   font-semibold text-gray-700">
-							Status
-						</th>
-
-						<th className="py-2 px-4 border-b border-gray-200   font-semibold text-gray-700">
-							Post Action
-						</th>
+						<th className="py-2 px-4 border-b border-gray-200  text-sm font-semibold ">Pay Date</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -30,8 +21,6 @@ export const DashboardPostsLoader = () => (
 						<tr key={index} className="">
 							<td className="py-2 px-4 border-b border-gray-200 ">
 								<div className="flex gap-2 justify-center">
-									<Skeleton className="w-10 h-10 bg-gray-300 rounded-md" />
-									<Skeleton className="w-10 h-10 bg-gray-300 rounded-md" />
 									<Skeleton className="w-10 h-10 bg-gray-300 rounded-md" />
 								</div>
 							</td>
