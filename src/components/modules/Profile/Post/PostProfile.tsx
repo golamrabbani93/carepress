@@ -94,7 +94,7 @@ const PostProfile = ({posts, query}: {posts: any; query?: any}) => {
 				[...Array(2)].map((_, index) => <PostLoader key={index} />)
 			) : post?.length > 0 ? (
 				post?.map((post: IPost) =>
-					post?.isPremium && user?.status === 'basic' ? (
+					post?.isPremium && user?.status !== 'premium' ? (
 						<PremiumPost key={post._id} post={post} />
 					) : (
 						<div

@@ -13,7 +13,7 @@ import DeletePostModal from '@/components/modal/DeletePostModal';
 import {useState} from 'react';
 import UpdatePostModal from '@/components/modal/updatePostModal';
 import ImageGallery from '../modules/Home/Posts/ImageGallery/ImageGallery';
-import PaymentModal from '../payment/PaymentModal';
+import {PaymentModal} from '../payment/PaymentModal';
 
 export interface PostProps {
 	post: IPost;
@@ -73,23 +73,25 @@ const PremiumPost = ({post}: PostProps) => {
 					/>
 					<div>
 						<div className="flex justify-center items-center">
-							<h2 className="font-semibold mr-3">{post?.author?.name}</h2>
+							<h2 className="text-sm sm:text-base font-semibold mr-3">{post?.author?.name}</h2>
 							{isFollowing ? (
-								<button disabled className="text-primary font-semibold text-xs">
+								<button disabled className="text-primary font-semibold  text-[10px] sm:text-xs">
 									Following
 								</button>
 							) : isPending ? (
 								<Spinner color="primary" size="sm" />
 							) : !isMyPost ? (
 								<button
-									className="text-primary font-semibold text-xs  hover:scale-110 transition-transform"
+									className="text-primary font-semibold text-[10px] sm:text-xs  hover:scale-110 transition-transform"
 									onClick={handleFollow}
 								>
 									Follow
 								</button>
 							) : null}
 						</div>
-						{post.createdAt && <p className="text-sm text-gray-400">{timeConvert(postDate)}</p>}
+						{post.createdAt && (
+							<p className="text-xs sm:text-sm text-gray-400">{timeConvert(postDate)}</p>
+						)}
 					</div>
 				</div>
 				<div className="relative">
@@ -109,18 +111,21 @@ const PremiumPost = ({post}: PostProps) => {
 				</div>
 			</div>
 			<div className="mb-2">
-				<h1 className="text-xl font-bold">{post?.title}</h1>
+				<h1 className="text-base sm:text-xl font-bold mb-3 w-fit">{post?.title}</h1>
 
-				<div dangerouslySetInnerHTML={{__html: `${post?.content.slice(0, 100)}......`}} />
+				<div
+					dangerouslySetInnerHTML={{__html: `${post?.content.slice(0, 100)}......`}}
+					className="text-sm sm:text-base"
+				/>
 			</div>
 
 			<div className="relative">
 				<ImageGallery images={post?.images} />
 				<div
-					className={` absolute inset-0 bg-black bg-opacity-30 backdrop-blur-lg z-50 flex items-center justify-center rounded-md`}
+					className={`absolute inset-0 bg-black bg-opacity-30 backdrop-blur-lg z-50 flex items-center justify-center rounded-md`}
 				>
 					<div className="flex flex-col justify-center items-center">
-						<p className="font-extrabold  text-2xl text-white w-2/3 text-center">
+						<p className="font-extrabold  sm:text-2xl text-white w-2/3 text-center">
 							This is a Pemium Content, Please Subscribe to view more.
 						</p>
 						<div className="mt-3 text-white">

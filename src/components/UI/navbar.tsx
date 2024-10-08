@@ -16,10 +16,11 @@ import Image from 'next/image';
 import Search from '../modules/Home/LeftSideBar/Search/Search';
 import CategorySidebar from '../modules/Home/LeftSideBar/Category/Category';
 import FilterSider from '../modules/Home/LeftSideBar/Filter/Filter';
-import PaymentModal from '../payment/PaymentModal';
+
 import Link from 'next/link';
 import {Button} from '@nextui-org/button';
 import {LogInIcon} from 'lucide-react';
+import {PaymentModal} from '../payment/PaymentModal';
 
 export const Navbar = () => {
 	return (
@@ -84,11 +85,11 @@ export const Navbar = () => {
 					<div className="flex lg:hidden mt-3">
 						<Link href={'/login'}>
 							<Button
-								size="sm"
+								className="hover:bg-primary hover:text-white mr-2"
 								color="primary"
+								size="sm"
 								startContent={<LogInIcon />}
 								variant="bordered"
-								className="hover:bg-primary hover:text-white mr-2"
 							>
 								Login
 							</Button>

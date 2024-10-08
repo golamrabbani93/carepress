@@ -15,7 +15,7 @@ import {Button} from '@nextui-org/button';
 import {Spinner} from '@nextui-org/spinner';
 import {PostModalProps} from '../modal/DeletePostModal';
 import {Checkbox} from '@nextui-org/checkbox';
-import PaymentModal from '../payment/PaymentModal';
+import {PaymentModal} from '../payment/PaymentModal';
 
 interface PostData {
 	title: string;

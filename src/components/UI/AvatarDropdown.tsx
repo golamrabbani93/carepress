@@ -66,11 +66,11 @@ const AvatarDropdown = () => {
 			) : (
 				<Link href={'/login'}>
 					<Button
-						size="sm"
+						className="hidden lg:flex hover:bg-primary hover:text-white"
 						color="primary"
+						size="sm"
 						startContent={<LoginIcon />}
 						variant="bordered"
-						className="hidden lg:flex hover:bg-primary hover:text-white"
 					>
 						Login
 					</Button>

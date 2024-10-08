@@ -78,16 +78,16 @@ const Post = ({post}: PostProps) => {
 					</div>
 					<div>
 						<div className="flex justify-center items-center">
-							<h2 className="text-xs md:text-sm font-semibold mr-3">{post?.author?.name}</h2>
+							<h2 className="text-sm sm:text-base font-semibold mr-3">{post?.author?.name}</h2>
 							{isFollowing ? (
-								<button disabled className="text-primary font-semibold  text-[10px] md:text-xs">
+								<button disabled className="text-primary font-semibold  text-[10px] sm:text-xs">
 									Following
 								</button>
 							) : isPending ? (
 								<Spinner color="primary" size="sm" />
 							) : !isMyPost ? (
 								<button
-									className="text-primary font-semibold text-[10px] md:text-xs  hover:scale-110 transition-transform"
+									className="text-primary font-semibold text-[10px] sm:text-xs  hover:scale-110 transition-transform"
 									onClick={handleFollow}
 								>
 									Follow
@@ -95,7 +95,7 @@ const Post = ({post}: PostProps) => {
 							) : null}
 						</div>
 						{post.createdAt && (
-							<p className="text-xs md:text-sm text-gray-400">{timeConvert(postDate)}</p>
+							<p className="text-xs sm:text-sm text-gray-400">{timeConvert(postDate)}</p>
 						)}
 					</div>
 				</div>
@@ -120,16 +120,16 @@ const Post = ({post}: PostProps) => {
 				</div>
 			</div>
 			<div className="mb-2">
-				<h1 className="text-sm md:text-xl font-bold mb-3 w-fit">
+				<h1 className="text-base sm:text-xl font-bold mb-3 w-fit">
 					<Link className="hover:text-primary transition-all" href={`/post/${post._id}`}>
 						{post?.title}
 					</Link>
 				</h1>
 				<div
-					className="text-xs md:text-base"
 					dangerouslySetInnerHTML={{
 						__html: `${post.content.length > 200 ? `${post?.content.slice(0, 200)}......` : post?.content}`,
 					}}
+					className="text-sm sm:text-base"
 				/>
 				{post.content.length > 200 && (
 					<Link className="text-primary hover:underline transition-all" href={`/post/${post._id}`}>

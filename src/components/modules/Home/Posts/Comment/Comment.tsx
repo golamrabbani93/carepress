@@ -7,7 +7,7 @@ const CommentSection = ({post}: PostProps) => {
 	const comments = post.comments;
 
 	return (
-		<div className="p-2 md:p-4">
+		<div className="p-2 sm:p-4">
 			{comments.map((comment: IComment) => (
 				<SingleComment key={comment._id} comment={comment} />
 			))}

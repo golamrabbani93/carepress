@@ -54,30 +54,30 @@ const AddComment = ({post}: PostProps) => {
 			/>
 
 			{/* Input Area */}
-			<div className="md:flex-grow">
+			<div className="sm:flex-grow">
 				<form className="relative w-full customText" onSubmit={(e) => handleSendComment(e)}>
 					<input
 						required
-						className="w-full p-2 pr-10 rounded-md border border-gray-300 focus:outline-none text-xs md:text-base"
+						className="w-full p-2 pr-10 rounded-md border border-gray-300 focus:outline-none text-xs sm:text-base"
 						name="comment"
 						placeholder={`Comment as ${user?.name || 'Guest...'}`}
 						type="text"
 					/>
 					<button
-						className="absolute right-2 top-1/2 transform -translate-y-1/2  bg-primary w-6 h-6 md:w-8 md:h-8 rounded-full text-white flex items-center justify-center"
+						className="absolute right-2 top-1/2 transform -translate-y-1/2  bg-primary w-6 h-6 sm:w-8 sm:h-8 rounded-full text-white flex items-center justify-center"
 						type="submit"
 					>
 						{isPending ? (
 							<Spinner color="white" size="sm" />
 						) : (
-							<SendHorizontal className="w-[15px] md:w-[20px]" />
+							<SendHorizontal className="w-[15px] sm:w-[20px]" />
 						)}
 					</button>
 				</form>
 			</div>
 
 			{/* Icons Section */}
-			<div className="hidden md:flex items-center space-x-2">
+			<div className="hidden sm:flex items-center space-x-2">
 				<ChevronDown className="cursor-pointer" />
 				<Star className="cursor-pointer" />
 				<Smile className="cursor-pointer" />
