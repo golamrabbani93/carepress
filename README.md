@@ -72,6 +72,39 @@ npm run dev
 yarn dev
 
 
+Here's the README section for installation and usage with Bash commands formatted accordingly:
+
+markdown
+Copy code
+### Installation Steps
+
+1. Clone the repository:
+
+   ```bash
+   git clone <repository-url>
+   cd carepress
+Install dependencies:
+
+bash
+Copy code
+npm install
+# or
+yarn install
+Start the development server:
+
+bash
+Copy code
+npm run dev
+# or
+yarn dev
+Configuration
+
+
+Create a .env file in the root directory of the project:
+
+echo "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key" >> .env
+echo "NEXT_PUBLIC_JWT_SECRET=your_jwt_secret" >> .env
+
 
 
 
