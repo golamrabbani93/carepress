@@ -122,7 +122,7 @@ const PremiumPost = ({post}: PostProps) => {
 			<div className="relative">
 				<ImageGallery images={post?.images} />
 				<div
-					className={`absolute inset-0 bg-black bg-opacity-30 backdrop-blur-lg z-50 flex items-center justify-center rounded-md`}
+					className={`absolute inset-0 bg-black bg-opacity-30 backdrop-blur-lg z-10 flex items-center justify-center rounded-md`}
 				>
 					<div className="flex flex-col justify-center items-center">
 						<p className="font-extrabold  sm:text-2xl text-white w-2/3 text-center">

@@ -1,5 +1,5 @@
 'use client';
-import {ThumbsUp, MessageCircle, ThumbsDown} from 'lucide-react';
+import {ThumbsUp, ThumbsDown} from 'lucide-react';
 import {PostProps} from '../Post/Post';
 import {useUser} from '@/context/user.provider';
 import {useState} from 'react';
