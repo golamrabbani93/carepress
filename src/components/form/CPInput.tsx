@@ -11,6 +11,7 @@ interface IProps {
 	label: string;
 	name: string;
 	className?: string;
+	isReadOnly?: boolean;
 }
 
 export default function CPInput({
@@ -21,6 +22,7 @@ export default function CPInput({
 	type = 'text',
 	label,
 	name,
+	isReadOnly = false,
 }: IProps) {
 	const {
 		register,
@@ -33,6 +35,7 @@ export default function CPInput({
 			className={className}
 			errorMessage={errors[name]?.message as string}
 			isInvalid={!!errors[name]}
+			isReadOnly={isReadOnly}
 			label={label}
 			required={required}
 			size={size}

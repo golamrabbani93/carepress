@@ -1,6 +1,6 @@
 'use client';
 
-import {ReactNode} from 'react';
+import {ReactNode, useEffect} from 'react';
 import {FormProvider, SubmitHandler, useForm} from 'react-hook-form';
 
 interface formConfig {
@@ -14,23 +14,22 @@ interface IProps extends formConfig {
 }
 
 export default function CPForm({children, onSubmit, defaultValues, resolver}: IProps) {
-	const formConfig: formConfig = {};
+	// Initialize the form with resolver and default values
+	const methods = useForm({
+		defaultValues,
+		resolver,
+	});
 
-	if (!!defaultValues) {
-		formConfig['defaultValues'] = defaultValues;
-	}
-
-	if (!!resolver) {
-		formConfig['resolver'] = resolver;
-	}
-
-	const methods = useForm(formConfig);
-
-	const submitHandler = methods.handleSubmit;
+	// Reset form whenever defaultValues changes
+	useEffect(() => {
+		if (defaultValues) {
+			methods.reset(defaultValues); // Reset with new default values
+		}
+	}, [defaultValues, methods]);
 
 	return (
 		<FormProvider {...methods}>
-			<form onSubmit={submitHandler(onSubmit)}>{children}</form>
+			<form onSubmit={methods.handleSubmit(onSubmit)}>{children}</form>
 		</FormProvider>
 	);
 }

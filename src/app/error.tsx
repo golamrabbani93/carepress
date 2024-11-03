@@ -5,6 +5,7 @@ import {useEffect} from 'react';
 export default function Error({error, reset}: {error: Error; reset: () => void}) {
 	useEffect(() => {
 		// Log the error to an error reporting service
+		/* eslint-disable no-console */
 		console.error(error);
 	}, [error]);
 
@@ -16,8 +17,8 @@ export default function Error({error, reset}: {error: Error; reset: () => void})
 					We&apos;re sorry for the inconvenience. Please try again.
 				</p>
 				<button
-					onClick={() => reset()}
 					className="bg-primary text-white px-4 py-2 rounded hover:bg-red-400 transition duration-200"
+					onClick={() => reset()}
 				>
 					Try Again
 				</button>

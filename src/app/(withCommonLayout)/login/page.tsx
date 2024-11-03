@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 'use client';
 
-import {Suspense} from 'react'; // Import Suspense
+import {Key, Suspense, useState} from 'react'; // Import Suspense
 import {useUserLogin} from '@/hooks/auth.hook';
 import {loginValidationSchema} from '@/schemas/login.schema';
 import {useUser} from '@/context/user.provider';
@@ -13,6 +13,8 @@ import {FieldValues, SubmitHandler} from 'react-hook-form';
 import CPForm from '@/components/form/CPForm';
 import CPInput from '@/components/form/CPInput';
 import {Spinner} from '@nextui-org/spinner';
+import {Tabs, Tab} from '@nextui-org/tabs';
+import {ShieldCheck, UserCheck} from 'lucide-react';
 
 export default function LoginPage() {
 	const {setIsLoading: userLoader} = useUser();
@@ -43,6 +45,11 @@ function LoginForm({isPending, isSuccess, data, onSubmit, router}: any) {
 	const searchParams = useSearchParams(); // Client-side hook
 	const redirect = searchParams.get('redirect');
 
+	const [loginData, setLoginData] = useState({
+		email: 'rabbani@gmail.com',
+		password: 'password123',
+	});
+
 	if (!isPending && isSuccess && data?.success) {
 		if (redirect) {
 			router.push(redirect);
@@ -50,6 +57,18 @@ function LoginForm({isPending, isSuccess, data, onSubmit, router}: any) {
 			router.push('/');
 		}
 	}
+
+	const tabsChange = (e: Key) => {
+		e === 'admin'
+			? setLoginData({
+					email: 'admin@gmail.com',
+					password: 'password123',
+				})
+			: setLoginData({
+					email: 'rabbani@gmail.com',
+					password: 'password123',
+				});
+	};
 
 	return (
 		<div className="flex h-screen w-full">
@@ -69,10 +88,7 @@ function LoginForm({isPending, isSuccess, data, onSubmit, router}: any) {
 							</h3>
 
 							<CPForm
-								defaultValues={{
-									email: 'rabbani@gmail.com',
-									password: '123456',
-								}}
+								defaultValues={loginData}
 								resolver={zodResolver(loginValidationSchema)}
 								onSubmit={onSubmit}
 							>
@@ -103,12 +119,45 @@ function LoginForm({isPending, isSuccess, data, onSubmit, router}: any) {
 										Forgot Password?
 									</Link>
 								</div>
+								{/* Tabs Start */}
 
+								<div className="flex w-full flex-col mb-5">
+									<Tabs
+										aria-label="Options"
+										color="primary"
+										size="sm"
+										variant="solid"
+										onSelectionChange={(key) => tabsChange(key)}
+									>
+										<Tab
+											key="user"
+											title={
+												<div className="flex items-center space-x-2">
+													<UserCheck />
+													<span>USER</span>
+												</div>
+											}
+										/>
+										<Tab
+											key="admin"
+											title={
+												<div className="flex items-center space-x-2">
+													<ShieldCheck />
+													<span>ADMIN</span>
+												</div>
+											}
+										/>
+									</Tabs>
+								</div>
+
+								{/* Tabs End */}
 								<Button
-									className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-full shadow-lg hover:from-pink-600 hover:to-red-500 transition-transform transform hover:scale-105 font-semibold"
+									className="w-full text-xl uppercase font-bold hover:bg-primary hover:text-white"
+									color="primary"
 									isDisabled={isPending}
 									size="lg"
 									type="submit"
+									variant="bordered"
 								>
 									{isPending ? <Spinner color="white" /> : 'Login'}
 								</Button>
