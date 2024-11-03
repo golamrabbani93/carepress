@@ -27,7 +27,7 @@ const AvatarDropdown = () => {
 
 	return (
 		<>
-			{user?._id ? (
+			{user?._id && (
 				<Dropdown>
 					<DropdownTrigger>
 						<div className="relative cursor-pointer">
@@ -63,18 +63,6 @@ const AvatarDropdown = () => {
 						</DropdownItem>
 					</DropdownMenu>
 				</Dropdown>
-			) : (
-				<Link href={'/login'}>
-					<Button
-						className="hidden lg:flex hover:bg-primary hover:text-white"
-						color="primary"
-						size="sm"
-						startContent={<LoginIcon />}
-						variant="bordered"
-					>
-						Login
-					</Button>
-				</Link>
 			)}
 		</>
 	);

@@ -1,3 +1,5 @@
+'use client';
+
 import {
 	Navbar as NextUINavbar,
 	NavbarContent,
@@ -14,10 +16,12 @@ import Search from '../modules/Home/LeftSideBar/Search/Search';
 import CategorySidebar from '../modules/Home/LeftSideBar/Category/Category';
 import FilterSider from '../modules/Home/LeftSideBar/Filter/Filter';
 import {PaymentModal} from '../payment/PaymentModal';
-import LoginButton from './Sidebar/LoginButton';
 import ActiveNav from './ActiveNav';
+import {useUser} from '@/context/user.provider';
 
 export const Navbar = () => {
+	const {user} = useUser();
+
 	return (
 		<NextUINavbar className="" maxWidth="xl" position="sticky">
 			<NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -34,9 +38,7 @@ export const Navbar = () => {
 			<NavbarContent className="hidden lg:flex basis-1 pl-4" justify="end">
 				<ThemeSwitch />
 				<AvatarDropdown />
-				<div className="lg:flex">
-					<PaymentModal />
-				</div>
+				<div className="lg:flex">{user?._id && <PaymentModal />}</div>
 			</NavbarContent>
 			<NavbarContent className="lg:hidden basis-1 pl-4" justify="end">
 				<ThemeSwitch />
@@ -50,10 +52,7 @@ export const Navbar = () => {
 				<div className="mx-4 mt-2 flex flex-col gap-2">
 					<ActiveNav />
 
-					<div className="flex lg:hidden mt-3">
-						<LoginButton />
-						<PaymentModal />
-					</div>
+					<div className="flex lg:hidden mt-3">{user?._id && <PaymentModal />}</div>
 					{/* "left side bar" */}
 
 					<div className="lg:hidden border-t-1 mt-2"> </div>

@@ -48,7 +48,5 @@ export const config = {
 		'/login',
 		'/register',
 		'/',
-		'/about-us',
-		'/contact-us',
 	],
 };

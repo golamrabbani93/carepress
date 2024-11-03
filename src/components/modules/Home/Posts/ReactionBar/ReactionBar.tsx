@@ -5,6 +5,7 @@ import {useUser} from '@/context/user.provider';
 import {useState} from 'react';
 import {useCreateDownVote, useCreateUpVote} from '@/hooks/post.hook';
 import {useRouter} from 'next/navigation';
+import CommentsModal from '@/components/modal/CommentsModal';
 
 const ReactionBar: React.FC<PostProps> = ({post}) => {
 	const {mutate: handleUpVoteUpdate} = useCreateUpVote();
@@ -65,11 +66,8 @@ const ReactionBar: React.FC<PostProps> = ({post}) => {
 				<span className="text-sm md:text-base">Dislike</span>
 			</button>
 
-			{/* Comment Button */}
-			<button className="flex items-center space-x-2 text-gray-500 hover:text-primary">
-				<MessageCircle className="w-4 h-4 md:w-5 md:h-5" />
-				<span className="text-sm md:text-base">Comment</span>
-			</button>
+			{/* Comments Modal */}
+			<CommentsModal post={post} />
 		</div>
 	);
 };
