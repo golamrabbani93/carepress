@@ -51,7 +51,7 @@ const Post = ({post}: PostProps) => {
 	const isMyPost = post?.author?._id === user?._id;
 
 	// *check if user is following
-	const isUserFollowing = post?.author.followers?.find((item) => item === user?._id);
+	const isUserFollowing = post?.author?.followers?.find((item) => item === user?._id);
 	const isFollowing = isUserFollowing ? true : false;
 
 	return (
@@ -127,7 +127,9 @@ const Post = ({post}: PostProps) => {
 				</h1>
 				<div
 					dangerouslySetInnerHTML={{
-						__html: `${post.content.length > 200 ? `${post?.content.slice(0, 200)}......` : post?.content}`,
+						__html: `${
+							post.content.length > 200 ? `${post?.content.slice(0, 200)}......` : post?.content
+						}`,
 					}}
 					className="text-sm sm:text-base"
 				/>

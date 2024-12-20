@@ -44,7 +44,7 @@ const PremiumPost = ({post}: PostProps) => {
 	const isMyPost = post?.author?._id === user?._id;
 
 	// *check if user is following
-	const isUserFollowing = post?.author.followers?.find((item) => item === user?._id);
+	const isUserFollowing = post?.author?.followers?.find((item) => item === user?._id);
 	const isFollowing = isUserFollowing ? true : false;
 
 	return (

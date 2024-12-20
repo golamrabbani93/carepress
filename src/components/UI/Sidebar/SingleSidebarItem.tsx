@@ -29,11 +29,13 @@ const SingleSidebarItem = () => {
 			{items.map((item: any) => (
 				<li key={item.name}>
 					<Link
-						className={`flex items-center p-3 rounded-lg text-lg hover:bg-primary transition-all duration-300 ${pathname === item.path && 'bg-primary'}`}
+						className={`flex items-center p-3 rounded-lg text-lg hover:bg-primary transition-all duration-300 ${
+							pathname === item.path && 'bg-primary'
+						}`}
 						href={item?.path || '/'}
 					>
 						<span className="mr-4">{item.icon}</span>
-						{item.name}
+						{item?.name}
 					</Link>
 				</li>
 			))}

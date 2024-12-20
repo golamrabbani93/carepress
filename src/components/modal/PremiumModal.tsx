@@ -18,7 +18,7 @@ const AutoModal = () => {
 				setIsOpen(true);
 			}, 3000);
 		}
-	}, [user]);
+	}, [user?.status]);
 
 	// Handler to close the modal
 	const onClose = () => {

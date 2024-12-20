@@ -28,11 +28,11 @@ export default function CommentsModal({post}: {post: IPost}) {
 					{() => (
 						<>
 							<ModalHeader className="flex flex-col gap-1 text-center uppercase text-primary">
-								{post.author.name}&#39;s Post Comments
+								{post?.author?.name}&#39;s Post Comments
 							</ModalHeader>
 							<ModalBody>
 								<div className="p-2 sm:p-4">
-									{post.comments.map((comment: IComment) => (
+									{post?.comments.map((comment: IComment) => (
 										<SingleComment key={comment._id} comment={comment} />
 									))}
 								</div>

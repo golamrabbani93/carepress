@@ -33,12 +33,14 @@ const SinglePostList = ({post}: {post: IPost}) => {
 			</td>
 			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-400">{post.title}</td>
 			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-400">
-				{post.author.name}
+				{post?.author?.name}
 			</td>
 
 			<td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-400">
 				<span
-					className={`border px-3 py-1 rounded-md uppercase text-xs ${!post.status ? 'border-red-500' : 'border-green-500'}`}
+					className={`border px-3 py-1 rounded-md uppercase text-xs ${
+						!post.status ? 'border-red-500' : 'border-green-500'
+					}`}
 				>
 					{post.status ? 'Published' : 'Draft'}
 				</span>

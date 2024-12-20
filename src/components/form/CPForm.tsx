@@ -25,7 +25,7 @@ export default function CPForm({children, onSubmit, defaultValues, resolver}: IP
 		if (defaultValues) {
 			methods.reset(defaultValues); // Reset with new default values
 		}
-	}, [defaultValues, methods]);
+	}, [defaultValues]);
 
 	return (
 		<FormProvider {...methods}>

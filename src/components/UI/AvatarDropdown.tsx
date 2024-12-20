@@ -3,10 +3,7 @@
 import {useUser} from '@/context/user.provider';
 import {logout} from '@/services/AuthService';
 import {Avatar} from '@nextui-org/avatar';
-import {Button} from '@nextui-org/button';
 import {Dropdown, DropdownItem, DropdownMenu, DropdownTrigger} from '@nextui-org/dropdown';
-import {LoginIcon} from '../icons';
-import Link from 'next/link';
 import {usePathname, useRouter} from 'next/navigation';
 import {protectedRoutes} from '@/constants/private-routes';
 import {Crown} from 'lucide-react';

@@ -44,16 +44,7 @@ export default function RegisterPage() {
 								Register to Carepress
 							</h3>
 							<div>
-								<CPForm
-									//! Only for development
-									defaultValues={{
-										name: 'Golam Rabbani',
-										email: 'rabbani@gmail.com',
-										password: '123456',
-									}}
-									resolver={zodResolver(registerValidationSchema)}
-									onSubmit={onSubmit}
-								>
+								<CPForm resolver={zodResolver(registerValidationSchema)} onSubmit={onSubmit}>
 									<div className="py-3">
 										<CPInput className="text-black" label="Name" name="name" size="sm" />
 									</div>

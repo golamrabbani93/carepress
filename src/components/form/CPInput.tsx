@@ -26,6 +26,7 @@ export default function CPInput({
 }: IProps) {
 	const {
 		register,
+		getValues,
 		formState: {errors},
 	} = useFormContext();
 
@@ -40,6 +41,7 @@ export default function CPInput({
 			required={required}
 			size={size}
 			type={type}
+			value={getValues(name)}
 			variant={variant}
 		/>
 	);
